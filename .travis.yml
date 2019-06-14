@@ -1,0 +1,17 @@
+language: node_js
+dist: trusty
+
+node_js:
+  - "stable"
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  sonarcloud:
+    organization: "lumenol-github"   
+ 
+script:
+  - npm test
+  - npm run build
