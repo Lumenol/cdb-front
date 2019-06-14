@@ -13,8 +13,9 @@ addons:
     organization: "lumenol-github"   
  
 script:
-  - npm test
+  - npm test -- --coverage --watchAll=false
   - npm run build
   - bash <(curl -s https://codecov.io/bash)
-  - mvn sonar:sonar
+  - npm run sonarqube
+
   
