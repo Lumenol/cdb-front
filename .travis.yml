@@ -1,0 +1,20 @@
+language: node_js
+dist: trusty
+
+node_js:
+  - "lts/*"
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  sonarcloud:
+    organization: "lumenol-github"   
+ 
+script:
+  - npm test
+  - npm run build
+  - bash <(curl -s https://codecov.io/bash)
+  - mvn sonar:sonar
+  
