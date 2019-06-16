@@ -8,6 +8,7 @@
     "react-scripts": "3.0.1"
   },
   "devDependencies": {
+    "flow-bin": "^0.101.0",
     "sonarqube-scanner-node": "^0.0.10"
   },
   "scripts": {
