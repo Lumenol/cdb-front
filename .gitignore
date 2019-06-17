@@ -229,6 +229,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
+.idea
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -293,3 +294,4 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/node,linux,windows,eclipse,webstorm,visualstudiocode
 
 package-lock.json
+yarn.lock
