@@ -5,8 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
+import searchComputerReducer from './redux/computerSearch';
 
-const reducer = combineReducers({});
+const reducer = combineReducers({search: searchComputerReducer});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));

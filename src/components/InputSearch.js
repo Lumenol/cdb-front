@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import {connect} from "react-redux";
 import {selectComputerSearch} from "../redux/selectors";
+import {setSearchComputer} from "../redux/computerSearch";
 
 
 class InputSearch extends Component {
+
+
     constructor(props) {
         super(props);
     }
@@ -29,10 +32,11 @@ function mapStateToProps(state) {
     }
 }
 
+
 function mapDispatchToProps(dispatch) {
     return {
         onChange: search => {
-            dispatch(changeComputerSearch(search))
+            dispatch(setSearchComputer(search));
         }
     }
 }
