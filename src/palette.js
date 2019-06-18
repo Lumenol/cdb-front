@@ -2,17 +2,23 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 export default createMuiTheme({
     palette: {
-        primary: {
-            light: '#B2DFDB',
-            main: '#009688',
-            dark: '#00796B',
-            contrastText: '#FFFFFF',
+        primary: { main:  '#009688' },
+        secondary: { main: '#757575' },
+    },
+
+    typography: {
+        fontFamily: [
+            'Viga'
+        ].join(','),
+        fontWeightMedium: 500,
+        body1: {
+            fontWeight: 500,
         },
-        secondary: {
-            light: '#ff7961',
-            main: '#f44336',
-            dark: '#ba000d',
-            contrastText: '#000',
+        subtitle1: {
+            fontSize: 15,
+        },
+        button: {
+            fontStyle: 'italic',
         },
     },
 });

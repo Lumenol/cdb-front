@@ -1,5 +1,28 @@
 .card {
+    max-width: 400px;
+}
+
+.addCard {
+    min-height: 300px;
+
+}
+
+.cardSelected {
     max-width: 350px;
+    background-color: transparent;
+    border: 3px solid #00796B;
+}
+
+.divIcon {
+    margin-bottom: 1vh;
+    max-width: 350px;
+    background-color: #61dafb;
+}
+
+.icons {
+    margin-top: 1vh;
+    margin-left: 0.3vw;
+float: right;
 }
 
 .media {
