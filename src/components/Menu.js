@@ -1,5 +1,5 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -10,30 +10,31 @@ import OrderBy from "./OrderBy";
 import InputSearch from "./InputSearch";
 
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     margin: {
         margin: theme.spacing(3),
     },
-}));
+});
 
 
-export default function PersistentDrawerLeft() {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+class PersistentDrawerLeft extends Component {
 
-    function handleDrawerClose() {
-        setOpen(true);
+    constructor(props) {
+        super(props);
+        this.state = {open: true};
     }
 
-    return (
-        <div>
-            <Drawer
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
+    handleDrawerClose = () => {
+        this.setState({open: false});
+    };
+
+    render() {
+        const {classes} = this.props;
+        const {open} = this.state;
+        return (
+            <Drawer variant="persistent" anchor="left" open={open}>
                 <div>
-                    <IconButton onClick={handleDrawerClose} style={{float: "right"}}>
+                    <IconButton onClick={this.handleDrawerClose} style={{float: "right"}}>
                         <ChevronLeftIcon/>
                     </IconButton>
                 </div>
@@ -45,10 +46,10 @@ export default function PersistentDrawerLeft() {
                     <OrderBy/>
                     <SwitchDirection/>
                 </List>
-
             </Drawer>
-
-        </div>
-
-    );
+        );
+    }
 }
+
+
+export default PersistentDrawerLeft = withStyles(styles)(PersistentDrawerLeft);
