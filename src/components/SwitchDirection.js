@@ -1,34 +1,59 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Switch from '@material-ui/core/Switch';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import {selectComputerDirection} from "../redux/selectors";
+import {connect} from "react-redux";
+import {DIRECTION, setDirectionComputer} from "../redux/computerDirection";
 
 
-export default function SwitchDirection() {
+class SwitchDirection extends Component {
 
-    const [state, setState] = React.useState({
-        checkedA: true,
-    });
+    constructor(props) {
+        super(props);
+
+    }
 
 
-    const handleChange = name => event => {
-        setState({...state, [name]: event.target.checked});
+    onChangeDirection = (event) => {
+        this.props.onChange(event.target.checked ? DIRECTION.DESC : DIRECTION.ASC);
     };
 
-    return (
-        <Typography component="div">
-            <Grid component="label" container alignItems="center" spacing={1}>
-                <Grid item>Asc</Grid>
-                <Grid item>
-                    <Switch
-                        checked={state.checkedA}
-                        onChange={handleChange('checkedA')}
-                        value="checkedA"
-                    />
+    isChecked = () => this.props.value === DIRECTION.DESC;
+
+    render() {
+        const {value} = this.props;
+
+
+        return (
+            <Typography component="div">
+                <Grid component="label" container alignItems="center" spacing={1}>
+                    <Grid item>Asc</Grid>
+                    <Grid item>
+                        <Switch checked={this.isChecked()} onChange={this.onChangeDirection}/>
+                    </Grid>
+                    <Grid item>Desc</Grid>
                 </Grid>
-                <Grid item>Desc</Grid>
-            </Grid>
-        </Typography>
-    );
+            </Typography>
+        )
+            ;
+    }
 }
+
+function mapStateToProps(state) {
+    return {
+        value: selectComputerDirection(state)
+    }
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onChange: direction => {
+            dispatch(setDirectionComputer(direction));
+        }
+    }
+}
+
+export default SwitchDirection = connect(mapStateToProps, mapDispatchToProps)(SwitchDirection);
 

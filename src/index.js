@@ -6,8 +6,17 @@ import * as serviceWorker from './serviceWorker';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import searchComputerReducer from './redux/computerSearch';
+import orderByComputerReducer from './redux/computerOrderBy';
+import directionComputerReducer from './redux/computerDirection';
 
-const reducer = combineReducers({search: searchComputerReducer});
+
+const searchReducer = {
+    orderBy: orderByComputerReducer,
+    search: searchComputerReducer,
+    direction: directionComputerReducer
+};
+
+const reducer = combineReducers({...searchReducer});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
