@@ -1,16 +1,40 @@
-import React from 'react';
+import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+import {connect} from "react-redux";
+import {selectComputerSearch} from "../redux/selectors";
 
 
-export default function InputSearch() {
-    return (
-        <div>
-            <Grid container spacing={1} alignItems="flex-end">
-                <Grid item>
-                    <TextField id="input-with-icon-grid" label="Search"/>
-                </Grid>
-            </Grid>
-        </div>
-    );
+class InputSearch extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    onChangeSearch = (event) => {
+        this.props.onChange(event.target.value);
+    };
+
+    render() {
+        const {value} = this.props;
+        return (
+            <TextField id="input-with-icon-grid" value={value} onChange={this.onChangeSearch}
+                       label="Search"/>
+        );
+    }
 }
+
+
+function mapStateToProps(state) {
+    return {
+        value: selectComputerSearch(state)
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onChange: search => {
+            dispatch(changeComputerSearch(search))
+        }
+    }
+}
+
+export default InputSearch = connect(mapStateToProps, mapDispatchToProps)(InputSearch);
