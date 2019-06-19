@@ -1,4 +1,4 @@
-const CONST_PRESS_CONNECT_BUTTON = "toggle_connect_button";
+const CONST_PRESS_CONNECT_BUTTON = "TOGGLE_CONNECT_BUTTON";
 
 
 export function toggleConnect(isConnected){
