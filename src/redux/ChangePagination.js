@@ -6,11 +6,12 @@ export function setPageSize(size) {
     }
 }
 
-export default function reducer(state = 10, action) {
-    if(action.type === SET_PAGE_SIZE) {
-        if(action.size > 0) {
+export default function reducer(state = true, action) {
+    switch(action.type) {
+        case action.type>0:
             return action.size;
+        default:
+            return state;
         }
-    }
-    return state
+
 }

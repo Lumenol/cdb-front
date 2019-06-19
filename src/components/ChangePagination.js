@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
 import {connect} from "react-redux";
 import {setPageSize} from "../redux/ChangePagination";
 import {selectPageSize} from "../redux/selectors";
+import * as PropTypes from "prop-types";
+
 
 
 const styles = theme => ({
@@ -18,7 +20,6 @@ const styles = theme => ({
 
 
 });
-const useStyles = makeStyles(styles);
 
 const marks = [
     {
@@ -74,4 +75,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 const Styled = withStyles(styles)(ChangePagination);
+
+ChangePagination.propTypes = {
+    Styled: PropTypes.func,
+    classes: PropTypes.object
+
+};
+
 export default ChangePagination = connect(mapStateToProps, mapDispatchToProps)(Styled);
