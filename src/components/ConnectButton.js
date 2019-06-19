@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {toggleConnect} from "../redux/connectButton";
 import {getConnectState} from "../redux/selectors";
 
-class ConnectButton extends Component{
+class ConnectButton extends Component {
 
     render() {
         return (
@@ -20,7 +20,7 @@ class ConnectButton extends Component{
 
 
 const mapStateToProps = state => {
-    return { isConnected: getConnectState(state) };
+    return {isConnected: getConnectState(state)};
 };
 
 function mapDispatchToProps(dispatch) {
@@ -28,4 +28,5 @@ function mapDispatchToProps(dispatch) {
         clickConnectButton: (isConnected) => dispatch(toggleConnect(isConnected)),
     }
 }
-export default ConnectButton = connect(mapStateToProps,mapDispatchToProps)(ConnectButton);
+
+export default ConnectButton = connect(mapStateToProps, mapDispatchToProps)(ConnectButton);

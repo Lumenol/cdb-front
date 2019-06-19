@@ -21,8 +21,8 @@ function App() {
             Learn React
           </a>
         </header>
-        <ConnectButton/>
-        <PersistentDrawerLeft/>
+          <ConnectButton/>
+          <PersistentDrawerLeft/>
       </div>
   );
 }
