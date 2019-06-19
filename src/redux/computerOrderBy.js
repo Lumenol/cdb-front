@@ -16,10 +16,12 @@ export function setOrderByComputer(orderBy) {
 }
 
 const reducer = (state = ORDER_BY.ID, action) => {
-    if (action.type === SET_ORDERBY_COMPUTER) {
-        return action.orderBy;
-    } else {
-        return state;
+
+    switch (action.type) {
+        case SET_ORDERBY_COMPUTER:
+            return action.orderBy;
+        default :
+            return state;
     }
 };
 

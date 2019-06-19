@@ -12,10 +12,12 @@ export function setDirectionComputer(direction) {
 }
 
 const reducer = (state = "asc", action) => {
-    if (action.type === SET_DIRECTION_COMPUTER) {
-        return action.direction;
-    } else {
-        return state;
+
+    switch (action.type) {
+        case SET_DIRECTION_COMPUTER:
+            return action.direction;
+        default :
+            return state;
     }
 };
 

@@ -8,10 +8,11 @@ export function setSearchComputer(search) {
 }
 
 const reducer = (state = "", action) => {
-    if (action.type === SET_SEARCH_COMPUTER) {
-        return action.search;
-    } else {
-        return state;
+    switch (action.type) {
+        case  SET_SEARCH_COMPUTER:
+            return action.search;
+        default :
+            return state;
     }
 };
 

@@ -15,10 +15,11 @@ export function openMenu() {
 }
 
 const reducer = (state = true, action) => {
-    if (action.type === MENU_IS_OPEN) {
-        return action.isOpen;
-    } else {
-        return state;
+    switch (action.type) {
+        case MENU_IS_OPEN:
+            return action.isOpen;
+        default :
+            return state;
     }
 };
 
