@@ -5,7 +5,6 @@ export function setSearchComputer(search) {
         type: SET_SEARCH_COMPUTER,
         search: search
     }
-
 }
 
 const reducer = (state = "", action) => {

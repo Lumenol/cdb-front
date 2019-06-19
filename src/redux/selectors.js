@@ -11,5 +11,5 @@ export function selectComputerDirection(state) {
 }
 
 export function selectMenuIsOpen(state) {
-    return state.menuIsOpen;
+    return state.isOpen;
 }

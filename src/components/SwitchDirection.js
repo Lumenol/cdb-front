@@ -17,8 +17,6 @@ class SwitchDirection extends Component {
     isChecked = () => this.props.value === DIRECTION.DESC;
 
     render() {
-
-
         return (
             <Typography component="div">
                 <Grid component="label" container alignItems="center" spacing={1}>
@@ -29,8 +27,7 @@ class SwitchDirection extends Component {
                     <Grid item>Desc</Grid>
                 </Grid>
             </Typography>
-        )
-            ;
+        );
     }
 }
 
@@ -39,7 +36,6 @@ function mapStateToProps(state) {
         value: selectComputerDirection(state)
     }
 }
-
 
 function mapDispatchToProps(dispatch) {
     return {

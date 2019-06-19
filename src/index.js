@@ -10,12 +10,11 @@ import orderByComputerReducer from './redux/computerOrderBy';
 import directionComputerReducer from './redux/computerDirection';
 import menuIsOpenReducer from './redux/menuIsOpen';
 
-
 const searchReducer = {
     orderBy: orderByComputerReducer,
     search: searchComputerReducer,
     direction: directionComputerReducer,
-    menuIsOpen: menuIsOpenReducer,
+    isOpen: menuIsOpenReducer,
 };
 
 const reducer = combineReducers({...searchReducer});

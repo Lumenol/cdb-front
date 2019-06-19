@@ -9,7 +9,6 @@ export function setDirectionComputer(direction) {
         type: SET_DIRECTION_COMPUTER,
         direction: direction
     }
-
 }
 
 const reducer = (state = "asc", action) => {
