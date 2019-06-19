@@ -24,12 +24,10 @@ export function PageReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 page: state.page > state.minPage ? state.page -1 : state.page
             });
-            break;
         case CONST_PRESS_NEXT_PAGE_BUTTON:
             return Object.assign({}, state, {
                 page: state.page < state.maxPage ? state.page +1 : state.page
             });
-            break;
         default:
             return state;
     }

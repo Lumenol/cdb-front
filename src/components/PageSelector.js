@@ -54,7 +54,6 @@ class PageSelector extends Component {
 
         )
     }
-
 }
 
 const mapStateToProps = state => {
