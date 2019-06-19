@@ -15,6 +15,7 @@
     "prop-types": "latest"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
     "sonarqube-scanner-node": "^0.0.10"
   },
   "scripts": {
@@ -22,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sonarqube": "sonarqube-scanner-node -Dsonar.projectKey=Lumenol_cdb-front"
+    "sonarqube": "sonarqube-scanner-node -Dsonar.projectKey=Lumenol_cdb-front",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": "react-app"
