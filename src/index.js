@@ -8,13 +8,22 @@ import {Provider} from "react-redux";
 import {I18nReduxProvider} from "./containers/I18nReduxProvider";
 import i18n from "./configuration/i18n";
 import languageReducer from "./redux/i18n";
-import {ConnectReducer} from "./redux/ConnectButton";
+import searchComputerReducer from './redux/computerSearch';
+import orderByComputerReducer from './redux/computerOrderBy';
+import directionComputerReducer from './redux/computerDirection';
+import menuIsOpenReducer from './redux/menuIsOpen';
+import {ConnectReducer} from "./redux/connectButton";
 
 const language = {language: languageReducer};
+const searchReducer = {
+    orderBy: orderByComputerReducer,
+    search: searchComputerReducer,
+    direction: directionComputerReducer,
+    isOpen: menuIsOpenReducer,
+};
+const connectReducter = {isConnected: ConnectReducer};
 
-const connectReducter = {connectReducter: ConnectReducer};
-
-const reducer = combineReducers({...language, ...connectReducter});
+const reducer = combineReducers({...searchReducer, ...language, ...connectReducter});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(
