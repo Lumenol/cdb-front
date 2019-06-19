@@ -21,6 +21,9 @@ class PageSelector extends Component {
         const {classes} = this.props;
         return (
             <div>
+                <div>
+                    {this.props.page}
+                </div>
                 <MobileStepper
                     variant="dots"
                     steps={this.props.maxStep+1}
@@ -47,9 +50,6 @@ class PageSelector extends Component {
                         </Button>
                     }
                 />
-                <p>
-                    {this.props.page}
-                </p>
             </div>
 
         )
