@@ -8,11 +8,6 @@ import PropTypes from 'prop-types';
 
 class InputSearch extends Component {
 
-
-    constructor(props) {
-        super(props);
-    }
-
     onChangeSearch = (event) => {
         this.props.onChange(event.target.value);
     };

@@ -11,10 +11,6 @@ import PropTypes from "prop-types";
 
 class OrderBy extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     onChangeOrderBy = (event) => {
         this.props.onChange(event.target.value);
     };

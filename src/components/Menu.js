@@ -23,9 +23,6 @@ const styles = theme => ({
 
 class PersistentDrawerLeft extends Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const {classes, isOpen, close} = this.props;

@@ -10,12 +10,6 @@ import PropTypes from "prop-types";
 
 class SwitchDirection extends Component {
 
-    constructor(props) {
-        super(props);
-
-    }
-
-
     onChangeDirection = (event) => {
         this.props.onChange(event.target.checked ? DIRECTION.DESC : DIRECTION.ASC);
     };
