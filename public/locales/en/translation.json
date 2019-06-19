@@ -1,2 +1,12 @@
 {
+  "computer": {
+    "name": "Name",
+    "introduced": "Introduced",
+    "discontinued": "Discontinued",
+    "company": "Manufacturer"
+  },
+  "title": {
+    "orderBy": "Order by",
+    "search": "Search"
+  }
 }
