@@ -16,16 +16,12 @@ export async function getToken(login, password) {
     }
 }
 
-export async function refreshToken(token) {
+export async function refreshToken() {
     try {
         const response = await axios.get(LOGIN_URL);
         return extractToken(response);
     } catch (e) {
-        console.error("Erreur lors du refresh de token");
+        console.error("Erreur lors du rafraichissement du token");
         return "";
     }
-}
-
-export function pushToken(header) {
-
 }
