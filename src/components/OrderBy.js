@@ -7,6 +7,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import {connect} from "react-redux";
 import {selectComputerOrderBy} from "../redux/selectors";
 import {ORDER_BY, setOrderByComputer} from "../redux/computerOrderBy";
+import PropTypes from "prop-types";
 
 class OrderBy extends Component {
 
@@ -52,5 +53,9 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
+
+OrderBy.propTypes = {
+    value: PropTypes.oneOf(ORDER_BY).isRequired
+};
 
 export default OrderBy = connect(mapStateToProps, mapDispatchToProps)(OrderBy);

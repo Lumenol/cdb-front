@@ -8,6 +8,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SwitchDirection from "./SwitchDirection";
 import OrderBy from "./OrderBy";
 import InputSearch from "./InputSearch";
+import {selectMenuIsOpen} from "../redux/selectors";
+import {connect} from "react-redux";
+import {closeMenu} from "../redux/menuIsOpen";
+import PropTypes from "prop-types";
 
 
 const styles = theme => ({
@@ -21,20 +25,14 @@ class PersistentDrawerLeft extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {open: true};
     }
 
-    handleDrawerClose = () => {
-        this.setState({open: false});
-    };
-
     render() {
-        const {classes} = this.props;
-        const {open} = this.state;
+        const {classes, isOpen, close} = this.props;
         return (
-            <Drawer variant="persistent" anchor="left" open={open}>
+            <Drawer variant="persistent" anchor="left" open={isOpen}>
                 <div>
-                    <IconButton onClick={this.handleDrawerClose} style={{float: "right"}}>
+                    <IconButton onClick={close} style={{float: "right"}}>
                         <ChevronLeftIcon/>
                     </IconButton>
                 </div>
@@ -51,5 +49,26 @@ class PersistentDrawerLeft extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        isOpen: selectMenuIsOpen(state)
+    };
+}
 
-export default PersistentDrawerLeft = withStyles(styles)(PersistentDrawerLeft);
+
+function mapDispatchToProps(dispatch) {
+    return {
+        close: () => {
+            dispatch(closeMenu());
+        }
+    };
+}
+
+PersistentDrawerLeft.propTypes = {
+    classes: PropTypes.string.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired,
+};
+
+
+export default PersistentDrawerLeft = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PersistentDrawerLeft));

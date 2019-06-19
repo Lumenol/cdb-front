@@ -9,3 +9,7 @@ export function selectComputerOrderBy(state) {
 export function selectComputerDirection(state) {
     return state.direction;
 }
+
+export function selectMenuIsOpen(state) {
+    return state.menuIsOpen;
+}

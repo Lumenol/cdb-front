@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import {connect} from "react-redux";
 import {selectComputerSearch} from "../redux/selectors";
 import {setSearchComputer} from "../redux/computerSearch";
+import PropTypes from 'prop-types';
 
 
 class InputSearch extends Component {
@@ -40,5 +41,9 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
+
+InputSearch.propTypes = {
+    value: PropTypes.string.isRequired,
+};
 
 export default InputSearch = connect(mapStateToProps, mapDispatchToProps)(InputSearch);

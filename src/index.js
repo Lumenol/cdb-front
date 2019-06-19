@@ -8,12 +8,14 @@ import {Provider} from "react-redux";
 import searchComputerReducer from './redux/computerSearch';
 import orderByComputerReducer from './redux/computerOrderBy';
 import directionComputerReducer from './redux/computerDirection';
+import menuIsOpenReducer from './redux/menuIsOpen';
 
 
 const searchReducer = {
     orderBy: orderByComputerReducer,
     search: searchComputerReducer,
-    direction: directionComputerReducer
+    direction: directionComputerReducer,
+    menuIsOpen: menuIsOpenReducer,
 };
 
 const reducer = combineReducers({...searchReducer});

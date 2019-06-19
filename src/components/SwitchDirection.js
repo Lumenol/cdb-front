@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import {selectComputerDirection} from "../redux/selectors";
 import {connect} from "react-redux";
 import {DIRECTION, setDirectionComputer} from "../redux/computerDirection";
+import PropTypes from "prop-types";
 
 
 class SwitchDirection extends Component {
@@ -54,6 +55,10 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
+
+SwitchDirection.propTypes = {
+    value: PropTypes.oneOf(DIRECTION).isRequired
+};
 
 export default SwitchDirection = connect(mapStateToProps, mapDispatchToProps)(SwitchDirection);
 
