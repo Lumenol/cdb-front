@@ -9,6 +9,7 @@ import {selectMenuIsOpen} from "../redux/selectors";
 import {connect} from "react-redux";
 import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
+import ConnectButton from "./ConnectButton";
 
 
 class DenseAppBar extends Component {
@@ -26,6 +27,7 @@ class DenseAppBar extends Component {
                         <Typography variant="h6" color="inherit">
                             {t("title.title")}
                         </Typography>
+                        <ConnectButton/>
                     </Toolbar>
                 </Paper>
                 <PersistentDrawerLeft/>
