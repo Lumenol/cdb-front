@@ -5,19 +5,25 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
-import {RootReducer} from "./redux/ConnectButton";
+import {I18nReduxProvider} from "./containers/I18nReduxProvider";
+import i18n from "./configuration/i18n";
+import languageReducer from "./redux/i18n";
+import {ConnectReducer} from "./redux/ConnectButton";
 
+const language = {language: languageReducer};
 
-const reducer = combineReducers({RootReducer});
+const connectReducter = {connectReducter: ConnectReducer};
+
+const reducer = combineReducers({...language, ...connectReducter});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <I18nReduxProvider i18n={i18n}>
+            <App/>
+        </I18nReduxProvider>
     </Provider>,
-    document.getElementById('root')
-);
+    document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
