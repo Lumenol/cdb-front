@@ -1,0 +1,12 @@
+{
+  "computer": {
+    "name": "Nom",
+    "introduced": "Date d'introduction",
+    "discontinued": "Date de sortie",
+    "company": "Fabriquant"
+  },
+  "title": {
+    "orderBy": "Trier par",
+    "search": "Rechercher"
+  }
+}
