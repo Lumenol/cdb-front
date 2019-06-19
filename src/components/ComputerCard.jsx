@@ -5,35 +5,33 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
-import {faKeyboard} from "@fortawesome/free-solid-svg-icons";
+import {faKeyboard, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import '../css/ComputerCard.css';
 import {Grid} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
+import {selectComputer, unselectComputer} from "../redux/computers";
+import {connect} from "react-redux";
+import {selectSelectedComputers} from "../redux/selectors";
 
-export class ComputerCard extends Component {
+class ComputerCard extends Component {
 
-    state = {
-        selected: false
+    constructor(props) {
+        super(props);
     }
-
-    style = "card"
 
     toggleSelect = () => {
-        this.setState({
-            selected: !this.state.selected
-        })
-        this.style === "cardSelected" ? this.style = "card" : this.style = "cardSelected";
-    }
+        this.props.isSelected ? this.props.unselect() : this.props.select();
+    };
 
     render() {
-        {
-            console.log(this.state.selected)
-        }
+        debugger;
+        const {id, name, brand} = this.props.computer;
+        const style = this.props.isSelected ? "cardSelected" : "card";
+
         return (
             <Grid container direction="row"  spacing={1} >
                 <Grid item lg={10} md={10} xs={10}>
-                    <Card className={this.style} onClick={this.toggleSelect}>
+                    <Card className={style} onClick={this.toggleSelect}>
                         <CardActionArea>
                             <CardMedia
                                 className="media"
@@ -42,10 +40,10 @@ export class ComputerCard extends Component {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2" color="primary">
-                                    Macbook Pro
+                                    {name}
                                 </Typography>
                                 <Typography variant="subtitle1" component="p">
-                                    Apple Inc.
+                                    {brand}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
                                     05.11.2000 • 06.03.2005
@@ -54,7 +52,7 @@ export class ComputerCard extends Component {
                         </CardActionArea>
                     </Card>
                 </Grid>
-                {this.state.selected ?
+                {this.props.isSelected ?
                     <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
                         <Grid item xs={1}>
                             <Fab size="small" color="primary" aria-label="Delete">
@@ -74,3 +72,23 @@ export class ComputerCard extends Component {
     }
 
 }
+
+const mapStateToProps = (state, props) => {
+    return {
+        computer: {
+            name: 'Macintosh yeah',
+            brand: 'Apple Inc.',
+            id: 1,
+        },
+        isSelected: selectSelectedComputers(state).includes(props.id)
+    };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        select: () => dispatch(selectComputer(props.id)),
+        unselect: () => dispatch(unselectComputer(props.id))
+    }
+};
+
+export default ComputerCard = connect(mapStateToProps, mapDispatchToProps)(ComputerCard)

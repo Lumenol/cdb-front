@@ -1,14 +1,17 @@
 .card {
     max-width: 400px;
+    min-height: 330px;
 }
 
 .addCard {
-    min-height: 300px;
-
+    width: 100%;
+    min-height: 330px;
+    background-color: darkorange;
 }
 
 .cardSelected {
     max-width: 350px;
+    min-height: 330px;
     background-color: transparent;
     border: 3px solid #00796B;
 }
@@ -22,7 +25,6 @@
 .icons {
     margin-top: 1vh;
     margin-left: 0.3vw;
-float: right;
 }
 
 .media {

@@ -5,8 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
+import computerReducer from './redux/computers';
 
-const reducer = combineReducers({});
+const computer = {
+    selectedComputers: computerReducer
+};
+
+const reducer = combineReducers({...computer});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
