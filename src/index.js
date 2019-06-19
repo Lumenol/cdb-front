@@ -5,8 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
+import {PageReducer} from "./redux/PageSelector";
 
-const reducer = combineReducers({});
+const reducer = combineReducers({PageReducer});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));

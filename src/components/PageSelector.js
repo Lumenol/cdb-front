@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import {withStyles} from '@material-ui/core/styles';
+import connect from "react-redux/es/connect/connect";
+import {getPageSelectorState} from "../redux/selectors";
+import {nextPage, previousPage} from "../redux/PageSelector";
 
 const styles = {
     root: {
@@ -14,30 +17,8 @@ const styles = {
 
 class PageSelector extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            step: this.props.currentStep,
-            page: this.props.currentPage,
-            mid : Math.ceil(this.props.maxStep / 2)
-        }
-    }
-
-    handleNext = () => {
-        this.setState((prev,props) => ({
-            page: prev.page < props.maxPage ? prev.page +1 : prev.page
-        }));
-    };
-
-    handleBack = () => {
-        this.setState((prev,props) => ({
-            page: prev.page > props.minPage ? prev.page -1 : prev.page
-        }));
-    }
-
     render() {
         const {classes} = this.props;
-
         return (
             <div>
                 <MobileStepper
@@ -46,36 +27,47 @@ class PageSelector extends Component {
                     position="static"
                     activeStep=
                         {
-                            this.state.page < this.state.mid ?
-                            this.state.page :
+                            this.props.page < this.props.midStep ?
+                            this.props.page :
                             (
-                                this.props.maxPage -this.state.mid < this.state.page  ?
-                                (this.props.maxStep - (this.props.maxPage - this.state.page)) :
-                                this.state.mid
+                                 this.props.maxPage - this.props.midStep < this.props.page  ?
+                                 this.props.maxStep - (this.props.maxPage - this.props.page) :
+                                 this.props.midStep
                             )
                         }
                     className={classes.root}
                     nextButton={
-                        <Button size="small" onClick={this.handleNext} disabled={this.state.page === this.props.maxPage}>
+                        <Button size="small" onClick={this.props.clickNextPageButton} disabled={this.props.page === this.props.maxPage}>
                             <KeyboardArrowRight/>
                         </Button>
                     }
                     backButton={
-                        <Button size="small" onClick={this.handleBack} disabled={this.state.page === this.props.minPage}>
+                        <Button size="small" onClick={this.props.clickPreviousPageButton} disabled={this.props.page === this.props.minPage}>
                             <KeyboardArrowLeft/>
                         </Button>
                     }
                 />
                 <p>
-                    {this.state.page}
+                    {this.props.page}
                 </p>
             </div>
 
         )
     }
 
-
 }
 
-export default PageSelector = withStyles(styles)(PageSelector);
+const mapStateToProps = state => {
+    return {...getPageSelectorState(state)};
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        clickNextPageButton: () => dispatch(nextPage()),
+        clickPreviousPageButton: () => dispatch(previousPage()),
+    }
+}
+
+export default PageSelector = connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(PageSelector));
+
 
