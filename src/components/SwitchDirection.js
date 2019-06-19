@@ -23,7 +23,6 @@ class SwitchDirection extends Component {
     isChecked = () => this.props.value === DIRECTION.DESC;
 
     render() {
-        const {value} = this.props;
 
 
         return (

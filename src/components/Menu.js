@@ -65,7 +65,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 PersistentDrawerLeft.propTypes = {
-    classes: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
     isOpen: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
 };
