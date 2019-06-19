@@ -5,8 +5,10 @@ export function setLanguage(language) {
 }
 
 export default function reducer(state = "fr", action) {
-    if (action === action.type) {
-        return action.language;
+    switch (action.type) {
+        case SET_LANGUAGE:
+            return action.language;
+        default:
+            return state;
     }
-    return state;
 }
