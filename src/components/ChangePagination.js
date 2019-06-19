@@ -34,9 +34,6 @@ const marks = [
 ];
 
 class ChangePagination extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const {classes} = this.props;
