@@ -1,3 +1,6 @@
+import {createSelector} from "reselect";
+import {decode} from "jsonwebtoken";
+
 export function selectSelectedComputers(state) {
     return state.selectedComputers;
 }
@@ -27,3 +30,5 @@ export const selectIsConnected = state => !!selectToken(state);
 export function selectToken(state) {
     return state.token;
 }
+
+export const selectDecodedToken = createSelector([selectToken], decode);
