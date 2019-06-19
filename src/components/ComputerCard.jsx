@@ -27,7 +27,6 @@ class ComputerCard extends Component {
         debugger;
         const {id, name, brand} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
-
         return (
             <Grid container direction="row"  spacing={1} >
                 <Grid item lg={10} md={10} xs={10}>

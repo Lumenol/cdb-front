@@ -21,6 +21,7 @@ export default function reducer(state = [], action) {
             return [action.id];
         case UNSELECT_COMPUTER:
             return state.filter((id) => action.id !== id);
+        default:
+            return state;
     }
-    return state;
 }

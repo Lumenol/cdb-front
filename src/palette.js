@@ -1,9 +1,9 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 
 export default createMuiTheme({
     palette: {
-        primary: { main:  '#009688' },
-        secondary: { main: '#757575' },
+        primary: {main: '#009688'},
+        secondary: {main: '#757575'},
     },
 
     typography: {
@@ -11,14 +11,8 @@ export default createMuiTheme({
             'Viga'
         ].join(','),
         fontWeightMedium: 500,
-        body1: {
-            fontWeight: 500,
-        },
-        subtitle1: {
-            fontSize: 15,
-        },
-        button: {
-            fontStyle: 'italic',
-        },
+        body1: {fontWeight: 500,},
+        subtitle1: {fontSize: 15,},
+        button: {fontStyle: 'italic',},
     },
 });
