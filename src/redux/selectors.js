@@ -13,3 +13,7 @@ export function selectComputerDirection(state) {
 export function selectMenuIsOpen(state) {
     return state.isOpen;
 }
+
+export function selectLanguage(state) {
+    return state.language;
+}
