@@ -21,3 +21,5 @@ export function selectComputerDirection(state) {
 export function selectMenuIsOpen(state) {
     return state.isOpen;
 }
+
+export const getConnectState = state => state.isConnected;

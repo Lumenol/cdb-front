@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ConnectButton from "./components/ConnectButton";
+import PersistentDrawerLeft from './components/Menu';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             Learn React
           </a>
         </header>
+          <ConnectButton/>
+          <PersistentDrawerLeft/>
       </div>
   );
 }

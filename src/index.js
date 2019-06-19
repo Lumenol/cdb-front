@@ -15,19 +15,20 @@ import orderByComputerReducer from './redux/computerOrderBy';
 import directionComputerReducer from './redux/computerDirection';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import {ConnectReducer} from "./redux/connectButton";
 
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
-
 const searchReducer = {
     orderBy: orderByComputerReducer,
     search: searchComputerReducer,
     direction: directionComputerReducer,
     isOpen: menuIsOpenReducer,
 };
+const connectReducter = {isConnected: ConnectReducer};
 
-const reducer = combineReducers({...searchReducer, ...language, ...computer});
+const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connectReducter});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(
