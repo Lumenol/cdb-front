@@ -1,17 +1,14 @@
-const CONST_PRESS_CONNECT_BUTTON = "TOGGLE_CONNECT_BUTTON";
+const LOGOUT = "LOGOUT";
 
 
-export function toggleConnect(isConnected) {
-    return {type: CONST_PRESS_CONNECT_BUTTON, isConnected}
+export function logout() {
+    return {type: LOGOUT};
 }
 
-/**
- * @return {boolean}
- */
-export function ConnectReducer(state = '', action) {
+export default function connectionReducer(state = '', action) {
     switch (action.type) {
-        case CONST_PRESS_CONNECT_BUTTON:
-            return !state;
+        case LOGOUT:
+            return '';
         default:
             return state;
     }
