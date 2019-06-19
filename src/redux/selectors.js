@@ -23,3 +23,13 @@ export function selectMenuIsOpen(state) {
 }
 
 export const getConnectState = state => state.isConnected;
+
+export const getPageSelectorState = state => ({
+    step: state.pageSelector.step,
+    minStep: state.pageSelector.minStep,
+    midStep: state.pageSelector.midStep,
+    maxStep: state.pageSelector.maxStep,
+    page: state.pageSelector.page,
+    minPage: state.pageSelector.minPage,
+    maxPage: state.pageSelector.maxPage,
+});

@@ -16,10 +16,12 @@ import directionComputerReducer from './redux/computerDirection';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import {ConnectReducer} from "./redux/connectButton";
+import {PageReducer} from "./redux/PageSelector";
 
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
+
 const searchReducer = {
     orderBy: orderByComputerReducer,
     search: searchComputerReducer,
@@ -27,8 +29,9 @@ const searchReducer = {
     isOpen: menuIsOpenReducer,
 };
 const connectReducter = {isConnected: ConnectReducer};
+const pageSelectorReducer = {pageSelector: PageReducer};
 
-const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connectReducter});
+const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connectReducter, ...pageSelectorReducer});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(

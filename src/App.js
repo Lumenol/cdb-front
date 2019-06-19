@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ConnectButton from "./components/ConnectButton";
 import PersistentDrawerLeft from './components/Menu';
+import PageSelector from "./components/PageSelector";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
             Learn React
           </a>
         </header>
-          <ConnectButton/>
-          <PersistentDrawerLeft/>
+        <ConnectButton/>
+        <PersistentDrawerLeft/>
+        <PageSelector/>
       </div>
   );
 }
