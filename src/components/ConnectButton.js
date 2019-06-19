@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Switch from '@material-ui/core/Switch';
 import {connect} from "react-redux";
-import {toggleConnect} from "../redux/connectButton";
-import {getConnectState} from "../redux/selectors";
+import {toggleConnect} from "../redux/connection";
+import {selectIsConnected} from "../redux/selectors";
 
 class ConnectButton extends Component {
 
@@ -20,7 +20,7 @@ class ConnectButton extends Component {
 
 
 const mapStateToProps = state => {
-    return {isConnected: getConnectState(state)};
+    return {isConnected: selectIsConnected(state)};
 };
 
 function mapDispatchToProps(dispatch) {

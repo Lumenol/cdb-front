@@ -22,4 +22,8 @@ export function selectMenuIsOpen(state) {
     return state.isOpen;
 }
 
-export const getConnectState = state => state.isConnected;
+export const selectIsConnected = state => !!selectToken(state);
+
+export function selectToken(state) {
+    return state.token;
+}

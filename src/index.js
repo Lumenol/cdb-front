@@ -15,8 +15,9 @@ import orderByComputerReducer from './redux/computerOrderBy';
 import directionComputerReducer from './redux/computerDirection';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import {ConnectReducer} from "./redux/connectButton";
-
+import {ConnectReducer} from "./redux/connection";
+import {addTokenInterceptor} from "./configuration/axios";
+import {selectToken} from "./redux/selectors";
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
@@ -31,6 +32,9 @@ const connectReducter = {isConnected: ConnectReducer};
 const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connectReducter});
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+addTokenInterceptor(() => selectToken(store.getState()));
+
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
