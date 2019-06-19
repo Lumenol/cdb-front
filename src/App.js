@@ -6,7 +6,13 @@ import PageSelector from './components/PageSelector'
 class App extends Component{
   render() {
     return (
-        <PageSelector max={5} min={0} current={0}></PageSelector>
+        <PageSelector maxStep={9}
+                      minStep={0}
+                      currentStep={0}
+                      minPage={0}
+                      maxPage={20}
+                      currentPage={0}
+        />
     );
   };
 }

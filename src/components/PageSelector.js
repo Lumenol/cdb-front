@@ -17,38 +17,60 @@ class PageSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeStep: this.props.current
+            step: this.props.currentStep,
+            page: this.props.currentPage,
+            mid : Math.ceil(this.props.maxStep / 2)
         }
     }
 
     handleNext = () => {
-        this.setState((prev,props) => ({ activeStep: prev.activeStep < props.max ? prev.activeStep + 1 : prev.activeStep }));
+        this.setState((prev,props) => ({
+            page: prev.page < props.maxPage ? prev.page +1 : prev.page
+        }));
     };
 
     handleBack = () => {
-        this.setState((prev,props) => ({ activeStep: prev.activeStep > props.min ? prev.activeStep -1 : prev.activeStep }));
+        this.setState((prev,props) => ({
+            page: prev.page > props.minPage ? prev.page -1 : prev.page
+        }));
     }
 
     render() {
         const {classes} = this.props;
+
         return (
-            <MobileStepper
-                variant="dots"
-                steps={this.props.max}
-                position="static"
-                activeStep={this.state.activeStep}
-                className={classes.root}
-                nextButton={
-                    <Button size="small" onClick={this.handleNext} disabled={this.state.activeStep === this.props.max}>
-                        Next <KeyboardArrowRight/>
-                    </Button>
-                }
-                backButton={
-                    <Button size="small" onClick={this.handleBack} disabled={this.state.activeStep === this.props.min}>
-                        <KeyboardArrowLeft/> Back
-                    </Button>
-                }
-            />
+            <div>
+                <MobileStepper
+                    variant="dots"
+                    steps={this.props.maxStep+1}
+                    position="static"
+                    activeStep=
+                        {
+                            this.state.page < this.state.mid ?
+                            this.state.page :
+                            (
+                                this.props.maxPage -this.state.mid < this.state.page  ?
+                                (this.props.maxStep - (this.props.maxPage - this.state.page)) :
+                                this.state.mid
+                            )
+                        }
+                    className={classes.root}
+                    nextButton={
+                        <Button size="small" onClick={this.handleNext} disabled={this.state.page === this.props.maxPage}>
+                            <KeyboardArrowRight/>
+                        </Button>
+                    }
+                    backButton={
+                        <Button size="small" onClick={this.handleBack} disabled={this.state.page === this.props.minPage}>
+                            <KeyboardArrowLeft/>
+                        </Button>
+                    }
+                />
+                <p>
+                    {this.state.page}
+                </p>
+            </div>
+
         )
     }
 
