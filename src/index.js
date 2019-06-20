@@ -20,7 +20,7 @@ import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
 import {PageReducer} from "./redux/PageSelector";
-
+import pageSizeReducer from "./redux/ChangePagination";
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
@@ -33,12 +33,15 @@ const searchReducer = {
     direction: directionComputerReducer,
     isOpen: menuIsOpenReducer,
 };
-const pageSelectorReducer = {pageSelector: PageReducer};
 
-const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connection, ...pageSelectorReducer});
+const pageSelectorReducer = {pageSelector: PageReducer};
+const pageSize={pageSize: pageSizeReducer};
+
+const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connection, ...pageSelectorReducer, ...pageSize});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+
 
 addTokenInterceptor(() => selectToken(store.getState()));
 
