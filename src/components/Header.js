@@ -8,7 +8,7 @@ import {selectMenuIsOpen} from "../redux/selectors";
 import {connect} from "react-redux";
 import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
-import ConnectButton from "./ConnectButton";
+import DisconnectButton from "./DisconectButton";
 import Grid from "@material-ui/core/Grid";
 
 
@@ -36,7 +36,7 @@ class DenseAppBar extends Component {
 
 
                         <Grid item xs={1}>
-                            <ConnectButton/>
+                            <DisconnectButton/>
                         </Grid>
 
 
