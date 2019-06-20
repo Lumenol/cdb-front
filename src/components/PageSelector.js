@@ -26,26 +26,28 @@ class PageSelector extends Component {
                 </div>
                 <MobileStepper
                     variant="dots"
-                    steps={this.props.maxStep+1}
+                    steps={this.props.maxStep + 1}
                     position="static"
                     activeStep=
                         {
                             this.props.page < this.props.midStep ?
-                            this.props.page :
-                            (
-                                 this.props.maxPage - this.props.midStep < this.props.page  ?
-                                 this.props.maxStep - (this.props.maxPage - this.props.page) :
-                                 this.props.midStep
-                            )
+                                this.props.page :
+                                (
+                                    this.props.maxPage - this.props.midStep < this.props.page ?
+                                        this.props.maxStep - (this.props.maxPage - this.props.page) :
+                                        this.props.midStep
+                                )
                         }
                     className={classes.root}
                     nextButton={
-                        <Button size="small" onClick={this.props.clickNextPageButton} disabled={this.props.page === this.props.maxPage}>
+                        <Button size="small" onClick={this.props.clickNextPageButton}
+                                disabled={this.props.page === this.props.maxPage}>
                             <KeyboardArrowRight/>
                         </Button>
                     }
                     backButton={
-                        <Button size="small" onClick={this.props.clickPreviousPageButton} disabled={this.props.page === this.props.minPage}>
+                        <Button size="small" onClick={this.props.clickPreviousPageButton}
+                                disabled={this.props.page === this.props.minPage}>
                             <KeyboardArrowLeft/>
                         </Button>
                     }
@@ -67,6 +69,6 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default PageSelector = connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(PageSelector));
+export default PageSelector = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PageSelector));
 
 

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {Provider} from "react-redux";
 import {I18nReduxProvider} from "./containers/I18nReduxProvider";
 import i18n from "./configuration/i18n";
@@ -15,12 +15,17 @@ import orderByComputerReducer from './redux/computerOrderBy';
 import directionComputerReducer from './redux/computerDirection';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import {ConnectReducer} from "./redux/connectButton";
+import connectionReducer, {login} from "./redux/connection";
+import {addTokenInterceptor} from "./configuration/axios";
+import {selectToken} from "./redux/selectors";
+import thunk from "redux-thunk";
 import {PageReducer} from "./redux/PageSelector";
 
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
+
+const connection = {connectionInfos: connectionReducer};
 
 const searchReducer = {
     orderBy: orderByComputerReducer,
@@ -28,12 +33,17 @@ const searchReducer = {
     direction: directionComputerReducer,
     isOpen: menuIsOpenReducer,
 };
-const connectReducter = {isConnected: ConnectReducer};
 const pageSelectorReducer = {pageSelector: PageReducer};
 
-const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connectReducter, ...pageSelectorReducer});
+const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connection, ...pageSelectorReducer});
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+
+addTokenInterceptor(() => selectToken(store.getState()));
+
+store.dispatch(login("user", "user"));
+
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
