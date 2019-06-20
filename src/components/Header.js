@@ -23,15 +23,15 @@ class DenseAppBar extends Component {
                     <Toolbar variant="dense">
 
                         <Grid item xs={1}>
-                            <IconButton edge="start" color="inherit" aria-label="Menu">
+                            {!isOpen && <IconButton edge="start" color="inherit" aria-label="Menu">
                                 <MenuIcon onClick={open}/>
-                            </IconButton>
+                            </IconButton>}
                         </Grid>
 
                         <Grid item xs={10}>
                             <Typography variant="h6" color="inherit" align="center">
-                            {t("title.title")}
-                        </Typography>
+                                {t("title.title")}
+                            </Typography>
                         </Grid>
 
 
