@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {withStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
 import {connect} from "react-redux";
 import {setPageSize} from "../redux/ChangePagination";
@@ -8,10 +7,9 @@ import {selectPageSize} from "../redux/selectors";
 import * as PropTypes from "prop-types";
 
 
-
 const styles = theme => ({
     root: {
-        width: 200,
+        width: 150,
     },
     margin: {
         height: theme.spacing(5),
@@ -39,11 +37,7 @@ class ChangePagination extends Component {
         const {classes} = this.props;
         return (
             <div className={classes.margin && classes.root}>
-                <Typography id="pagination-slider" gutterBottom>
-                    Pagination
-                </Typography>
                 <Slider
-                    min={10}
                     max={100}
                     defaultValue={10}
                     aria-labelledby="pagination-slider"

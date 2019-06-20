@@ -23,15 +23,18 @@ const styles = theme => ({
 
 class PersistentDrawerLeft extends Component {
 
-
     render() {
         const {classes, isOpen, close} = this.props;
         return (
             <Drawer variant="persistent" anchor="left" open={isOpen}>
                 <div>
-                    <IconButton onClick={close} style={{float: "right"}}>
-                        <ChevronLeftIcon/>
-                    </IconButton>
+                    <div className={classes.margin}>
+                        512 Ordinateurs trouvés
+
+                        <IconButton onClick={close} style={{float: "right"}}>
+                            <ChevronLeftIcon/>
+                        </IconButton>
+                    </div>
                 </div>
                 <Divider/>
                 <div className={classes.margin}>

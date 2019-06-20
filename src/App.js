@@ -1,20 +1,32 @@
 import React from 'react';
 import './App.css';
-import PersistentDrawerLeft from './components/Menu';
 import PageSelector from "./components/PageSelector";
-import DisconnectButton from "./components/DisconectButton";
-import Slider from "./components/ChangePagination";
+import Header from "./components/Header";
+import Grid from "@material-ui/core/Grid";
+import PersistentDrawerLeft from "./components/Menu";
+import ChangePagination from "./components/ChangePagination";
 
 
 function App() {
     return (
-        <div>
-            <DisconnectButton/>
+        <Grid container direction="row" spacing={2}>
+            <Grid item xs={12}><Header/></Grid>
+
+            <Grid item xs={12} container justify="center" alignItems="flex-end">
+                <ChangePagination/>
+
+            </Grid>
+
+            <Grid item xs={12} container justify="center">
+                <footer className="footer">
+                    <PageSelector/>
+                </footer>
+            </Grid>
             <PersistentDrawerLeft/>
-            <PageSelector/>
-            <Slider/>
-        </div>
-    );
+        </Grid>
+
+
+    )
 }
 
 export default App;

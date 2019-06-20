@@ -35,7 +35,7 @@ const searchReducer = {
 };
 
 const pageSelectorReducer = {pageSelector: PageReducer};
-const pageSize={pageSize: pageSizeReducer};
+const pageSize = {pageSize: pageSizeReducer};
 
 const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connection, ...pageSelectorReducer, ...pageSize});
 

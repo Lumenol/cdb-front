@@ -7,6 +7,8 @@ import {withStyles} from '@material-ui/core/styles';
 import connect from "react-redux/es/connect/connect";
 import {getPageSelectorState} from "../redux/selectors";
 import {nextPage, previousPage} from "../redux/PageSelector";
+import {Grid} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const styles = {
     root: {
@@ -20,39 +22,44 @@ class PageSelector extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div>
-                <div>
-                    {this.props.page}
-                </div>
-                <MobileStepper
-                    variant="dots"
-                    steps={this.props.maxStep + 1}
-                    position="static"
-                    activeStep=
-                        {
-                            this.props.page < this.props.midStep ?
-                                this.props.page :
-                                (
-                                    this.props.maxPage - this.props.midStep < this.props.page ?
-                                        this.props.maxStep - (this.props.maxPage - this.props.page) :
-                                        this.props.midStep
-                                )
+            <Grid container direction="row">
+
+                <Grid item container justify="center">
+                    <Typography>
+                        Page {this.props.page} / {this.props.maxPage}
+                    </Typography>
+                </Grid>
+                <Grid item container justify="center">
+                    <MobileStepper
+                        variant="dots"
+                        steps={this.props.maxStep + 1}
+                        position="static"
+                        activeStep=
+                            {
+                                this.props.page < this.props.midStep ?
+                                    this.props.page :
+                                    (
+                                        this.props.maxPage - this.props.midStep < this.props.page ?
+                                            this.props.maxStep - (this.props.maxPage - this.props.page) :
+                                            this.props.midStep
+                                    )
+                            }
+                        className={classes.root}
+                        nextButton={
+                            <Button size="small" onClick={this.props.clickNextPageButton}
+                                    disabled={this.props.page === this.props.maxPage}>
+                                <KeyboardArrowRight/>
+                            </Button>
                         }
-                    className={classes.root}
-                    nextButton={
-                        <Button size="small" onClick={this.props.clickNextPageButton}
-                                disabled={this.props.page === this.props.maxPage}>
-                            <KeyboardArrowRight/>
-                        </Button>
-                    }
-                    backButton={
-                        <Button size="small" onClick={this.props.clickPreviousPageButton}
-                                disabled={this.props.page === this.props.minPage}>
-                            <KeyboardArrowLeft/>
-                        </Button>
-                    }
-                />
-            </div>
+                        backButton={
+                            <Button size="small" onClick={this.props.clickPreviousPageButton}
+                                    disabled={this.props.page === this.props.minPage}>
+                                <KeyboardArrowLeft/>
+                            </Button>
+                        }
+                    />
+                </Grid>
+            </Grid>
 
         )
     }
