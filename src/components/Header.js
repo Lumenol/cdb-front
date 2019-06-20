@@ -3,13 +3,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import PersistentDrawerLeft from "./Menu";
 import {withTranslation} from "react-i18next";
 import {selectMenuIsOpen} from "../redux/selectors";
 import {connect} from "react-redux";
 import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
 import ConnectButton from "./ConnectButton";
+import Grid from "@material-ui/core/Grid";
 
 
 class DenseAppBar extends Component {
@@ -18,20 +18,32 @@ class DenseAppBar extends Component {
     render() {
         const {t, isOpen, open} = this.props;
         return (
-            <div>
+            <Grid container direction="column">
                 <Paper position="static">
                     <Toolbar variant="dense">
-                        <IconButton edge="start" color="inherit" aria-label="Menu">
-                            <MenuIcon onClick={open}/>
-                        </IconButton>
-                        <Typography variant="h6" color="inherit">
+
+                        <Grid item xs={1}>
+                            <IconButton edge="start" color="inherit" aria-label="Menu">
+                                <MenuIcon onClick={open}/>
+                            </IconButton>
+                        </Grid>
+
+                        <Grid item xs={10}>
+                            <Typography variant="h6" color="inherit" align="center">
                             {t("title.title")}
                         </Typography>
-                        <ConnectButton/>
+                        </Grid>
+
+
+                        <Grid item xs={1}>
+                            <ConnectButton/>
+                        </Grid>
+
+
                     </Toolbar>
                 </Paper>
-                <PersistentDrawerLeft/>
-            </div>
+
+            </Grid>
         )
             ;
     }
