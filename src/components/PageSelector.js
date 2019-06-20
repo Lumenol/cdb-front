@@ -15,16 +15,42 @@ const styles = {
     }
 };
 
+
+
 class PageSelector extends Component {
+
+
+    state = {
+        print : false
+    };
+
+    onMouseOver = () => {
+        console.log("on mouse over"+this.state.print)
+        this.setState({
+            print:true
+        })
+    };
+
+    onMouseOut = () => {
+        console.log("onMouseOut"+this.state.print)
+        this.setState({
+            print: false
+        })
+    };
 
     render() {
         const {classes} = this.props;
         return (
-            <div>
-                <div>
-                    {this.props.page}
-                </div>
+            <div onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                {this.state.print ?
+                    <div>
+                        {this.props.page}
+                    </div> :
+                    null
+                }
+
                 <MobileStepper
+
                     variant="dots"
                     steps={this.props.maxStep+1}
                     position="static"
@@ -40,14 +66,16 @@ class PageSelector extends Component {
                         }
                     className={classes.root}
                     nextButton={
+                        this.state.print ?
                         <Button size="small" onClick={this.props.clickNextPageButton} disabled={this.props.page === this.props.maxPage}>
                             <KeyboardArrowRight/>
-                        </Button>
+                        </Button> : null
                     }
                     backButton={
+                        this.state.print ?
                         <Button size="small" onClick={this.props.clickPreviousPageButton} disabled={this.props.page === this.props.minPage}>
                             <KeyboardArrowLeft/>
-                        </Button>
+                        </Button> : null
                     }
                 />
             </div>
