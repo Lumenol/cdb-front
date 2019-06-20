@@ -52,7 +52,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 OrderBy.propTypes = {
-    value: PropTypes.oneOf(ORDER_BY).isRequired,
+    value: PropTypes.oneOf(Object.values(ORDER_BY)).isRequired,
     onChange: PropTypes.func.isRequired
 };
 const Translation = withTranslation()(OrderBy);
