@@ -16,11 +16,11 @@ class DisconnectButton extends Component {
     };
 
     render() {
-        const {onChange, isConnected} = this.props;
+        const {isConnected} = this.props;
         return (
             <Switch
                 checked={isConnected}
-                onChange={onChange}
+                onChange={this.onChange}
                 color="primary">
             </Switch>
         )
