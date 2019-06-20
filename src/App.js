@@ -1,17 +1,16 @@
 import React from 'react';
 import './App.css';
-import {getToken} from "./api/connection";
-import Button from "@material-ui/core/Button";
+import PersistentDrawerLeft from './components/Menu';
+import PageSelector from "./components/PageSelector";
 import DisconnectButton from "./components/DisconectButton";
 
 function App() {
     return (
-        <>
-            <Button color="primary" onClick={() => getToken('user', 'user')}>
-                Bonjour
-            </Button>
-            < DisconnectButton/>
-        </>
+        <div className="App">
+            <DisconnectButton/>
+            <PersistentDrawerLeft/>
+            <PageSelector/>
+        </div>
     );
 }
 

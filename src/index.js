@@ -19,19 +19,23 @@ import connectionReducer, {login} from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
+import {PageReducer} from "./redux/PageSelector";
 
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
+
 const connection = {connectionInfos: connectionReducer};
+
 const searchReducer = {
     orderBy: orderByComputerReducer,
     search: searchComputerReducer,
     direction: directionComputerReducer,
     isOpen: menuIsOpenReducer,
 };
+const pageSelectorReducer = {pageSelector: PageReducer};
 
-const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connection});
+const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connection, ...pageSelectorReducer});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));

@@ -1,5 +1,5 @@
-import {createSelector} from "reselect";
 import {decode} from "jsonwebtoken";
+import {createSelector} from "reselect";
 
 export function selectSelectedComputers(state) {
     return state.selectedComputers;
@@ -40,3 +40,13 @@ function selectConnectionInfos(state) {
 }
 
 export const selectDecodedToken = createSelector([selectToken], decode);
+
+export const getPageSelectorState = state => ({
+    step: state.pageSelector.step,
+    minStep: state.pageSelector.minStep,
+    midStep: state.pageSelector.midStep,
+    maxStep: state.pageSelector.maxStep,
+    page: state.pageSelector.page,
+    minPage: state.pageSelector.minPage,
+    maxPage: state.pageSelector.maxPage,
+});
