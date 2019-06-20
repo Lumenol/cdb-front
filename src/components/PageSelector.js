@@ -19,22 +19,21 @@ const styles = {
 
 class PageSelector extends Component {
 
-
     state = {
-        print : false
+        displayControl: false
     };
 
     onMouseOver = () => {
-        console.log("on mouse over"+this.state.print)
+        console.log("on mouse over" + this.state.displayControl);
         this.setState({
-            print:true
+            displayControl: true
         })
     };
 
     onMouseOut = () => {
-        console.log("onMouseOut"+this.state.print)
+        console.log("onMouseOut" + this.state.displayControl);
         this.setState({
-            print: false
+            displayControl: false
         })
     };
 
@@ -42,7 +41,7 @@ class PageSelector extends Component {
         const {classes} = this.props;
         return (
             <div onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
-                {this.state.print ?
+                {this.state.displayControl ?
                     <div>
                         {this.props.page}
                     </div> :
@@ -66,13 +65,13 @@ class PageSelector extends Component {
                         }
                     className={classes.root}
                     nextButton={
-                        this.state.print ?
+                        this.state.displayControl ?
                         <Button size="small" onClick={this.props.clickNextPageButton} disabled={this.props.page === this.props.maxPage}>
                             <KeyboardArrowRight/>
                         </Button> : null
                     }
                     backButton={
-                        this.state.print ?
+                        this.state.displayControl ?
                         <Button size="small" onClick={this.props.clickPreviousPageButton} disabled={this.props.page === this.props.minPage}>
                             <KeyboardArrowLeft/>
                         </Button> : null
