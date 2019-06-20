@@ -12,7 +12,7 @@ export async function getToken(login, password) {
         return extractToken(response);
     } catch (e) {
         console.error("Erreur lors de l'attribution du token");
-        return "";
+        throw e;
     }
 }
 
@@ -22,6 +22,6 @@ export async function refreshToken() {
         return extractToken(response);
     } catch (e) {
         console.error("Erreur lors du rafraichissement du token");
-        return "";
+        throw e;
     }
 }

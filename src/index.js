@@ -23,7 +23,7 @@ import thunk from "redux-thunk";
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
-const connection = {token: connectionReducer};
+const connection = {connectionInfos: connectionReducer};
 const searchReducer = {
     orderBy: orderByComputerReducer,
     search: searchComputerReducer,

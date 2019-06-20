@@ -28,7 +28,15 @@ export function selectMenuIsOpen(state) {
 export const selectIsConnected = state => !!selectToken(state);
 
 export function selectToken(state) {
-    return state.token;
+    return selectConnectionInfos(state).token;
+}
+
+export function selectLoginError(state) {
+    return selectConnectionInfos(state).error;
+}
+
+function selectConnectionInfos(state) {
+    return state.connectionInfos;
 }
 
 export const selectDecodedToken = createSelector([selectToken], decode);
