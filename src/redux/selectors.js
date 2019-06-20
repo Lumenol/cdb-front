@@ -27,7 +27,7 @@ export function selectMenuIsOpen(state) {
     return state.isOpen;
 }
 
-export const selectIsConnected = state => !!selectToken(state);
+export const selectIsConnected = state => selectTokenIsNotExpired(state);
 
 export function selectToken(state) {
     return selectConnectionInfos(state).token;
@@ -63,6 +63,21 @@ const selectUserHasRole = role => state => selectUserRoles(state).includes(role)
 
 
 export const selectUserIsAdmin = selectUserHasRole("ROLE_ADMIN");
+
+export function selectUsername(state) {
+    return selectDecodedToken(state).sub;
+}
+
+function selectTokenEndOfLife(state) {
+    return selectDecodedToken(state).exp * 1000;
+}
+
+function selectTokenIsNotExpired(state) {
+    const now = new Date();
+    const selectTokenEndOfLife1 = selectTokenEndOfLife(state);
+    const utcMilliseconds = now.getTime();
+    return selectTokenEndOfLife1 > utcMilliseconds;
+}
 
 export const getPageSelectorState = state => ({
     step: state.pageSelector.step,
