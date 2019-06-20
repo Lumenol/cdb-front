@@ -41,7 +41,28 @@ function selectConnectionInfos(state) {
     return state.connectionInfos;
 }
 
-export const selectDecodedToken = createSelector([selectToken], decode);
+const selectDecodedToken = createSelector([selectToken], function (token) {
+    const decoded = decode(token);
+    if (decoded) {
+        return decoded;
+    } else {
+        return {};
+    }
+});
+
+function selectUserRoles(state) {
+    const authorization = selectDecodedToken(state).Authorization;
+    if (authorization) {
+        return authorization;
+    } else {
+        return [];
+    }
+}
+
+const selectUserHasRole = role => state => selectUserRoles(state).includes(role);
+
+
+export const selectUserIsAdmin = selectUserHasRole("ROLE_ADMIN");
 
 export const getPageSelectorState = state => ({
     step: state.pageSelector.step,
