@@ -23,7 +23,7 @@ export async function getCompanyById(id) {
 
 export async function deleteCompanies(id) {
     try {
-        return await axios.delete(COMPANIES_URL + `/${id}`);
+        await axios.delete(COMPANIES_URL + `/${id}`);
     } catch (e) {
         console.error(e);
         throw(e);
