@@ -3,12 +3,13 @@
 }
 
 .card {
-  background-color: #00796B;
+    background-color: #00796B;
+    height: 600px;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
+    position: absolute;
+    bottom: 0;
 }
 
 .App-logo {
