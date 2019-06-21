@@ -4,7 +4,7 @@ import {createSelector} from "reselect";
 export const selectComputers = state => state.computers.computers;
 
 export function selectComputerCount(state) {
-    return 526;
+    return state.computers.count;
 }
 
 export function selectSelectedComputers(state) {
