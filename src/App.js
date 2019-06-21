@@ -24,8 +24,6 @@ function App() {
             </Grid>
             <PersistentDrawerLeft/>
         </Grid>
-
-
     )
 }
 
