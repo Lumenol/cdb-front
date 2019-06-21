@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {GET_ALL_URL} from "../configuration/constants";
+import {COMPUTERS_URL} from "../configuration/constants";
 
 export async function getAll(direction, field, page, search, size) {
     try {
-        const result = await axios.get(GET_ALL_URL, {
+        const result = await axios.get(COMPUTERS_URL, {
             params: {
                 direction,
                 field,
