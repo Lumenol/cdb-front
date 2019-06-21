@@ -2,11 +2,21 @@
   text-align: center;
 }
 
+.card {
+  background-color: #00796B;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
 }
+
 
 .App-header {
   background-color: #282c34;

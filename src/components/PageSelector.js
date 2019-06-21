@@ -7,6 +7,8 @@ import {withStyles} from '@material-ui/core/styles';
 import connect from "react-redux/es/connect/connect";
 import {getPageSelectorState} from "../redux/selectors";
 import {nextPage, previousPage} from "../redux/PageSelector";
+import {Grid} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const styles = {
     root: {
@@ -14,8 +16,6 @@ const styles = {
         flexGrow: 1,
     }
 };
-
-
 
 class PageSelector extends Component {
 
@@ -40,44 +40,45 @@ class PageSelector extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
-                {this.state.displayControl ?
-                    <div>
-                        {this.props.page}
-                    </div> :
-                    null
-                }
+            <Grid container direction="row" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
 
-                <MobileStepper
-
-                    variant="dots"
-                    steps={this.props.maxStep+1}
-                    position="static"
-                    activeStep=
-                        {
-                            this.props.page < this.props.midStep ?
-                            this.props.page :
-                            (
-                                 this.props.maxPage - this.props.midStep < this.props.page  ?
-                                 this.props.maxStep - (this.props.maxPage - this.props.page) :
-                                 this.props.midStep
-                            )
+                <Grid item container justify="center">
+                    {this.state.displayControl ?
+                        <Typography color="secondary">
+                            Page {this.props.page} / {this.props.maxPage}
+                        </Typography> : null}
+                </Grid>
+                <Grid item container justify="center">
+                    <MobileStepper
+                        variant="dots"
+                        steps={this.props.maxStep + 1}
+                        position="static"
+                        activeStep=
+                            {
+                                this.props.page <= this.props.midStep ?
+                                    this.props.page - 1 :
+                                    (
+                                        this.props.maxPage - this.props.midStep < this.props.page ?
+                                            this.props.maxStep - (this.props.maxPage - this.props.page) :
+                                            this.props.midStep
+                                    )
+                            }
+                        className={classes.root}
+                        nextButton={
+                            <Button size="small" onClick={this.props.clickNextPageButton}
+                                    disabled={this.props.page === this.props.maxPage}>
+                                <KeyboardArrowRight/>
+                            </Button>
                         }
-                    className={classes.root}
-                    nextButton={
-                        this.state.displayControl ?
-                        <Button size="small" onClick={this.props.clickNextPageButton} disabled={this.props.page === this.props.maxPage}>
-                            <KeyboardArrowRight/>
-                        </Button> : null
-                    }
-                    backButton={
-                        this.state.displayControl ?
-                        <Button size="small" onClick={this.props.clickPreviousPageButton} disabled={this.props.page === this.props.minPage}>
-                            <KeyboardArrowLeft/>
-                        </Button> : null
-                    }
-                />
-            </div>
+                        backButton={
+                            <Button size="small" onClick={this.props.clickPreviousPageButton}
+                                    disabled={this.props.page === this.props.minPage}>
+                                <KeyboardArrowLeft/>
+                            </Button>
+                        }
+                    />
+                </Grid>
+            </Grid>
 
         )
     }
@@ -94,6 +95,6 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default PageSelector = connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(PageSelector));
+export default PageSelector = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PageSelector));
 
 
