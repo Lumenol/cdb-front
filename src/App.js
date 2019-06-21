@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PageSelector from "./components/PageSelector";
+import Header from "./components/Header";
+import Grid from "@material-ui/core/Grid";
+import PersistentDrawerLeft from "./components/Menu";
+import ChangePagination from "./components/ChangePagination";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Grid container direction="row" spacing={2}>
+            <Grid item xs={12}><Header/></Grid>
+
+            <Grid item xs={12} container justify="center" alignItems="flex-end">
+                <ChangePagination/>
+
+            </Grid>
+
+            <Grid item xs={12} container justify="center">
+                <footer className="footer">
+                    <PageSelector/>
+                </footer>
+            </Grid>
+            <PersistentDrawerLeft/>
+        </Grid>
+
+
+    )
 }
 
 export default App;

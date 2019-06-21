@@ -1,0 +1,13 @@
+{
+  "computer": {
+    "name": "Nom",
+    "introduced": "Date d'introduction",
+    "discontinued": "Date de sortie",
+    "company": "Fabriquant"
+  },
+  "title": {
+    "title": "Ordinateurs",
+    "orderBy": "Trier par",
+    "search": "Rechercher"
+  }
+}

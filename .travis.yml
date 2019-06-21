@@ -13,7 +13,7 @@ addons:
     organization: "lumenol-github"   
  
 script:
-  - npm test -- --coverage --watchAll=false
+  - npm test -- --coverage --watchAll=false --passWithNoTests
   - npm run build
   - bash <(curl -s https://codecov.io/bash)
   - npm run sonarqube
