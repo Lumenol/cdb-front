@@ -46,7 +46,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 SwitchDirection.propTypes = {
-    value: PropTypes.oneOf(DIRECTION).isRequired
+    value: PropTypes.oneOf(Object.values(DIRECTION)).isRequired
 };
 
 export default SwitchDirection = connect(mapStateToProps, mapDispatchToProps)(SwitchDirection);
