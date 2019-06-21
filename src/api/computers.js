@@ -60,9 +60,13 @@ export async function deleteComputer(id) {
     }
 }
 
-export async function countComputers(id) {
+export async function countComputers(search) {
     try {
-        const result = await axios.get(COMPUTERS_URL + `/count`);
+        const result = await axios.get(COMPUTERS_URL + `/count`, {
+            params: {
+                search
+            }
+        });
         return result.data;
     } catch (e) {
         console.error(e);

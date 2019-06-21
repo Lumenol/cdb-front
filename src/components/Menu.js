@@ -8,7 +8,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SwitchDirection from "./SwitchDirection";
 import OrderBy from "./OrderBy";
 import InputSearch from "./InputSearch";
-import {selectMenuIsOpen} from "../redux/selectors";
+import {selectComputersCount, selectMenuIsOpen} from "../redux/selectors";
 import {connect} from "react-redux";
 import {closeMenu} from "../redux/menuIsOpen";
 import PropTypes from "prop-types";
@@ -24,12 +24,12 @@ const styles = theme => ({
 class PersistentDrawerLeft extends Component {
 
     render() {
-        const {classes, isOpen, close} = this.props;
+        const {classes, isOpen, close, count} = this.props;
         return (
             <Drawer variant="persistent" anchor="left" open={isOpen}>
                 <div>
                     <div className={classes.margin}>
-                        512 Ordinateurs trouvés
+                        {count} Ordinateurs trouvés
 
                         <IconButton onClick={close} style={{float: "right"}}>
                             <ChevronLeftIcon/>
@@ -51,7 +51,8 @@ class PersistentDrawerLeft extends Component {
 
 function mapStateToProps(state) {
     return {
-        isOpen: selectMenuIsOpen(state)
+        isOpen: selectMenuIsOpen(state),
+        count: selectComputersCount(state)
     };
 }
 

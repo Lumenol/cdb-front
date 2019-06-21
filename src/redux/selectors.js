@@ -2,6 +2,7 @@ import {decode} from "jsonwebtoken";
 import {createSelector} from "reselect";
 
 export const selectComputers = state => state.computers.computers;
+export const selectCountComputers = state => state.computers.count;
 
 export function selectSelectedComputers(state) {
     return state.computers.selected;
@@ -45,6 +46,10 @@ export function selectToken(state) {
 
 export function selectLoginError(state) {
     return selectConnectionInfos(state).error;
+}
+
+export function selectComputersCount(state) {
+    return state.computers.count;
 }
 
 function selectConnectionInfos(state) {
