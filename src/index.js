@@ -17,18 +17,10 @@ import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import connectionReducer, {login} from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
-import {
-    selectComputerDirection,
-    selectComputerOrderBy,
-    selectComputerSearch,
-    selectPage,
-    selectPageSize,
-    selectToken
-} from "./redux/selectors";
+import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
 import {PageReducer} from "./redux/PageSelector";
 import pageSizeReducer from "./redux/ChangePagination";
-import {getAll} from "./api/computer";
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
@@ -54,14 +46,6 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 addTokenInterceptor(() => selectToken(store.getState()));
 
 store.dispatch(login("user", "user"));
-
-function get() {
-    const state = store.getState();
-    getAll(selectComputerDirection(state), selectComputerOrderBy(state), selectPage(state),
-        selectComputerSearch(state), selectPageSize(state));
-}
-
-store.subscribe(get);
 
 ReactDOM.render(
     <Provider store={store}>
