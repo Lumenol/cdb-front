@@ -13,7 +13,7 @@ const initialState = {
     minStep: 0,
     midStep: 3,
     maxStep: 6,
-    minPage: 0,
+    minPage: 1,
     maxPage: 20,
     page: 1,
 };
