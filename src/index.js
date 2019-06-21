@@ -21,6 +21,7 @@ import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
 import {PageReducer} from "./redux/PageSelector";
 import pageSizeReducer from "./redux/ChangePagination";
+import {countCompanies} from "./api/companies";
 
 const computer = {selectedComputers: computerReducer};
 const language = {language: languageReducer};
@@ -45,7 +46,14 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 addTokenInterceptor(() => selectToken(store.getState()));
 
-store.dispatch(login("user", "user"));
+store.dispatch(login("string", "string"));
+
+function lol() {
+    // getCompanies();
+    countCompanies();
+}
+
+setTimeout(lol, 3000);
 
 ReactDOM.render(
     <Provider store={store}>
