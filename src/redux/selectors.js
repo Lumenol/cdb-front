@@ -3,6 +3,10 @@ import {createSelector} from "reselect";
 
 export const selectComputers = state => state.computers.computers;
 
+export function selectComputerCount(state) {
+    return 10;
+}
+
 export function selectSelectedComputers(state) {
     return state.computers.selected;
 }
@@ -11,7 +15,16 @@ export function selectComputersError(state) {
     return state.computers.error;
 }
 
-export const selectPageSize = state => state.pageSize;
+
+export function selectMinPage() {
+    return 1;
+}
+
+export function selectCurrentPage(state) {
+    return selectSearchParameters(state).page;
+}
+
+export const selectPageSize = state => selectSearchParameters(state).size;
 
 export function selectSearchParameters(state) {
     return state.searchParameters;
@@ -100,3 +113,5 @@ export const selectPageSelectorState = state => ({
 });
 
 export const selectPage = state => state.pageSelector.page;
+
+export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + 1);

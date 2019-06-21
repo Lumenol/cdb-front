@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/lab/Slider';
 import {connect} from "react-redux";
-import {setPageSize} from "../redux/ChangePagination";
 import {selectPageSize} from "../redux/selectors";
 import * as PropTypes from "prop-types";
+import {setPageSize} from "../redux/searchParameters";
 
 
 const styles = theme => ({
@@ -47,7 +47,7 @@ class ChangePagination extends Component {
                     valueLabelDisplay="auto"
                     marks={marks}
                     checked={this.props.changeValue}
-                    onChangeCommitted={this.onChange}
+                    onChange={this.onChange}
                 />
 
             </div>

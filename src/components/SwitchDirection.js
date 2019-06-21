@@ -4,8 +4,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {selectComputerDirection} from "../redux/selectors";
 import {connect} from "react-redux";
-import {DIRECTION, setDirectionComputer} from "../redux/computerDirection";
 import PropTypes from "prop-types";
+import {DIRECTION, setDirectionComputer} from "../redux/searchParameters";
 
 
 class SwitchDirection extends Component {
