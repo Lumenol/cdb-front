@@ -19,15 +19,34 @@ const styles = {
 
 class PageSelector extends Component {
 
+    state = {
+        displayControl: false
+    };
+
+    onMouseOver = () => {
+        console.log("on mouse over" + this.state.displayControl);
+        this.setState({
+            displayControl: true
+        })
+    };
+
+    onMouseOut = () => {
+        console.log("onMouseOut" + this.state.displayControl);
+        this.setState({
+            displayControl: false
+        })
+    };
+
     render() {
         const {classes} = this.props;
         return (
-            <Grid container direction="row">
+            <Grid container direction="row" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
 
                 <Grid item container justify="center">
-                    <Typography>
-                        Page {this.props.page} / {this.props.maxPage}
-                    </Typography>
+                    {this.state.displayControl ?
+                        <Typography color="secondary">
+                            Page {this.props.page} / {this.props.maxPage}
+                        </Typography> : null}
                 </Grid>
                 <Grid item container justify="center">
                     <MobileStepper
@@ -37,7 +56,7 @@ class PageSelector extends Component {
                         activeStep=
                             {
                                 this.props.page < this.props.midStep ?
-                                    this.props.page :
+                                    this.props.page - 1 :
                                     (
                                         this.props.maxPage - this.props.midStep < this.props.page ?
                                             this.props.maxStep - (this.props.maxPage - this.props.page) :
