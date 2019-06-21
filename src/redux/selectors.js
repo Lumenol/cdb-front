@@ -4,7 +4,7 @@ import {createSelector} from "reselect";
 export const selectComputers = state => state.computers.computers;
 
 export function selectComputerCount(state) {
-    return 10;
+    return 526;
 }
 
 export function selectSelectedComputers(state) {
@@ -101,17 +101,5 @@ function selectTokenIsNotExpired(state) {
     const utcMilliseconds = now.getTime();
     return selectTokenEndOfLife1 > utcMilliseconds;
 }
-
-export const selectPageSelectorState = state => ({
-    step: state.pageSelector.step,
-    minStep: state.pageSelector.minStep,
-    midStep: state.pageSelector.midStep,
-    maxStep: state.pageSelector.maxStep,
-    page: state.pageSelector.page,
-    minPage: state.pageSelector.minPage,
-    maxPage: state.pageSelector.maxPage,
-});
-
-export const selectPage = state => state.pageSelector.page;
 
 export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + 1);

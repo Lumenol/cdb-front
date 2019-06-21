@@ -1,4 +1,4 @@
-import {selectCurrentPage, selectMaxPage, selectMinPage} from "./selectors";
+import {selectCurrentPage, selectMaxPage, selectMinPage, selectPageSize} from "./selectors";
 
 export const ORDER_BY = {
     ID: "id",
@@ -22,9 +22,17 @@ const SET_SEARCH_COMPUTER = 'SET_SEARCH_COMPUTER';
 
 
 export function setPageSize(size) {
-    return {
-        type: SET_PAGE_SIZE,
-        size: size
+    return function (dispatch, getState) {
+        const pageSize = selectPageSize(getState());
+        if (pageSize !== size) {
+            dispatch({type: SET_PAGE_SIZE, size: size});
+            const state = getState();
+            const maxPage = selectMaxPage(state);
+            const currentPage = selectCurrentPage(state);
+            if (currentPage > maxPage) {
+                dispatch(setCurrentPage(maxPage));
+            }
+        }
     }
 }
 
@@ -34,7 +42,6 @@ function setCurrentPage(page) {
 
 export function previousPage() {
     return function (dispatch, getState) {
-        debugger;
         const state = getState();
         const minPage = selectMinPage(state);
         const newCurrentPage = selectCurrentPage(state) - 1;
@@ -46,7 +53,6 @@ export function previousPage() {
 
 export function nextPage() {
     return function (dispatch, getState) {
-        debugger;
         const state = getState();
         const maxPage = selectMaxPage(state);
         const newCurrentPage = selectCurrentPage(state) + 1;

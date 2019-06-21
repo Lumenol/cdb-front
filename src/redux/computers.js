@@ -1,9 +1,9 @@
-import {getAll} from "../api/computer";
+import {getAll} from "../api/computers";
 import {
     selectComputerDirection,
     selectComputerOrderBy,
     selectComputerSearch,
-    selectPage,
+    selectCurrentPage,
     selectPageSize
 } from "./selectors";
 
@@ -16,8 +16,7 @@ export function getComputers() {
     return async function (dispatch, getState) {
         try {
             const state = getState();
-            const result = await getAll(selectComputerDirection(state), selectComputerOrderBy(state), selectPage(state),
-                selectComputerSearch(state), selectPageSize(state));
+            const result = await getAll(selectCurrentPage(state), selectPageSize(state), selectComputerOrderBy(state), selectComputerDirection(state), selectComputerSearch(state));
             dispatch(setComputers(result));
         } catch (e) {
             dispatch(setError(e));
@@ -62,7 +61,7 @@ export default function reducer(state = {computers: [], selected: []}, action) {
         case SET_COMPUTERS:
             return {computers: action.computers, selected: []};
         case SET_ERROR:
-            return {...state, error: action.error};
+            return {...state, error: action.error.message};
         default:
             return state;
     }
