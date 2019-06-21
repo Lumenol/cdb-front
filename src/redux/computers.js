@@ -1,4 +1,4 @@
-import {getAll} from "../api/computer";
+import {getAll} from "../api/computers";
 import {
     selectComputerDirection,
     selectComputerOrderBy,
