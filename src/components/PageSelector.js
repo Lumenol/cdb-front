@@ -37,7 +37,7 @@ class PageSelector extends Component {
                         activeStep=
                             {
                                 this.props.page < this.props.midStep ?
-                                    this.props.page :
+                                    this.props.page -1:
                                     (
                                         this.props.maxPage - this.props.midStep < this.props.page ?
                                             this.props.maxStep - (this.props.maxPage - this.props.page) :
