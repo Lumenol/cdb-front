@@ -8,6 +8,7 @@ import ChangePagination from "./components/ChangePagination";
 import {useStore} from "react-redux";
 import {getComputers} from "./redux/computers";
 import {selectIsConnected, selectSearchParameters} from "./redux/selectors";
+import ComputerContainer from './containers/CardContainer';
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -44,9 +45,9 @@ function App() {
         <Grid container direction="row" spacing={2}>
             <Grid item xs={12}><Header/></Grid>
 
-            <Grid item xs={12} container justify="center" alignItems="flex-end">
-                <ChangePagination/>
-
+            <Grid item xs={12} container justify="center">
+                <Grid item xs={12} container justify="center"><ChangePagination/></Grid>
+                <Grid item xs={10} className="card_container"><ComputerContainer/></Grid>
             </Grid>
 
             <Grid item xs={12} container justify="center">

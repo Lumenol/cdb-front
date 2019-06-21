@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.card {
-    background-color: #00796B;
-    height: 600px;
-}
-
 .footer {
     position: absolute;
     bottom: 0;
@@ -32,6 +27,11 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.card_container {
+  min-height: 500px;
+  background-color: blue;
 }
 
 

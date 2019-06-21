@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -24,12 +24,12 @@ class ComputerCard extends Component {
     };
 
     render() {
-        debugger;
-        const {id, name, brand} = this.props.computer;
+        const {id, name, manufacturer, introduced, discontinued} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
+
         return (
-            <Grid container direction="row" spacing={1}>
-                <Grid item lg={10} md={10} xs={10}>
+            <Fragment>
+                <Grid item xs={10}>
                     <Card className={style} onClick={this.toggleSelect}>
                         <CardActionArea>
                             <CardMedia
@@ -42,16 +42,18 @@ class ComputerCard extends Component {
                                     {name}
                                 </Typography>
                                 <Typography variant="subtitle1" component="p">
-                                    {brand}
+                                    {manufacturer}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    05.11.2000 • 06.03.2005
+                                    {introduced} • {discontinued}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>
                 </Grid>
-                {this.props.isSelected ?
+                {
+                    this.props.isSelected ?
+                        <Grid item xs={2}>
                     <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
                         <Grid item xs={1}>
                             <Fab size="small" color="primary" aria-label="Delete">
@@ -64,21 +66,16 @@ class ComputerCard extends Component {
                                 <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>
                             </Fab>
                         </Grid>
-                    </Grid> : null}
-            </Grid>
-
-        );
+                    </Grid>
+                        </Grid> : null
+                }</Fragment>
+        )
+            ;
     }
-
 }
 
 const mapStateToProps = (state, props) => {
     return {
-        computer: {
-            name: 'Macintosh yeah',
-            brand: 'Apple Inc.',
-            id: 1,
-        },
         isSelected: selectSelectedComputers(state).includes(props.id)
     };
 };
