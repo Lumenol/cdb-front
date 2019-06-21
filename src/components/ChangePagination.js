@@ -33,6 +33,8 @@ const marks = [
 
 class ChangePagination extends Component {
 
+    onChange = event => this.props.slideOnSlider(Number(event.target.textContent));
+
     render() {
         const {classes} = this.props;
         return (
@@ -45,7 +47,7 @@ class ChangePagination extends Component {
                     valueLabelDisplay="auto"
                     marks={marks}
                     checked={this.props.changeValue}
-                    onChange={this.props.slideOnSlider}
+                    onChange={this.onChange}
                 />
 
             </div>
@@ -61,7 +63,10 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        slideOnSlider: (size) => dispatch(setPageSize(size)),
+        slideOnSlider: (size) => {
+            console.log(size);
+            dispatch(setPageSize(size));
+        }
     }
 }
 
