@@ -55,7 +55,7 @@ class PageSelector extends Component {
                         position="static"
                         activeStep=
                             {
-                                this.props.page <= this.props.midStep ?
+                                this.props.page < this.props.midStep ?
                                     this.props.page - 1 :
                                     (
                                         this.props.maxPage - this.props.midStep < this.props.page ?

@@ -10,12 +10,12 @@ export function nextPage() {
 }
 
 const initialState = {
-    minStep:0,
-    midStep:3,
-    maxStep:6,
-    minPage:0,
-    maxPage:20,
-    page:1,
+    minStep: 0,
+    midStep: 3,
+    maxStep: 6,
+    minPage: 1,
+    maxPage: 20,
+    page: 1,
 };
 
 export function PageReducer(state = initialState, action) {
