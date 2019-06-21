@@ -9,7 +9,7 @@ import {I18nReduxProvider} from "./containers/I18nReduxProvider";
 import i18n from "./configuration/i18n";
 import theme from './palette';
 import languageReducer from "./redux/i18n";
-import computerReducer, {getComputers} from './redux/computers';
+import computerReducer from './redux/computers';
 import searchComputerReducer from './redux/computerSearch';
 import orderByComputerReducer from './redux/computerOrderBy';
 import directionComputerReducer from './redux/computerDirection';
@@ -17,7 +17,7 @@ import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import connectionReducer, {login} from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
-import {selectSearchParameters, selectToken} from "./redux/selectors";
+import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
 import {PageReducer} from "./redux/PageSelector";
 import pageSizeReducer from "./redux/ChangePagination";
@@ -52,14 +52,6 @@ addTokenInterceptor(() => selectToken(store.getState()));
 
 store.dispatch(login("user", "user"));
 
-let mem;
-store.subscribe(() => {
-    if (selectSearchParameters(store.getState()) !== mem) {
-        store.dispatch(getComputers());
-        mem = selectSearchParameters(store.getState());
-    }
-});
-
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
@@ -68,7 +60,9 @@ ReactDOM.render(
             </I18nReduxProvider>
         </ThemeProvider>
     </Provider>,
-    document.getElementById('root'));
+    document.getElementById('root')
+)
+;
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
