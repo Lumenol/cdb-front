@@ -12,8 +12,9 @@ export async function getAll(direction, field, page, search, size) {
                 size,
             }
         });
-        console.log(result);
+        return result;
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        throw(error);
     }
 }
