@@ -24,14 +24,12 @@ class PageSelector extends Component {
     };
 
     onMouseOver = () => {
-        console.log("on mouse over" + this.state.displayControl);
         this.setState({
             displayControl: true
         })
     };
 
     onMouseOut = () => {
-        console.log("onMouseOut" + this.state.displayControl);
         this.setState({
             displayControl: false
         })
