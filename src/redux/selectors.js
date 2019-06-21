@@ -1,11 +1,13 @@
 import {decode} from "jsonwebtoken";
 import {createSelector} from "reselect";
 
-export const selectPageSize = state => state.pageSize;
+export const selectComputers = state => state.computers.computers;
 
 export function selectSelectedComputers(state) {
-    return state.selectedComputers;
+    return state.computers.selected;
 }
+
+export const selectPageSize = state => state.pageSize;
 
 export function selectComputerSearch(state) {
     return state.search;

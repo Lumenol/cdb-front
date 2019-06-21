@@ -30,7 +30,7 @@ import {PageReducer} from "./redux/PageSelector";
 import pageSizeReducer from "./redux/ChangePagination";
 import {getAll} from "./api/computer";
 
-const computer = {selectedComputers: computerReducer};
+const computers = {computers: computerReducer};
 const language = {language: languageReducer};
 
 const connection = {connectionInfos: connectionReducer};
@@ -45,7 +45,7 @@ const searchReducer = {
 const pageSelectorReducer = {pageSelector: PageReducer};
 const pageSize = {pageSize: pageSizeReducer};
 
-const reducer = combineReducers({...searchReducer, ...language, ...computer, ...connection, ...pageSelectorReducer, ...pageSize});
+const reducer = combineReducers({...searchReducer, ...language, ...computers, ...connection, ...pageSelectorReducer, ...pageSize});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
