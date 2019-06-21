@@ -7,6 +7,10 @@ export function selectSelectedComputers(state) {
     return state.computers.selected;
 }
 
+export function selectComputersError(state) {
+    return state.computers.error;
+}
+
 export const selectPageSize = state => state.pageSize;
 
 export function selectComputerSearch(state) {
