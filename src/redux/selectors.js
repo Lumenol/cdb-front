@@ -79,7 +79,7 @@ function selectTokenIsNotExpired(state) {
     return selectTokenEndOfLife1 > utcMilliseconds;
 }
 
-export const getPageSelectorState = state => ({
+export const selectPageSelectorState = state => ({
     step: state.pageSelector.step,
     minStep: state.pageSelector.minStep,
     midStep: state.pageSelector.midStep,
@@ -88,3 +88,5 @@ export const getPageSelectorState = state => ({
     minPage: state.pageSelector.minPage,
     maxPage: state.pageSelector.maxPage,
 });
+
+export const selectPage = state => state.pageSelector.page;

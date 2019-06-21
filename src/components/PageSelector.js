@@ -5,7 +5,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import {withStyles} from '@material-ui/core/styles';
 import connect from "react-redux/es/connect/connect";
-import {getPageSelectorState} from "../redux/selectors";
+import {selectPageSelectorState} from "../redux/selectors";
 import {nextPage, previousPage} from "../redux/PageSelector";
 import {Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -85,7 +85,7 @@ class PageSelector extends Component {
 }
 
 const mapStateToProps = state => {
-    return {...getPageSelectorState(state)};
+    return {...selectPageSelectorState(state)};
 };
 
 function mapDispatchToProps(dispatch) {
