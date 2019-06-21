@@ -1,0 +1,13 @@
+{
+  "computer": {
+    "name": "Name",
+    "introduced": "Introduced",
+    "discontinued": "Discontinued",
+    "company": "Manufacturer"
+  },
+  "title": {
+    "title": "Computer Database",
+    "orderBy": "Order by",
+    "search": "Search"
+  }
+}
