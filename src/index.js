@@ -9,7 +9,7 @@ import {I18nReduxProvider} from "./containers/I18nReduxProvider";
 import i18n from "./configuration/i18n";
 import theme from './palette';
 import languageReducer from "./redux/i18n";
-import computerReducer from './redux/computers';
+import computerReducer, {getComputers} from './redux/computers';
 import searchComputerReducer from './redux/computerSearch';
 import orderByComputerReducer from './redux/computerOrderBy';
 import directionComputerReducer from './redux/computerDirection';
@@ -17,7 +17,7 @@ import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import connectionReducer, {login} from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
-import {selectToken} from "./redux/selectors";
+import {selectSearchParameters, selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
 import {PageReducer} from "./redux/PageSelector";
 import pageSizeReducer from "./redux/ChangePagination";
@@ -28,16 +28,21 @@ const language = {language: languageReducer};
 const connection = {connectionInfos: connectionReducer};
 
 const searchReducer = {
-    orderBy: orderByComputerReducer,
-    search: searchComputerReducer,
-    direction: directionComputerReducer,
-    isOpen: menuIsOpenReducer,
+    searchParameters: combineReducers({
+        orderBy: orderByComputerReducer,
+        search: searchComputerReducer,
+        direction: directionComputerReducer,
+    })
+};
+
+const menu = {
+    isOpen: menuIsOpenReducer
 };
 
 const pageSelectorReducer = {pageSelector: PageReducer};
 const pageSize = {pageSize: pageSizeReducer};
 
-const reducer = combineReducers({...searchReducer, ...language, ...computers, ...connection, ...pageSelectorReducer, ...pageSize});
+const reducer = combineReducers({...searchReducer, ...menu, ...language, ...computers, ...connection, ...pageSelectorReducer, ...pageSize});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
@@ -47,7 +52,13 @@ addTokenInterceptor(() => selectToken(store.getState()));
 
 store.dispatch(login("user", "user"));
 
-//store.subscribe(get);
+let mem;
+store.subscribe(() => {
+    if (selectSearchParameters(store.getState()) !== mem) {
+        store.dispatch(getComputers());
+        mem = selectSearchParameters(store.getState());
+    }
+});
 
 ReactDOM.render(
     <Provider store={store}>

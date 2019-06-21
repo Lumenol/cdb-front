@@ -13,12 +13,16 @@ export function selectComputersError(state) {
 
 export const selectPageSize = state => state.pageSize;
 
+export function selectSearchParameters(state) {
+    return state.searchParameters;
+}
+
 export function selectComputerSearch(state) {
-    return state.search;
+    return selectSearchParameters(state).search;
 }
 
 export function selectComputerOrderBy(state) {
-    return state.orderBy;
+    return selectSearchParameters(state).orderBy;
 }
 
 export function selectLanguage(state) {
@@ -26,7 +30,7 @@ export function selectLanguage(state) {
 }
 
 export function selectComputerDirection(state) {
-    return state.direction;
+    return selectSearchParameters(state).direction;
 }
 
 export function selectMenuIsOpen(state) {
