@@ -3,8 +3,8 @@ import {COMPANIES_URL} from "../configuration/constants";
 
 export async function getCompanies() {
     try {
-        const result = await axios.get(COMPANIES_URL).then(res => res.data);
-        return result;
+        const result = await axios.get(COMPANIES_URL);
+        return result.data;
     } catch (e) {
         console.error(e);
         throw(e);
@@ -13,8 +13,8 @@ export async function getCompanies() {
 
 export async function getCompanyById(id) {
     try {
-        const result = await axios.get(COMPANIES_URL + `/${id}`).then(res => res.data);
-        return result;
+        const result = await axios.get(COMPANIES_URL + `/${id}`);
+        return result.data;
     } catch (e) {
         console.error(e);
         throw(e);
@@ -42,8 +42,8 @@ export async function countCompanies(id) {
 
 export async function existCompanyById(id) {
     try {
-        const result = await axios.get(COMPANIES_URL + `/exist/${id}`).then(res => res.data);
-        return result;
+        const result = await axios.get(COMPANIES_URL + `/exist/${id}`);
+        return result.data;
     } catch (e) {
         console.error(e);
         throw(e);
