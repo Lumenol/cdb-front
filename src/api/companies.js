@@ -33,7 +33,7 @@ export async function deleteCompanies(id) {
 export async function countCompanies(id) {
     try {
         const result = await axios.get(COMPANIES_URL + `/count`);
-        return result;
+        return result.data;
     } catch (e) {
         console.error(e);
         throw(e);
