@@ -12,7 +12,7 @@ export async function getAll(direction, field, page, search, size) {
                 size,
             }
         });
-        return result;
+        return result.data;
     } catch (error) {
         console.error(error);
         throw(error);
