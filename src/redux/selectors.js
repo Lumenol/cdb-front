@@ -15,7 +15,6 @@ export function selectComputersError(state) {
     return state.computers.error;
 }
 
-
 export function selectMinPage() {
     return 1;
 }
@@ -102,4 +101,4 @@ function selectTokenIsNotExpired(state) {
     return selectTokenEndOfLife1 > utcMilliseconds;
 }
 
-export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + 1);
+export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + (count % size > 0 ? 1 : 0));
