@@ -18,8 +18,8 @@ class ComputerContainer extends Component {
 
         return (
             <Grid container direction="row" spacing={2}>
-                {computers.map(e => <Grid item xs={10} md={5} lg={3} container direction="row"><ComputerCard
-                    computer={e} key={e.id}/></Grid>)}
+                {computers.map(e => <Grid item xs={10} md={5} lg={3} container direction="row" key={e.id}><ComputerCard
+                    computer={e}/></Grid>)}
             </Grid>
 
         );
