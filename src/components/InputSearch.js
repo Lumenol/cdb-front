@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import {connect} from "react-redux";
 import {selectComputerSearch} from "../redux/selectors";
-import {setSearchComputer} from "../redux/computerSearch";
 import PropTypes from 'prop-types';
 import {withTranslation} from "react-i18next";
+import {setSearchComputer} from "../redux/searchParameters";
 
 
 class InputSearch extends Component {

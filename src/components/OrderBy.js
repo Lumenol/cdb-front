@@ -6,9 +6,9 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import {connect} from "react-redux";
 import {selectComputerOrderBy} from "../redux/selectors";
-import {ORDER_BY, setOrderByComputer} from "../redux/computerOrderBy";
 import PropTypes from "prop-types";
 import {withTranslation} from "react-i18next";
+import {ORDER_BY, setOrderByComputer} from "../redux/searchParameters";
 
 class OrderBy extends Component {
 

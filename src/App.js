@@ -6,16 +6,22 @@ import Grid from "@material-ui/core/Grid";
 import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
 import {useStore} from "react-redux";
-import {getComputers} from "./redux/computers";
+import {getComputers, getCountComputers} from "./redux/computers";
 import {selectIsConnected, selectSearchParameters} from "./redux/selectors";
 import ComputerContainer from './containers/CardContainer';
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
-    const handler = () => store.dispatch(getComputers());
+    const computerHandler = () => {
+        store.dispatch(getComputers())
+    };
+    const countHandler = () => {
+        store.dispatch(getCountComputers())
+    };
 
     let oldSearchParameters;
-    let timer;
+    let computerTimer;
+    let countTimer;
 
     function update() {
         const state = store.getState();
@@ -23,12 +29,17 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
         const isConnected = selectIsConnected(state);
         if (isConnected) {
             if (searchParameters !== oldSearchParameters) {
-                oldSearchParameters = searchParameters;
-
-                if (timer) {
-                    clearTimeout(timer);
+                if (!oldSearchParameters || searchParameters.search !== oldSearchParameters.search) {
+                    if (countTimer) {
+                        clearTimeout(countTimer);
+                    }
+                    countTimer = setTimeout(countHandler, TIMEOUT);
                 }
-                timer = setTimeout(handler, TIMEOUT);
+                if (computerTimer) {
+                    clearTimeout(computerTimer);
+                }
+                computerTimer = setTimeout(computerHandler, TIMEOUT);
+                oldSearchParameters = searchParameters;
             }
         } else {
             oldSearchParameters = undefined;
