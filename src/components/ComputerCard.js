@@ -17,9 +17,6 @@ import {companies} from "../configuration/constants";
 
 class ComputerCard extends Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     toggleSelect = () => {
         this.props.isSelected ? this.props.unselect() : this.props.select();
@@ -32,9 +29,8 @@ class ComputerCard extends Component {
     }
 
     render() {
-        const {id, name, manufacturer, introduced, discontinued} = this.props.computer;
+        const {name, manufacturer, introduced, discontinued} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
-        console.log(companies.get(manufacturer));
 
         return (
             <Fragment>

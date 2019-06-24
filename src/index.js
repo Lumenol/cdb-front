@@ -10,39 +10,21 @@ import i18n from "./configuration/i18n";
 import theme from './palette';
 import languageReducer from "./redux/i18n";
 import computerReducer from './redux/computers';
-import searchComputerReducer from './redux/computerSearch';
-import orderByComputerReducer from './redux/computerOrderBy';
-import directionComputerReducer from './redux/computerDirection';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import connectionReducer, {login} from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
-import {PageReducer} from "./redux/PageSelector";
-import pageSizeReducer from "./redux/ChangePagination";
+import searchParametersReducer from './redux/searchParameters';
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
-
 const connection = {connectionInfos: connectionReducer};
+const menu = {isOpen: menuIsOpenReducer};
+const search = {searchParameters: searchParametersReducer};
 
-const searchReducer = {
-    searchParameters: combineReducers({
-        orderBy: orderByComputerReducer,
-        search: searchComputerReducer,
-        direction: directionComputerReducer,
-    })
-};
-
-const menu = {
-    isOpen: menuIsOpenReducer
-};
-
-const pageSelectorReducer = {pageSelector: PageReducer};
-const pageSize = {pageSize: pageSizeReducer};
-
-const reducer = combineReducers({...searchReducer, ...menu, ...language, ...computers, ...connection, ...pageSelectorReducer, ...pageSize});
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
