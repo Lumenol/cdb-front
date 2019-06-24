@@ -13,6 +13,12 @@ import {selectComputer, unselectComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectSelectedComputers} from "../redux/selectors";
 
+const companies = {
+    "Apple Inc": 'https://bit.ly/2WM55gP',
+    "Thinking Machines": 'https://www.studiointernational.com/images/articles/t/097-thinking-machines-2018/01---cm2supercomputer.jpg',
+    "RCA": 'https://images-na.ssl-images-amazon.com/images/I/51zCMihlMML._SX425_.jpg'
+};
+
 class ComputerCard extends Component {
 
     constructor(props) {
@@ -35,7 +41,7 @@ class ComputerCard extends Component {
                             <CardMedia
                                 className="media"
                                 image='https://bit.ly/2WM55gP'
-                                title="Contemplative Reptile"
+                                title="Brand"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2" color="primary">
@@ -54,19 +60,19 @@ class ComputerCard extends Component {
                 {
                     this.props.isSelected ?
                         <Grid item xs={2}>
-                    <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
-                        <Grid item xs={1}>
-                            <Fab size="small" color="primary" aria-label="Delete">
-                                <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
-                            </Fab>
-                        </Grid>
+                            <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
+                                <Grid item xs={1}>
+                                    <Fab size="small" color="primary" aria-label="Delete">
+                                        <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
+                                    </Fab>
+                                </Grid>
 
-                        <Grid item xs={1}>
-                            <Fab size="small" color="primary" aria-label="Delete">
-                                <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>
-                            </Fab>
-                        </Grid>
-                    </Grid>
+                                <Grid item xs={1}>
+                                    <Fab size="small" color="primary" aria-label="Delete">
+                                        <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>
+                                    </Fab>
+                                </Grid>
+                            </Grid>
                         </Grid> : null
                 }</Fragment>
         )
@@ -76,14 +82,14 @@ class ComputerCard extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        isSelected: selectSelectedComputers(state).includes(props.id)
+        isSelected: selectSelectedComputers(state).includes(props.computer.id)
     };
 };
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        select: () => dispatch(selectComputer(props.id)),
-        unselect: () => dispatch(unselectComputer(props.id))
+        select: () => dispatch(selectComputer(props.computer.id)),
+        unselect: () => dispatch(unselectComputer(props.computer.id))
     }
 };
 

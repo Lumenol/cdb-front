@@ -4,6 +4,7 @@ import {COMPANIES_URL} from "../configuration/constants";
 export async function getCompanies() {
     try {
         const result = await axios.get(COMPANIES_URL);
+        console.log(result);
         return result.data;
     } catch (e) {
         console.error(e);
