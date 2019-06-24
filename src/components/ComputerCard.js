@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,81 +12,83 @@ import Fab from '@material-ui/core/Fab';
 import {selectComputer, unselectComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectSelectedComputers} from "../redux/selectors";
+import {companies} from "../configuration/constants";
+
 
 class ComputerCard extends Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     toggleSelect = () => {
         this.props.isSelected ? this.props.unselect() : this.props.select();
     };
 
+    selectCompanyImg(manufacturer) {
+        let href = companies.get(manufacturer);
+        return href === undefined ? 'https://previews.123rf.com/images/lineartestpilot/lineartestpilot1603/lineartestpilot160311464/53364018-freehand-drawn-cartoon-laptop-computer-with-question-mark.jpg'
+            : href;
+    }
+
     render() {
-        debugger;
-        const {id, name, brand} = this.props.computer;
+        const {name, manufacturer, introduced, discontinued} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
+
         return (
-            <Grid container direction="row" spacing={1}>
-                <Grid item lg={10} md={10} xs={10}>
+            <Fragment>
+                <Grid item xs={10}>
                     <Card className={style} onClick={this.toggleSelect}>
                         <CardActionArea>
                             <CardMedia
                                 className="media"
-                                image='https://bit.ly/2WM55gP'
-                                title="Contemplative Reptile"
+                                image={this.selectCompanyImg(manufacturer)}
+                                title="Brand"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2" color="primary">
                                     {name}
                                 </Typography>
                                 <Typography variant="subtitle1" component="p">
-                                    {brand}
+                                    {manufacturer}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    05.11.2000 • 06.03.2005
+                                    {introduced} • {discontinued}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>
                 </Grid>
-                {this.props.isSelected ?
-                    <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
-                        <Grid item xs={1}>
-                            <Fab size="small" color="primary" aria-label="Delete">
-                                <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
-                            </Fab>
-                        </Grid>
+                {
+                    this.props.isSelected ?
+                        <Grid item xs={2}>
+                            <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
+                                <Grid item xs={1}>
+                                    <Fab size="small" color="primary" aria-label="Delete">
+                                        <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
+                                    </Fab>
+                                </Grid>
 
-                        <Grid item xs={1}>
-                            <Fab size="small" color="primary" aria-label="Delete">
-                                <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>
-                            </Fab>
-                        </Grid>
-                    </Grid> : null}
-            </Grid>
-
-        );
+                                <Grid item xs={1}>
+                                    <Fab size="small" color="primary" aria-label="Delete">
+                                        <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>
+                                    </Fab>
+                                </Grid>
+                            </Grid>
+                        </Grid> : null
+                }</Fragment>
+        )
+            ;
     }
-
 }
 
 const mapStateToProps = (state, props) => {
     return {
-        computer: {
-            name: 'Macintosh yeah',
-            brand: 'Apple Inc.',
-            id: 1,
-        },
-        isSelected: selectSelectedComputers(state).includes(props.id)
+        isSelected: selectSelectedComputers(state).includes(props.computer.id)
     };
 };
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        select: () => dispatch(selectComputer(props.id)),
-        unselect: () => dispatch(unselectComputer(props.id))
+        select: () => dispatch(selectComputer(props.computer.id)),
+        unselect: () => dispatch(unselectComputer(props.computer.id))
     }
 };
 
