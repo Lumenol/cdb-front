@@ -13,24 +13,15 @@ import {selectComputer, unselectComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectSelectedComputers} from "../redux/selectors";
 
-const companies = {
-    "Apple Inc": 'https://bit.ly/2WM55gP',
-    "Thinking Machines": 'https://www.studiointernational.com/images/articles/t/097-thinking-machines-2018/01---cm2supercomputer.jpg',
-    "RCA": 'https://images-na.ssl-images-amazon.com/images/I/51zCMihlMML._SX425_.jpg'
-};
-
 class ComputerCard extends Component {
 
-    constructor(props) {
-        super(props);
-    }
 
     toggleSelect = () => {
         this.props.isSelected ? this.props.unselect() : this.props.select();
     };
 
     render() {
-        const {id, name, manufacturer, introduced, discontinued} = this.props.computer;
+        const {name, manufacturer, introduced, discontinued} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
 
         return (
