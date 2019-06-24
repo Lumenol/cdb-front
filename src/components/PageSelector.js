@@ -5,16 +5,21 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import {withStyles} from '@material-ui/core/styles';
 import connect from "react-redux/es/connect/connect";
-import {selectPageSelectorState} from "../redux/selectors";
-import {nextPage, previousPage} from "../redux/PageSelector";
+import {selectCurrentPage, selectMaxPage, selectMinPage} from "../redux/selectors";
 import {Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import {nextPage, previousPage} from "../redux/searchParameters";
 
 const styles = {
     root: {
         maxWidth: 400,
         flexGrow: 1,
     }
+};
+
+const step = {
+    midStep: 3,
+    maxStep: 6,
 };
 
 class PageSelector extends Component {
@@ -36,41 +41,43 @@ class PageSelector extends Component {
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, currentPage, minPage, maxPage, next, previous} = this.props;
+        const {midStep, maxStep} = step;
+        const {displayControl} = this.state;
         return (
             <Grid container direction="row" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
 
                 <Grid item container justify="center">
-                    {this.state.displayControl ?
+                    {displayControl ?
                         <Typography color="secondary">
-                            Page {this.props.page} / {this.props.maxPage}
+                            Page {currentPage} / {maxPage}
                         </Typography> : null}
                 </Grid>
                 <Grid item container justify="center">
                     <MobileStepper
                         variant="dots"
-                        steps={this.props.maxStep + 1}
+                        steps={maxStep + 1}
                         position="static"
                         activeStep=
                             {
-                                this.props.page < this.props.midStep ?
-                                    this.props.page - 1 :
+                                currentPage < midStep ?
+                                    currentPage - 1 :
                                     (
-                                        this.props.maxPage - this.props.midStep < this.props.page ?
-                                            this.props.maxStep - (this.props.maxPage - this.props.page) :
-                                            this.props.midStep
+                                        maxPage - midStep < currentPage ?
+                                            maxStep - (maxPage - currentPage) :
+                                            midStep
                                     )
                             }
                         className={classes.root}
                         nextButton={
-                            <Button size="small" onClick={this.props.clickNextPageButton}
-                                    disabled={this.props.page === this.props.maxPage}>
+                            <Button size="small" onClick={next}
+                                    disabled={currentPage === maxPage}>
                                 <KeyboardArrowRight/>
                             </Button>
                         }
                         backButton={
-                            <Button size="small" onClick={this.props.clickPreviousPageButton}
-                                    disabled={this.props.page === this.props.minPage}>
+                            <Button size="small" onClick={previous}
+                                    disabled={currentPage === minPage}>
                                 <KeyboardArrowLeft/>
                             </Button>
                         }
@@ -83,13 +90,13 @@ class PageSelector extends Component {
 }
 
 const mapStateToProps = state => {
-    return {...selectPageSelectorState(state)};
+    return {currentPage: selectCurrentPage(state), minPage: selectMinPage(state), maxPage: selectMaxPage(state)};
 };
 
 function mapDispatchToProps(dispatch) {
     return {
-        clickNextPageButton: () => dispatch(nextPage()),
-        clickPreviousPageButton: () => dispatch(previousPage()),
+        next: () => dispatch(nextPage()),
+        previous: () => dispatch(previousPage()),
     }
 }
 
