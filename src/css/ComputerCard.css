@@ -1,16 +1,19 @@
-.card {
-    max-width: 400px;
+.card_test {
+    background-color: red;
+    height: 350px;
+}
 
+.icon_test {
+    background-color: green;
+    height: 350px;
 }
 
 .addCard {
     width: 100%;
-
     background-color: darkorange;
 }
 
 .cardSelected {
-    max-width: 350px;
     background-color: transparent;
     border: 3px solid #00796B;
 }

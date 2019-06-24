@@ -77,7 +77,7 @@ export default function reducer(state = {computers: [], selected: [], count: 0},
         case SELECT_COMPUTER:
             return {...state, selected: [action.id]};
         case UNSELECT_COMPUTER:
-            return {...state, selected: state.filter((id) => action.id !== id)};
+            return {...state, selected: state.selected.filter((id) => action.id !== id)};
         case SET_COMPUTERS:
             return {...state, computers: action.computers, selected: []};
         case SET_ERROR:

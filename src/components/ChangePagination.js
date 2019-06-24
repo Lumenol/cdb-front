@@ -15,8 +15,6 @@ const styles = theme => ({
         height: theme.spacing(5),
 
     },
-
-
 });
 
 const marks = [
