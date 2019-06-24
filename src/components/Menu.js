@@ -12,7 +12,9 @@ import {selectComputerCount, selectMenuIsOpen} from "../redux/selectors";
 import {connect} from "react-redux";
 import {closeMenu} from "../redux/menuIsOpen";
 import PropTypes from "prop-types";
-
+import Typography from "@material-ui/core/Typography";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import theme from "../paletteBis";
 
 const styles = theme => ({
     margin: {
@@ -26,25 +28,27 @@ class PersistentDrawerLeft extends Component {
     render() {
         const {classes, isOpen, close, count} = this.props;
         return (
-            <Drawer variant="persistent" anchor="left" open={isOpen}>
-                <div>
-                    <div className={classes.margin}>
-                        {count} Ordinateurs trouvés
+            <ThemeProvider theme={theme}>
+                <Drawer variant="persistent" anchor="left" open={isOpen}>
+                    <div>
+                        <div className={classes.margin}>
+                            <Typography color="primary" variant="h6"> {count} ordinateurs</Typography>
 
-                        <IconButton onClick={close} style={{float: "right"}}>
-                            <ChevronLeftIcon/>
-                        </IconButton>
+                            <IconButton onClick={close} style={{float: "right"}}>
+                                <ChevronLeftIcon/>
+                            </IconButton>
+                        </div>
                     </div>
-                </div>
-                <Divider/>
-                <div className={classes.margin}>
-                    <InputSearch/>
-                </div>
-                <List className={classes.margin}>
-                    <OrderBy/>
-                    <SwitchDirection/>
-                </List>
-            </Drawer>
+                    <Divider/>
+                    <div className={classes.margin}>
+                        <InputSearch/>
+                    </div>
+                    <List className={classes.margin}>
+                        <OrderBy/>
+                        <SwitchDirection/>
+                    </List>
+                </Drawer>
+            </ThemeProvider>
         );
     }
 }

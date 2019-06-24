@@ -10,40 +10,46 @@ import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
 import DisconnectButton from "./DisconectButton";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import theme from "../paletteBis";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
 
 
 class DenseAppBar extends Component {
 
 
     render() {
+
         const {t, isOpen, open} = this.props;
         return (
-            <Grid container direction="column">
-                <Paper position="static">
-                    <Toolbar variant="dense">
+            <ThemeProvider theme={theme}>
+                <Grid container direction="column">
+                    <Paper position="static">
+                        <Toolbar>
 
-                        <Grid item xs={1}>
-                            {!isOpen && <IconButton edge="start" color="inherit" aria-label="Menu" onClick={open}>
-                                <MenuIcon/>
-                            </IconButton>}
-                        </Grid>
+                            <Grid item xs={1}>
+                                {!isOpen && <IconButton aria-label="Menu" onClick={open}>
+                                    <MenuIcon/>
+                                </IconButton>}
+                            </Grid>
 
-                        <Grid item xs={10}>
-                            <Typography variant="h6" color="inherit" align="center">
-                                {t("title.title")}
-                            </Typography>
-                        </Grid>
-
-
-                        <Grid item xs={1}>
-                            <DisconnectButton/>
-                        </Grid>
+                            <Grid item xs={10}>
+                                <Typography variant="h3" align="center" color="secondary" fontFamily="Permanent Marker">
+                                    <Box fontFamily="Permanent Marker"> Computer database </Box>
+                                </Typography>
+                            </Grid>
 
 
-                    </Toolbar>
-                </Paper>
+                            <Grid item xs={1}>
+                                <DisconnectButton/>
+                            </Grid>
 
-            </Grid>
+
+                        </Toolbar>
+                    </Paper>
+
+                </Grid>
+            </ThemeProvider>
         )
             ;
     }
