@@ -12,12 +12,8 @@ import Fab from '@material-ui/core/Fab';
 import {selectComputer, unselectComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectSelectedComputers} from "../redux/selectors";
+import {companies} from "../configuration/constants";
 
-const companies = {
-    "Apple Inc": 'https://bit.ly/2WM55gP',
-    "Thinking Machines": 'https://www.studiointernational.com/images/articles/t/097-thinking-machines-2018/01---cm2supercomputer.jpg',
-    "RCA": 'https://images-na.ssl-images-amazon.com/images/I/51zCMihlMML._SX425_.jpg'
-};
 
 class ComputerCard extends Component {
 
@@ -29,9 +25,16 @@ class ComputerCard extends Component {
         this.props.isSelected ? this.props.unselect() : this.props.select();
     };
 
+    selectCompanyImg(manufacturer) {
+        let href = companies.get(manufacturer);
+        return href === undefined ? 'https://previews.123rf.com/images/lineartestpilot/lineartestpilot1603/lineartestpilot160311464/53364018-freehand-drawn-cartoon-laptop-computer-with-question-mark.jpg'
+            : href;
+    }
+
     render() {
         const {id, name, manufacturer, introduced, discontinued} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
+        console.log(companies.get(manufacturer));
 
         return (
             <Fragment>
@@ -40,7 +43,7 @@ class ComputerCard extends Component {
                         <CardActionArea>
                             <CardMedia
                                 className="media"
-                                image='https://bit.ly/2WM55gP'
+                                image={this.selectCompanyImg(manufacturer)}
                                 title="Brand"
                             />
                             <CardContent>
