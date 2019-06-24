@@ -27,6 +27,7 @@
   "devDependencies": {
     "flow-bin": "^0.101.0",
     "eslint": "^5.16.0",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "sonarqube-scanner-node": "^0.0.10"
   },
   "scripts": {
@@ -38,7 +39,14 @@
     "lint": "eslint ."
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": [],
   "proxy": "http://localhost:8080"

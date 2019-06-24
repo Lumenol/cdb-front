@@ -46,7 +46,7 @@ export default function connectionReducer(state = {token: ""}, action) {
         case SET_TOKEN:
             return {token: action.token};
         case SET_ERROR_LOGIN:
-            return {...state, error: action.error};
+            return {...state, error: action.error.message};
         default:
             return state;
     }

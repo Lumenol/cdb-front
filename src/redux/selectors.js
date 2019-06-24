@@ -1,18 +1,41 @@
 import {decode} from "jsonwebtoken";
 import {createSelector} from "reselect";
 
-export const selectPageSize = state => state.pageSize;
+export const selectComputers = state => state.computers.computers;
+
+export function selectComputerCount(state) {
+    return state.computers.count;
+}
 
 export function selectSelectedComputers(state) {
-    return state.selectedComputers;
+    return state.computers.selected;
+}
+
+export function selectComputersError(state) {
+    return state.computers.error;
+}
+
+
+export function selectMinPage() {
+    return 1;
+}
+
+export function selectCurrentPage(state) {
+    return selectSearchParameters(state).page;
+}
+
+export const selectPageSize = state => selectSearchParameters(state).size;
+
+export function selectSearchParameters(state) {
+    return state.searchParameters;
 }
 
 export function selectComputerSearch(state) {
-    return state.search;
+    return selectSearchParameters(state).search;
 }
 
 export function selectComputerOrderBy(state) {
-    return state.orderBy;
+    return selectSearchParameters(state).orderBy;
 }
 
 export function selectLanguage(state) {
@@ -20,7 +43,7 @@ export function selectLanguage(state) {
 }
 
 export function selectComputerDirection(state) {
-    return state.direction;
+    return selectSearchParameters(state).direction;
 }
 
 export function selectMenuIsOpen(state) {
@@ -79,12 +102,4 @@ function selectTokenIsNotExpired(state) {
     return selectTokenEndOfLife1 > utcMilliseconds;
 }
 
-export const getPageSelectorState = state => ({
-    step: state.pageSelector.step,
-    minStep: state.pageSelector.minStep,
-    midStep: state.pageSelector.midStep,
-    maxStep: state.pageSelector.maxStep,
-    page: state.pageSelector.page,
-    minPage: state.pageSelector.minPage,
-    maxPage: state.pageSelector.maxPage,
-});
+export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + 1);
