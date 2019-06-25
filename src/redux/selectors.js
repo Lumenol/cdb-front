@@ -15,6 +15,7 @@ export function selectComputersError(state) {
     return state.computers.error;
 }
 
+export const selectAddButton = state => state.addButton;
 
 export function selectMinPage() {
     return 1;

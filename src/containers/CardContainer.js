@@ -4,7 +4,6 @@ import {selectComputers} from "../redux/selectors";
 import ComputerCard from "../components/ComputerCard";
 import Grid from "@material-ui/core/Grid";
 import '../css/ComputerCard.css';
-import AddCard from "../components/AddCard";
 
 class ComputerContainer extends Component {
 
@@ -13,7 +12,7 @@ class ComputerContainer extends Component {
 
         return (
             <Grid container direction="row" spacing={2}>
-                <Grid item xs={10} md={5} lg={3} spacing={1} container direction="row"><AddCard/></Grid>
+                {/*<Grid item xs={10} md={5} lg={3} spacing={1} container direction="row"><AddCard/></Grid>*/}
                 {computers.map(e => <Grid item xs={10} md={5} lg={3} spacing={1} container direction="row"
                                           key={e.id}><ComputerCard
                     computer={e}/></Grid>)}

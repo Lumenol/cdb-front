@@ -22,10 +22,10 @@ class DisconnectButton extends Component {
         const {isConnected} = this.props;
         theme.palette.primary.main = "#FF9800";
         return (
-            <ThemeProvider theme={theme}><Switch
-                checked={isConnected}
-                onChange={this.onChange}
-                color="primary">
+            <ThemeProvider theme={theme}><Switch title="Se déconnecter"
+                                                 checked={isConnected}
+                                                 onChange={this.onChange}
+                                                 color="primary">
             </Switch></ThemeProvider>
         )
     }

@@ -13,10 +13,17 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import theme from "../paletteBis";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import Fab from "@material-ui/core/Fab";
+import {addButton} from "../redux/addButton";
 
 
 class DenseAppBar extends Component {
 
+    toggleAdd = () => {
+        this.props.add();
+    };
 
     render() {
 
@@ -33,12 +40,18 @@ class DenseAppBar extends Component {
                                 </IconButton>}
                             </Grid>
 
-                            <Grid item xs={10}>
+                            <Grid item xs={9}>
                                 <Typography variant="h3" align="center" color="secondary" fontFamily="Permanent Marker">
                                     <Box fontFamily="Permanent Marker"> Computer database </Box>
                                 </Typography>
                             </Grid>
 
+
+                            <Grid item xs={1} container alignItems="center" justify="flex-end">
+                                <Fab size="small" color="primary" aria-label="Delete" title="Ajouter ordinateur">
+                                    <FontAwesomeIcon icon={faPlus} onClick={this.toggleAdd}></FontAwesomeIcon>
+                                </Fab>
+                            </Grid>
 
                             <Grid item xs={1}>
                                 <DisconnectButton/>
@@ -66,6 +79,9 @@ function mapDispatchToProps(dispatch) {
     return {
         open: () => {
             dispatch(openMenu());
+        },
+        add: () => {
+            dispatch(addButton(true));
         }
     };
 }

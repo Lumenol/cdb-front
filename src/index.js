@@ -17,14 +17,18 @@ import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
 import searchParametersReducer from './redux/searchParameters';
+import addButtonReducer from './redux/addButton';
+import companiesReducer, {getCompanies} from "./redux/companies";
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
 const connection = {connectionInfos: connectionReducer};
 const menu = {isOpen: menuIsOpenReducer};
 const search = {searchParameters: searchParametersReducer};
+const addButton = {addButton: addButtonReducer};
+const companies = {companies: companiesReducer};
 
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search});
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
@@ -33,6 +37,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 addTokenInterceptor(() => selectToken(store.getState()));
 
 store.dispatch(login("user", "user"));
+store.dispatch(getCompanies());
 
 ReactDOM.render(
     <Provider store={store}>
