@@ -52,15 +52,16 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
 function App() {
     const store = useStore();
     useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
+
     return (
         <Grid container direction="row" spacing={2}>
             <Grid item xs={12}><Header/></Grid>
+
 
             <Grid item xs={12} container justify="center">
                 <Grid item xs={12} container justify="center"><ChangePagination/></Grid>
                 <Grid item xs={10} className="card_container"><ComputerContainer/></Grid>
             </Grid>
-
             <Grid item xs={12} container justify="center">
                 <footer className="footer">
                     <PageSelector/>
