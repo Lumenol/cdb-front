@@ -37,7 +37,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 addTokenInterceptor(() => selectToken(store.getState()));
 
 store.dispatch(login("user", "user"));
-store.dispatch(getCompanies());
+setTimeout(() => store.dispatch(getCompanies()), 5000);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -4,9 +4,8 @@ const SET_ERROR = 'SET_ERROR';
 const SET_COMPANIES = 'SET_COMPANIES';
 
 export function getCompanies() {
-    return async function (dispatch, getState) {
+    return async function (dispatch) {
         try {
-            const state = getState();
             const result = await getAll();
             dispatch(setCompanies(result));
         } catch (e) {

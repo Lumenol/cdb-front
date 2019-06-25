@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
-import {selectMenuIsOpen} from "../redux/selectors";
+import {selectAddButton, selectMenuIsOpen} from "../redux/selectors";
 import {connect} from "react-redux";
 import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
@@ -22,7 +22,7 @@ import {addButton} from "../redux/addButton";
 class DenseAppBar extends Component {
 
     toggleAdd = () => {
-        this.props.add();
+        this.props.add(!this.props.addButton);
     };
 
     render() {
@@ -48,8 +48,9 @@ class DenseAppBar extends Component {
 
 
                             <Grid item xs={1} container alignItems="center" justify="flex-end">
-                                <Fab size="small" color="primary" aria-label="Delete" title="Ajouter ordinateur">
-                                    <FontAwesomeIcon icon={faPlus} onClick={this.toggleAdd}></FontAwesomeIcon>
+                                <Fab size="small" color="primary" aria-label="Delete" title="Ajouter ordinateur"
+                                     onClick={this.toggleAdd}>
+                                    <FontAwesomeIcon icon={faPlus}/>
                                 </Fab>
                             </Grid>
 
@@ -70,7 +71,8 @@ class DenseAppBar extends Component {
 
 function mapStateToProps(state) {
     return {
-        isOpen: selectMenuIsOpen(state)
+        isOpen: selectMenuIsOpen(state),
+        addButton: selectAddButton(state)
     }
 }
 
@@ -80,8 +82,8 @@ function mapDispatchToProps(dispatch) {
         open: () => {
             dispatch(openMenu());
         },
-        add: () => {
-            dispatch(addButton(true));
+        add: (boolean) => {
+            dispatch(addButton(boolean));
         }
     };
 }

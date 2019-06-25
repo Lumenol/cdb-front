@@ -11,6 +11,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import {selectCompanyImg} from "../utils/selectCompanyImage";
+import {connect} from "react-redux";
+import {selectCompanies} from "../redux/selectors";
 
 class AddCard extends Component {
 
@@ -18,17 +20,71 @@ class AddCard extends Component {
         name: "",
         introductionDate: "",
         discontinuedDate: "",
-        company: "",
+        company: {},
+        errorMsg: {}
+    };
+
+    checkName(name) {
+        if (name === undefined || name.trim() == "")
+            return "Please provide computer's name.";
+    }
+
+    checkCompany(company) {
+        // if (name === undefined || name.trim() == "")
+        return "Please provide computer's name.";
+    }
+
+    onNameChange = (event) => {
+        this.setState({
+            name: event.target.value,
+            errorMsg: {
+                ...this.state.errorMsg,
+                name: this.checkName(event.target.value)
+            }
+        });
+    };
+
+    onInDateChange = (event) => {
+        this.setState({
+            introductionDate: event.target.value,
+            errorMsg: {
+                ...this.state.errorMsg,
+                name: this.checkDate(event.target.value)
+            }
+        });
+    };
+
+    onOutDateChange = (event) => {
+        this.setState({
+            discontinuedDate: event.target.value,
+            errorMsg: {
+                ...this.state.errorMsg,
+                name: this.checkDate(event.target.value)
+            }
+        });
+    };
+
+    onCompanyChange = (event) => {
+        console.log(event.target);
+        this.setState({
+            company: event.target.value,
+            errorMsg: {
+                ...this.state.errorMsg,
+                error: this.checkCompany(event.target.value.name)
+            }
+        });
     };
 
     render() {
+        const companies = this.props.companies;
+        console.log(this.state.company);
         return (
             <Grid item xs={3} container direction="row">
                 <Card className="addCard">
 
                     <CardMedia
                         className="media"
-                        image={selectCompanyImg(this.state.company)}
+                        image={selectCompanyImg(this.state.company.name)}
                         title="Brand"
                     />
 
@@ -41,6 +97,7 @@ class AddCard extends Component {
                                 placeholder="Computer name"
                                 fullWidth
                                 margin="normal"
+                                onChange={this.onNameChange}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -52,6 +109,7 @@ class AddCard extends Component {
                                 id="date"
                                 label="Introduced date"
                                 type="date"
+                                onChange={this.onInDateChange}
                                 defaultValue="2017-05-24"
                                 InputLabelProps={{
                                     shrink: true,
@@ -63,6 +121,7 @@ class AddCard extends Component {
                             <TextField
                                 id="date"
                                 label="Discontinued date"
+                                onChange={this.onOutDateChange}
                                 type="date"
                                 defaultValue="2017-05-24"
                                 InputLabelProps={{
@@ -74,15 +133,10 @@ class AddCard extends Component {
                         <CardContent>
                             <InputLabel htmlFor="age-simple">Company</InputLabel>
                             <Select
-                                value="Company"
-                                inputProps={{
-                                    name: 'age',
-                                    id: 'age-simple',
-                                }}
+                                value={this.state.company}
+                                onChange={this.onCompanyChange}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                {companies.map(e => <MenuItem value={e} key={e.id}>{e.name}</MenuItem>)}
                             </Select>
                         </CardContent>
 
@@ -99,4 +153,10 @@ class AddCard extends Component {
     }
 }
 
-export default AddCard;
+const mapStateToProps = (state) => {
+    return {
+        companies: selectCompanies(state)
+    };
+};
+
+export default AddCard = connect(mapStateToProps)(AddCard);
