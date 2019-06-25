@@ -1,16 +1,11 @@
-.card_test {
-    background-color: red;
-    height: 350px;
-}
 
-.icon_test {
-    background-color: green;
-    height: 350px;
+.color {
+    background-color: #00796B;
+    height: 100%;
 }
 
 .addCard {
-    width: 100%;
-    background-color: darkorange;
+    min-width: 100%;
 }
 
 .cardSelected {
@@ -31,4 +26,8 @@
 
 .media {
     height: 20vh;
+}
+
+.margin {
+    min-height: 100px;
 }

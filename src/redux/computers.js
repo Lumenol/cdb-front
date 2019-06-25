@@ -58,7 +58,7 @@ function setComputers(computers) {
     }
 }
 
-function setError(error) {
+export function setError(error) {
     return {
         type: SET_ERROR,
         error: error
