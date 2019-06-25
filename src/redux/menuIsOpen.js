@@ -1,5 +1,6 @@
 const MENU_IS_OPEN = 'MENU_IS_OPEN';
 
+
 export function closeMenu() {
     return {
         type: MENU_IS_OPEN,
@@ -13,6 +14,7 @@ export function openMenu() {
         isOpen: true
     }
 }
+
 
 const reducer = (state = true, action) => {
     switch (action.type) {

@@ -7,18 +7,14 @@ import '../css/ComputerCard.css';
 
 class ComputerContainer extends Component {
 
-    /*<Grid container direction="row" spacing={2}>
-                <Grid item xs={3} container direction="row">
-                    <Grid item xs={10}><div className="card_test"></div></Grid>
-                    <Grid item xs={2}><div className="icon_test"></div></Grid>
-                </Grid>*/
-
     render() {
         const {computers} = this.props;
 
         return (
             <Grid container direction="row" spacing={2}>
-                {computers.map(e => <Grid item xs={10} md={5} lg={3} container direction="row" key={e.id}><ComputerCard
+                {/*<Grid item xs={10} md={5} lg={3} spacing={1} container direction="row"><AddCard/></Grid>*/}
+                {computers.map(e => <Grid item xs={10} md={5} lg={3} spacing={1} container direction="row"
+                                          key={e.id}><ComputerCard
                     computer={e}/></Grid>)}
             </Grid>
 

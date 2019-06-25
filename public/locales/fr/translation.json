@@ -3,11 +3,14 @@
     "name": "Nom",
     "introduced": "Date d'introduction",
     "discontinued": "Date de sortie",
-    "company": "Fabriquant"
+    "company": "Fabriquant",
+    "found": "Ordinateurs trouvés"
   },
   "title": {
-    "title": "Ordinateurs",
+    "title": "Base de donnée des ordinateurs",
     "orderBy": "Trier par",
     "search": "Rechercher"
-  }
+  },
+  "companies": "Fabriquants",
+  "computers": "Ordinateurs"
 }
