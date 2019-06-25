@@ -58,6 +58,10 @@ export function selectShow(state) {
 
 }
 
+export function selectUserBecomeAnAdmin(state) {
+    return state.isAdmin;
+}
+
 export const selectIsConnected = state => selectTokenIsNotExpired(state);
 
 export function selectToken(state) {
