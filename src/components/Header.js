@@ -10,13 +10,15 @@ import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
 import DisconnectButton from "./DisconectButton";
 import Grid from "@material-ui/core/Grid";
+import {setShow, SHOW} from "../redux/router";
+import Button from "@material-ui/core/Button";
 
 
 class DenseAppBar extends Component {
 
 
     render() {
-        const {t, isOpen, open} = this.props;
+        const {t, isOpen, open, showCompanies, showComputers} = this.props;
         return (
             <Grid container direction="column">
                 <Paper position="static">
@@ -26,15 +28,23 @@ class DenseAppBar extends Component {
                             {!isOpen && <IconButton edge="start" color="inherit" aria-label="Menu" onClick={open}>
                                 <MenuIcon/>
                             </IconButton>}
+
                         </Grid>
 
-                        <Grid item xs={10}>
+                        <Grid item xs={6}>
                             <Typography variant="h6" color="inherit" align="center">
                                 {t("title.title")}
                             </Typography>
                         </Grid>
 
-
+                        <Grid item xs={2}>
+                            <Button variant="contained" color="primary" onClick={showCompanies}>{t("companies")}
+                            </Button>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Button variant="contained" color="primary" onClick={showComputers}>{t("computers")}
+                            </Button>
+                        </Grid>
                         <Grid item xs={1}>
                             <DisconnectButton/>
                         </Grid>
@@ -60,7 +70,14 @@ function mapDispatchToProps(dispatch) {
     return {
         open: () => {
             dispatch(openMenu());
+        },
+        showCompanies: () => {
+            dispatch(setShow(SHOW.COMPANIES))
+        },
+        showComputers: () => {
+            dispatch(setShow(SHOW.COMPUTERS))
         }
+
     };
 }
 

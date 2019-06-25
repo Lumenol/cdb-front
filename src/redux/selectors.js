@@ -49,6 +49,11 @@ export function selectMenuIsOpen(state) {
     return state.isOpen;
 }
 
+export function selectShow(state) {
+    return state.router;
+
+}
+
 export const selectIsConnected = state => selectTokenIsNotExpired(state);
 
 export function selectToken(state) {
