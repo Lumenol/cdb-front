@@ -17,6 +17,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
+import {setShow, SHOW} from "../redux/router";
 
 
 class DenseAppBar extends Component {
@@ -40,19 +41,20 @@ class DenseAppBar extends Component {
                                 </IconButton>}
                             </Grid>
 
-                            <Grid item xs={9}>
+                            <Grid item xs={8}>
                                 <Typography variant="h3" align="center" color="secondary" fontFamily="Permanent Marker">
-                                    <Box fontFamily="Permanent Marker"> Computer database </Box>
+                                    <Box fontFamily="Permanent Marker"> {t("title.title")}</Box>
                                 </Typography>
                             </Grid>
 
 
-                            <Grid item xs={1} container alignItems="center" justify="flex-end">
+                            <Grid item xs={2} container alignItems="center" justify="flex-end">
                                 <Fab size="small" color="primary" aria-label="Delete" title="Ajouter ordinateur"
                                      onClick={this.toggleAdd}>
                                     <FontAwesomeIcon icon={faPlus}/>
                                 </Fab>
                             </Grid>
+
 
                             <Grid item xs={1}>
                                 <DisconnectButton/>
@@ -84,6 +86,12 @@ function mapDispatchToProps(dispatch) {
         },
         add: (boolean) => {
             dispatch(addButton(boolean));
+        },
+        showCompanies: () => {
+            dispatch(setShow(SHOW.COMPANIES))
+        },
+        showComputers: () => {
+            dispatch(setShow(SHOW.COMPUTERS))
         }
     };
 }

@@ -8,10 +8,10 @@ import ChangePagination from "./components/ChangePagination";
 import {useSelector, useStore} from "react-redux";
 import {getComputers, getCountComputers} from "./redux/computers";
 import {selectAddButton, selectIsConnected, selectMenuIsOpen, selectSearchParameters} from "./redux/selectors";
-import ComputerContainer from './containers/CardContainer';
 import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
+import Router from "./components/Router";
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -75,14 +75,13 @@ function App() {
 
                 <Grid item xs={12} container justify="center">
                     {open ? <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
-                            <Grid item xs={7} md={7} lg={9}
-                                  className="card_container"><ComputerContainer/></Grid></Fragment>
-                        : <Grid item xs={11} className="card_container"><ComputerContainer/></Grid>}
+                            <Grid item xs={7} md={7} lg={9} className="card_container"><Router/></Grid></Fragment>
+                        : <Grid item xs={11} className="card_container"><Router/></Grid>}
 
                 </Grid>
             </Grid>
 
-            <Grid item xs={12} container justify="center" className="margin" alignItems="center">
+            <Grid item xs={12} container justify="center">
                 <footer className="footer">
                     <PageSelector/>
                 </footer>

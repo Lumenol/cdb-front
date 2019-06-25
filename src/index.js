@@ -19,6 +19,7 @@ import thunk from "redux-thunk";
 import searchParametersReducer from './redux/searchParameters';
 import addButtonReducer from './redux/addButton';
 import companiesReducer, {getCompanies} from "./redux/companies";
+import routerReducer from './redux/router';
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
@@ -27,8 +28,10 @@ const menu = {isOpen: menuIsOpenReducer};
 const search = {searchParameters: searchParametersReducer};
 const addButton = {addButton: addButtonReducer};
 const companies = {companies: companiesReducer};
+const router = {router: routerReducer};
 
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies});
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router});
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));

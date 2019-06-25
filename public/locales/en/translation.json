@@ -3,11 +3,14 @@
     "name": "Name",
     "introduced": "Introduced",
     "discontinued": "Discontinued",
-    "company": "Manufacturer"
+    "company": "Manufacturer",
+    "found": "Computers found"
   },
   "title": {
     "title": "Computer Database",
     "orderBy": "Order by",
     "search": "Search"
-  }
+  },
+  "companies": "Manufacturers",
+  "computers": "Computers"
 }

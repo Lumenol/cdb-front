@@ -53,6 +53,11 @@ export function selectMenuIsOpen(state) {
     return state.isOpen;
 }
 
+export function selectShow(state) {
+    return state.router;
+
+}
+
 export const selectIsConnected = state => selectTokenIsNotExpired(state);
 
 export function selectToken(state) {
@@ -105,4 +110,4 @@ function selectTokenIsNotExpired(state) {
     return selectTokenEndOfLife1 > utcMilliseconds;
 }
 
-export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + 1);
+export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + (count % size > 0 ? 1 : 0));
