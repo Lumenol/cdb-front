@@ -12,5 +12,11 @@
     "search": "Rechercher"
   },
   "companies": "Fabriquants",
-  "computers": "Ordinateurs"
+  "computers": "Ordinateurs",
+  "connection": {
+    "login": "Identifiant",
+    "password": "Login",
+    "connection": "Se connecter",
+    "error": "Login ou mot de passe incorrect"
+  }
 }

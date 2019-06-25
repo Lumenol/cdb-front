@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import {login} from "../redux/connection";
 import connect from "react-redux/es/connect/connect";
 import {selectLoginError} from "../redux/selectors";
+import {withTranslation} from "react-i18next";
 
 
 const styles = theme => ({
@@ -60,9 +61,7 @@ class FormLogin extends Component {
     };
 
     onClickConnexion = () => {
-        console.log("this.state.login:" + this.state.login + ";this.state.password:" + this.state.password);
         this.props.OnSubmit(this.state.login, this.state.password);
-        console.log("loginError:" + this.props.loginError);
         this.setState({
             login: "",
             password: ""
@@ -70,14 +69,14 @@ class FormLogin extends Component {
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, t} = this.props;
 
         return (
             <div>
                 <FormControl>
                     <TextField
                         id="standard-search"
-                        label="Login"
+                        label={t("connection.login")}
                         type="search"
                         className={classes.textField}
                         margin="normal"
@@ -86,7 +85,7 @@ class FormLogin extends Component {
                     />
                     <TextField
                         id="standard-password-input"
-                        label="Password"
+                        label={t("connection.password")}
                         className={classes.textField}
                         type="password"
                         autoComplete="current-password"
@@ -97,13 +96,13 @@ class FormLogin extends Component {
                     {
                         this.props.loginError &&
                         <div>
-                            <p className={classes.error}>Identifiants incorrects</p>
+                            <p className={classes.error}>{t("connection.error")}</p>
                         </div>
                     }
                     <Button variant="contained" size="medium" color="primary" className={classes.margin}
                             onClick={this.onClickConnexion}
                             disabled={this.state.login.trim() === "" || this.state.password === ""}>
-                        Connexion
+                        {t("connection.connection")}
                     </Button>
                 </FormControl>
             </div>
@@ -124,4 +123,5 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default FormLogin = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormLogin));
+const Translation = withTranslation()(FormLogin);
+export default FormLogin = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Translation));
