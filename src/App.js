@@ -5,10 +5,11 @@ import Header from "./components/Header";
 import Grid from "@material-ui/core/Grid";
 import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
-import {useStore} from "react-redux";
+import {useSelector, useStore} from "react-redux";
 import {getComputers, getCountComputers} from "./redux/computers";
 import {selectIsConnected, selectSearchParameters} from "./redux/selectors";
 import ComputerContainer from './containers/CardContainer';
+import FormLogin from './components/FormLogin';
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -52,22 +53,31 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
 function App() {
     const store = useStore();
     useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
+    const isConnected = useSelector(selectIsConnected);
     return (
-        <Grid container direction="row" spacing={2}>
-            <Grid item xs={12}><Header/></Grid>
+        <div>
+            {isConnected ?
+                <Grid container direction="row" spacing={2}>
+                    <Grid item xs={12}><Header/></Grid>
 
-            <Grid item xs={12} container justify="center">
-                <Grid item xs={12} container justify="center"><ChangePagination/></Grid>
-                <Grid item xs={10} className="card_container"><ComputerContainer/></Grid>
-            </Grid>
+                    <Grid item xs={12} container justify="center">
+                        <Grid item xs={12} container justify="center"><ChangePagination/></Grid>
+                        <Grid item xs={10} className="card_container"><ComputerContainer/></Grid>
+                    </Grid>
 
-            <Grid item xs={12} container justify="center">
-                <footer className="footer">
-                    <PageSelector/>
-                </footer>
-            </Grid>
-            <PersistentDrawerLeft/>
-        </Grid>
+                    <Grid item xs={12} container justify="center">
+                        <footer className="footer">
+                            <PageSelector/>
+                        </footer>
+                    </Grid>
+                    <PersistentDrawerLeft/>
+                </Grid> :
+                <FormLogin></FormLogin>
+            }
+        </div>
+
+
+
     )
 }
 

@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import {login} from "../redux/connection";
+import connect from "react-redux/es/connect/connect";
+import {selectLoginError} from "../redux/selectors";
 
 
 const styles = theme => ({
@@ -28,6 +30,9 @@ const styles = theme => ({
     extendedIcon: {
         marginRight: theme.spacing(1),
     },
+    error: {
+        color: 'red'
+    }
 });
 
 
@@ -54,8 +59,14 @@ class FormLogin extends Component {
         )
     };
 
-    onSubmit = () => {
-        login(this.state.login, this.state.password);
+    onClickConnexion = () => {
+        console.log("this.state.login:" + this.state.login + ";this.state.password:" + this.state.password);
+        this.props.OnSubmit(this.state.login, this.state.password);
+        console.log("loginError:" + this.props.loginError);
+        this.setState({
+            login: "",
+            password: ""
+        })
     };
 
     render() {
@@ -80,19 +91,37 @@ class FormLogin extends Component {
                         type="password"
                         autoComplete="current-password"
                         margin="normal"
+                        value={this.state.password}
                         onChange={this.onInputOnPassword}
                     />
+                    {
+                        this.props.loginError &&
+                        <div>
+                            <p className={classes.error}>Identifiants incorrects</p>
+                        </div>
+                    }
                     <Button variant="contained" size="medium" color="primary" className={classes.margin}
-                            onClick={this.onSubmit}
+                            onClick={this.onClickConnexion}
                             disabled={this.state.login.trim() === "" || this.state.password === ""}>
                         Connexion
                     </Button>
                 </FormControl>
-
             </div>
 
         );
     }
 }
 
-export default FormLogin = (withStyles(styles)(FormLogin));
+const mapStateToProps = (state) => {
+    return {
+        loginError: selectLoginError(state)
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        OnSubmit: (l, p) => dispatch(login(l, p)),
+    }
+}
+
+export default FormLogin = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormLogin));
