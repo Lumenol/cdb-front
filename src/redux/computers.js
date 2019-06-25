@@ -12,7 +12,6 @@ const UNSELECT_COMPUTER = "UNSELECT_COMPUTER";
 const SET_COMPUTERS = "SET_COMPUTERS";
 const SET_ERROR = "SET_ERROR";
 const SET_COUNT_COMPUTERS = "SELECT_COUNT_COMPUTERS";
-const DELETE_COMPUTER = "DELETE_COMPUTER";
 
 export function getComputers() {
     return async function (dispatch, getState) {
@@ -85,7 +84,7 @@ export function unselectComputer(id) {
     }
 }
 
-export default function reducer(state = {computers: [], selected: [], count: 0, delete: []}, action) {
+export default function reducer(state = {computers: [], selected: [], count: 0}, action) {
     switch (action.type) {
         case SELECT_COMPUTER:
             return {...state, selected: [action.id]};
@@ -97,8 +96,6 @@ export default function reducer(state = {computers: [], selected: [], count: 0, 
             return {...state, error: action.error.message};
         case SET_COUNT_COMPUTERS:
             return {...state, count: action.count};
-        case DELETE_COMPUTER:
-            return {...state, delete: [action.id]}
         default:
             return state;
     }
