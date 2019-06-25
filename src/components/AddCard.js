@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import {selectCompanyImg} from "../utils/selectCompanyImage";
 import {connect} from "react-redux";
 import {selectCompanies} from "../redux/selectors";
+import {addComputer} from "../redux/computers";
 
 class AddCard extends Component {
 
@@ -21,8 +22,16 @@ class AddCard extends Component {
         introductionDate: "",
         discontinuedDate: "",
         company: {},
-        errorMsg: {}
+        errorMsg: {
+            name: "Please provide computer's name."
+        }
     };
+
+    checkDate(date) {
+        console.log(date);
+        if ((new Date(date).getTime() < new Date(1970, 1, 1).getTime()))
+            return "Date cannot be before 01/01/1970";
+    }
 
     checkName(name) {
         if (name === undefined || name.trim() == "")
@@ -30,8 +39,8 @@ class AddCard extends Component {
     }
 
     checkCompany(company) {
-        // if (name === undefined || name.trim() == "")
-        return "Please provide computer's name.";
+        if (!this.props.companies.includes(company))
+            return "Sorry, company does not exist.";
     }
 
     onNameChange = (event) => {
@@ -49,7 +58,7 @@ class AddCard extends Component {
             introductionDate: event.target.value,
             errorMsg: {
                 ...this.state.errorMsg,
-                name: this.checkDate(event.target.value)
+                inDate: this.checkDate(event.target.value)
             }
         });
     };
@@ -59,25 +68,38 @@ class AddCard extends Component {
             discontinuedDate: event.target.value,
             errorMsg: {
                 ...this.state.errorMsg,
-                name: this.checkDate(event.target.value)
+                outDate: this.checkDate(event.target.value)
             }
         });
     };
 
     onCompanyChange = (event) => {
-        console.log(event.target);
         this.setState({
             company: event.target.value,
             errorMsg: {
                 ...this.state.errorMsg,
-                error: this.checkCompany(event.target.value.name)
+                company: this.checkCompany(event.target.value)
             }
         });
     };
 
+    submit = () => {
+        if (this.state.errorMsg.name || this.state.errorMsg.inDate
+            || this.state.errorMsg.outDate || this.state.errorMsg.company)
+            return;
+        if (this.state.discontinuedDate && new Date(this.state.discontinuedDate).getDate()
+            < new Date(this.state.introductionDate).getDate()) {
+            this.setState({
+                ...this.state.errorMsg,
+                outDate: "Discontinued date cannot be before introduced date"
+            });
+            return;
+        }
+        this.props.addComputer(this.state.name, this.state.introductionDate, this.state.discontinuedDate, this.state.company.id);
+    };
+
     render() {
         const companies = this.props.companies;
-        console.log(this.state.company);
         return (
             <Grid item xs={3} container direction="row">
                 <Card className="addCard">
@@ -102,6 +124,8 @@ class AddCard extends Component {
                                     shrink: true,
                                 }}
                             />
+                            {this.state.name === "" || this.state.errorMsg.name ?
+                                <h5>{this.state.errorMsg.name} </h5> : null}
                         </CardContent>
 
                         <CardContent>
@@ -115,6 +139,7 @@ class AddCard extends Component {
                                     shrink: true,
                                 }}
                             />
+                            {this.state.errorMsg.inDate ? <h5>{this.state.errorMsg.inDate} </h5> : null}
                         </CardContent>
 
                         <CardContent>
@@ -128,6 +153,7 @@ class AddCard extends Component {
                                     shrink: true,
                                 }}
                             />
+                            {this.state.errorMsg.outDate ? <h5>{this.state.errorMsg.outDate} </h5> : null}
                         </CardContent>
 
                         <CardContent>
@@ -138,10 +164,11 @@ class AddCard extends Component {
                             >
                                 {companies.map(e => <MenuItem value={e} key={e.id}>{e.name}</MenuItem>)}
                             </Select>
+                            {this.state.errorMsg.company ? <h5>{this.state.errorMsg.company} </h5> : null}
                         </CardContent>
 
                         <CardContent>
-                            <Button variant="contained" color="primary">
+                            <Button variant="contained" color="primary" onClick={this.submit}>
                                 <Typography>Créer</Typography>
                             </Button>
                         </CardContent>
@@ -159,4 +186,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default AddCard = connect(mapStateToProps)(AddCard);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addComputer: (name, inDate, outDate, companyId) => dispatch(addComputer(name, inDate, outDate, companyId)),
+    }
+};
+
+export default AddCard = connect(mapStateToProps, mapDispatchToProps)(AddCard);

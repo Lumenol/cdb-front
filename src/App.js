@@ -12,6 +12,7 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
+import Divider from "@material-ui/core/Divider";
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -70,7 +71,8 @@ function App() {
                 </Grid>
 
                 {
-                    add ? <Grid item xs={12} container justify="center"><AddCard/></Grid> : null
+                    add ? <Grid item xs={12} container justify="center"><AddCard/>
+                        <Divider variant="middle"/></Grid> : null
                 }
 
                 <Grid item xs={12} container justify="center">

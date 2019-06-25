@@ -12,6 +12,7 @@ const UNSELECT_COMPUTER = "UNSELECT_COMPUTER";
 const SET_COMPUTERS = "SET_COMPUTERS";
 const SET_ERROR = "SET_ERROR";
 const SET_COUNT_COMPUTERS = "SELECT_COUNT_COMPUTERS";
+const ADD_COMPUTER = "ADD_COMPUTER";
 
 export function getComputers() {
     return async function (dispatch, getState) {
@@ -36,6 +37,13 @@ export function getCountComputers() {
         }
     }
 }
+
+export const addComputer = (name, inDate, outDate, companyId) => {
+    return async function (dispatch, getState) {
+        //  await addComputer(name, null, null, companyId);
+        console.log(name + " " + companyId);
+    }
+};
 
 function setCountComputers(count) {
     return {
