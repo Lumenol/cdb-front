@@ -25,7 +25,7 @@ class AddCard extends Component {
     };
 
     checkName(name) {
-        if (name === undefined || name.trim() == "")
+        if (name === undefined || name.trim() === "")
             return "Please provide computer's name.";
     }
 

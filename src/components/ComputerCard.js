@@ -9,7 +9,7 @@ import {faKeyboard, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import '../css/ComputerCard.css';
 import {Grid} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
-import {selectComputer, unselectComputer} from "../redux/computers";
+import {deleteAComputer, selectComputer, unselectComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectSelectedComputers} from "../redux/selectors";
 import {selectCompanyImg} from "../utils/selectCompanyImage";
@@ -54,7 +54,7 @@ class ComputerCard extends Component {
                         <Grid item xs={2}>
                             <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
                                 <Grid item xs={1}>
-                                    <Fab size="small" color="primary" aria-label="Delete">
+                                    <Fab size="small" color="primary" aria-label="Delete" onClick={this.props.delete}>
                                         <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
                                     </Fab>
                                 </Grid>
@@ -81,7 +81,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         select: () => dispatch(selectComputer(props.computer.id)),
-        unselect: () => dispatch(unselectComputer(props.computer.id))
+        unselect: () => dispatch(unselectComputer(props.computer.id)),
+        delete: () => dispatch(deleteAComputer(props.computer.id))
     }
 };
 
