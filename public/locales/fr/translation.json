@@ -7,9 +7,10 @@
     "found": "Ordinateurs trouvés"
   },
   "title": {
-    "title": "Ordinateurs",
+    "title": "Base de donnée des ordinateurs",
     "orderBy": "Trier par",
     "search": "Rechercher"
   },
-  "companies": "Fabriquants"
+  "companies": "Fabriquants",
+  "computers": "Ordinateurs"
 }

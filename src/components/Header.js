@@ -18,7 +18,7 @@ class DenseAppBar extends Component {
 
 
     render() {
-        const {t, isOpen, open, showCompanies} = this.props;
+        const {t, isOpen, open, showCompanies, showComputers} = this.props;
         return (
             <Grid container direction="column">
                 <Paper position="static">
@@ -31,7 +31,7 @@ class DenseAppBar extends Component {
 
                         </Grid>
 
-                        <Grid item xs={8}>
+                        <Grid item xs={6}>
                             <Typography variant="h6" color="inherit" align="center">
                                 {t("title.title")}
                             </Typography>
@@ -41,7 +41,10 @@ class DenseAppBar extends Component {
                             <Button variant="contained" color="primary" onClick={showCompanies}>{t("companies")}
                             </Button>
                         </Grid>
-
+                        <Grid item xs={2}>
+                            <Button variant="contained" color="primary" onClick={showComputers}>{t("computers")}
+                            </Button>
+                        </Grid>
                         <Grid item xs={1}>
                             <DisconnectButton/>
                         </Grid>
@@ -70,6 +73,9 @@ function mapDispatchToProps(dispatch) {
         },
         showCompanies: () => {
             dispatch(setShow(SHOW.COMPANIES))
+        },
+        showComputers: () => {
+            dispatch(setShow(SHOW.COMPUTERS))
         }
 
     };
