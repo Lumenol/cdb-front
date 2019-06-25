@@ -56,7 +56,8 @@ export function deleteAComputer(id) {
     return async function (dispatch) {
         try {
             const result = await deleteComputer(id);
-            dispatch(getComputers(), setCountComputers(getComputers()));
+            dispatch(getComputers());
+            dispatch(getCountComputers());
         }catch (e) {
             dispatch(setError(e));
         }
@@ -70,7 +71,7 @@ function setComputers(computers) {
     }
 }
 
-function setError(error) {
+export function setError(error) {
     return {
         type: SET_ERROR,
         error: error

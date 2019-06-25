@@ -15,6 +15,10 @@ export function selectComputersError(state) {
     return state.computers.error;
 }
 
+export const selectCompanies = state => state.companies.companies;
+
+export const selectAddButton = state => state.addButton;
+
 export function selectMinPage() {
     return 1;
 }
@@ -47,6 +51,11 @@ export function selectComputerDirection(state) {
 
 export function selectMenuIsOpen(state) {
     return state.isOpen;
+}
+
+export function selectShow(state) {
+    return state.router;
+
 }
 
 export const selectIsConnected = state => selectTokenIsNotExpired(state);

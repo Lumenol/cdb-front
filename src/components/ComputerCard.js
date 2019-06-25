@@ -12,9 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import {deleteAComputer, selectComputer, unselectComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectSelectedComputers} from "../redux/selectors";
-import {companies} from "../configuration/constants";
-import {closeMenu} from "../redux/menuIsOpen";
-
+import {selectCompanyImg} from "../utils/selectCompanyImage";
 
 class ComputerCard extends Component {
 
@@ -22,13 +20,6 @@ class ComputerCard extends Component {
     toggleSelect = () => {
         this.props.isSelected ? this.props.unselect() : this.props.select();
     };
-
-    selectCompanyImg(manufacturer) {
-        let href = companies.get(manufacturer);
-        return href === undefined ? 'https://previews.123rf.com/images/lineartestpilot/lineartestpilot1603/lineartestpilot160311464/53364018-freehand-drawn-cartoon-laptop-computer-with-question-mark.jpg'
-            : href;
-    };
-
 
     render() {
         const {name, manufacturer, introduced, discontinued} = this.props.computer;
@@ -41,7 +32,7 @@ class ComputerCard extends Component {
                         <CardActionArea>
                             <CardMedia
                                 className="media"
-                                image={this.selectCompanyImg(manufacturer)}
+                                image={selectCompanyImg(manufacturer)}
                                 title="Brand"
                             />
                             <CardContent>
@@ -83,7 +74,7 @@ class ComputerCard extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        isSelected: selectSelectedComputers(state).includes(props.computer.id),
+        isSelected: selectSelectedComputers(state).includes(props.computer.id)
     };
 };
 
