@@ -51,6 +51,8 @@ class PersistentDrawerLeft extends Component {
                         <Button variant="contained" color="primary" onClick={showComputers}>{t("computers")}
                         </Button>
                     </List>
+
+
                     <Divider/>
                     <div className={classes.margin}>
                         <InputSearch/>
