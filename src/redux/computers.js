@@ -54,7 +54,7 @@ export function selectComputer(id) {
 export function deleteAComputer(id) {
     return async function (dispatch) {
         try {
-            const result = await deleteComputer(id);
+            await deleteComputer(id);
             dispatch(getComputers());
             dispatch(getCountComputers());
         }catch (e) {
