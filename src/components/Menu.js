@@ -12,6 +12,7 @@ import {selectComputerCount, selectMenuIsOpen} from "../redux/selectors";
 import {connect} from "react-redux";
 import {closeMenu} from "../redux/menuIsOpen";
 import PropTypes from "prop-types";
+import {withTranslation} from "react-i18next";
 
 
 const styles = theme => ({
@@ -24,12 +25,12 @@ const styles = theme => ({
 class PersistentDrawerLeft extends Component {
 
     render() {
-        const {classes, isOpen, close, count} = this.props;
+        const {classes, isOpen, close, count, t} = this.props;
         return (
             <Drawer variant="persistent" anchor="left" open={isOpen}>
                 <div>
                     <div className={classes.margin}>
-                        {count} Ordinateurs trouvés
+                        {count} {t("computer.found")}
 
                         <IconButton onClick={close} style={{float: "right"}}>
                             <ChevronLeftIcon/>
@@ -71,5 +72,5 @@ PersistentDrawerLeft.propTypes = {
     close: PropTypes.func.isRequired,
 };
 
-
-export default PersistentDrawerLeft = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PersistentDrawerLeft));
+const Translation = withTranslation()(PersistentDrawerLeft);
+export default PersistentDrawerLeft = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Translation));

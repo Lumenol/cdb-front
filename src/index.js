@@ -17,14 +17,15 @@ import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
 import searchParametersReducer from './redux/searchParameters';
+import routerReducer from './redux/router';
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
 const connection = {connectionInfos: connectionReducer};
 const menu = {isOpen: menuIsOpenReducer};
 const search = {searchParameters: searchParametersReducer};
-
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search});
+const router = {router: routerReducer};
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...router});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
