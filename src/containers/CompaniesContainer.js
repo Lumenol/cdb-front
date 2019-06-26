@@ -25,9 +25,10 @@ import {withTranslation} from "react-i18next";
 class CompaniesContainer extends Component {
 
     render() {
+        const {t, remove, companies, i18n} = this.props;
         const columns = [
             {title: 'id', field: 'id'},
-            {title: 'Name', field: 'name'}
+            {title: t("company.name"), field: 'name'}
         ];
 
 
@@ -50,8 +51,7 @@ class CompaniesContainer extends Component {
             ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref}/>),
             ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref}/>)
         };
-        const {t, delete} = this.props;
-        const companies = this.props.companies;
+
         return (
             <MaterialTable
                 icons={tableIcons}
@@ -59,19 +59,19 @@ class CompaniesContainer extends Component {
                 columns={columns}
                 data={companies}
                 editable={{
-                    onRowAdd: newData => {
+                    onRowDelete: async oldData => {
+                        remove(oldData.id)
                     },
-                    onRowDelete: delete
-
                 }}
+                localization={i18n.store.data[i18n.language].translation.table}
             />
         );
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        delete: () => dispatch(deleteCompany(props.data.id))
+        remove: (id) => dispatch(deleteCompany(id))
     }
 };
 

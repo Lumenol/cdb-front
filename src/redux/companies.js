@@ -18,7 +18,7 @@ export function deleteCompany(id) {
     return async function (dispatch) {
         try {
             await deleteCompanies(id);
-            dispatch(getCompanies);
+            dispatch(getCompanies());
         } catch (e) {
             dispatch(setError(e));
         }
