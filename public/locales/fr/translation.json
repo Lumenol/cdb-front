@@ -41,5 +41,12 @@
     "toolbar": {
       "searchPlaceholder": "Rechercher"
     }
+  },
+  "header": {
+    "test": "test",
+    "hover": {
+      "addButton": "Ajouter un ordinateur",
+      "disconnectButton": "Se déconnecter"
+    }
   }
 }

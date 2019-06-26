@@ -4,9 +4,15 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
-import {selectAddButton, selectMenuIsOpen, selectUserBecomeAnAdmin} from "../redux/selectors";
+import {
+    selectAddButton,
+    selectMenuIsOpen,
+    selectUpdateButton,
+    selectUserBecomeAnAdmin,
+    selectUsername
+} from "../redux/selectors";
 import {connect} from "react-redux";
-import {openMenu} from "../redux/menuIsOpen";
+import {closeMenu, openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
 import DisconnectButton from "./DisconectButton";
 import Grid from "@material-ui/core/Grid";
@@ -25,19 +31,20 @@ import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 class DenseAppBar extends Component {
 
     toggleAdd = () => {
+        if (this.props.updateButton.boolean)
+            return;
         this.props.add(!this.props.addButton);
     };
 
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchAdmin, switchUser} = this.props;
+        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName} = this.props;
 
         if (adminMode) {
-           button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
+            button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
             </Button>
-        }
-        else{
-         button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
+        } else {
+            button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
             </Button>
         }
 
@@ -48,9 +55,9 @@ class DenseAppBar extends Component {
                         <Toolbar>
 
                             <Grid item xs={1}>
-                                {!isOpen && <IconButton aria-label="Menu" onClick={open}>
+                                {!isOpen && (adminMode ? null : <IconButton aria-label="Menu" onClick={open}>
                                     <MenuIcon/>
-                                </IconButton>}
+                                </IconButton>)}
                             </Grid>
 
                             <Grid item xs={8}>
@@ -64,12 +71,19 @@ class DenseAppBar extends Component {
                             </Grid>
 
                             <Grid item xs={2} container alignItems="center" justify="flex-end">
-                                <Fab size="small" color="primary" aria-label="Delete" title="Ajouter ordinateur"
+                                <Fab size="small" color="primary" aria-label="Delete"
+                                     title={t("header.hover.addButton")}
                                      onClick={this.toggleAdd}>
                                     <FontAwesomeIcon icon={faPlus}/>
                                 </Fab>
                             </Grid>
 
+                            <Grid item xs={1}>
+                                <Typography variant="h6" align="center" color="secondary" fontFamily="Permanent Marker">
+                                    <Box>{userName}</Box>
+                                </Typography>
+
+                            </Grid>
 
                             <Grid item xs={1}>
                                 <DisconnectButton/>
@@ -90,7 +104,9 @@ function mapStateToProps(state) {
     return {
         isOpen: selectMenuIsOpen(state),
         addButton: selectAddButton(state),
-        adminMode: selectUserBecomeAnAdmin(state)
+        updateButton: selectUpdateButton(state),
+        adminMode: selectUserBecomeAnAdmin(state),
+        userName: selectUsername(state)
     }
 }
 
@@ -103,16 +119,13 @@ function mapDispatchToProps(dispatch) {
         add: (boolean) => {
             dispatch(addButton(boolean));
         },
-        showCompanies: () => {
-            dispatch(setShow(SHOW.COMPANIES))
-        },
-        showComputers: () => {
-            dispatch(setShow(SHOW.COMPUTERS))
-        },
         switchAdmin: () => {
+            dispatch(closeMenu());
+            dispatch(setShow(SHOW.COMPANIES));
             dispatch(switchModeAdmin());
         },
         switchUser: () => {
+            dispatch(setShow(SHOW.COMPUTERS));
             dispatch(switchModeUser());
         },
     };
