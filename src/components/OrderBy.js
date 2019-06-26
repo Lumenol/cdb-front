@@ -18,13 +18,12 @@ class OrderBy extends Component {
 
     render() {
         const {value, t} = this.props;
-        const {COMPANY, INTRODUCED, ID, DISCONTINUED, NAME} = ORDER_BY;
+        const {COMPANY, INTRODUCED, DISCONTINUED, NAME} = ORDER_BY;
         return (
             <div>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">{t("title.orderBy")}</FormLabel>
                     <RadioGroup value={value} onChange={this.onChangeOrderBy}>
-                        <FormControlLabel value={ID} control={<Radio color="primary"/>} label="Id"/>
                         <FormControlLabel value={NAME} control={<Radio color="primary"/>} label={t("computer.name")}/>
                         <FormControlLabel value={COMPANY} control={<Radio color="primary"/>}
                                           label={t("computer.company")}/>

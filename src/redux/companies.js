@@ -1,4 +1,4 @@
-import {getCompanies as getAll} from '../api/companies';
+import {deleteCompanies, getCompanies as getAll} from '../api/companies';
 
 const SET_ERROR = 'SET_ERROR';
 const SET_COMPANIES = 'SET_COMPANIES';
@@ -14,6 +14,16 @@ export function getCompanies() {
     }
 }
 
+export function deleteCompany(id) {
+    return async function (dispatch) {
+        try {
+            await deleteCompanies(id);
+            dispatch(getCompanies());
+        } catch (e) {
+            dispatch(setError(e));
+        }
+    }
+}
 function setCompanies(companies) {
     return {
         type: SET_COMPANIES,
