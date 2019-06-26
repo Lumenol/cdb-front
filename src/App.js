@@ -73,6 +73,10 @@ function showCompanies() {
     return setShow(SHOW.COMPANIES);
 }
 
+function showUsers() {
+    return setShow(SHOW.USERS);
+}
+
 function App() {
     const store = useStore();
     const open = useSelector(selectMenuIsOpen);
