@@ -22,7 +22,7 @@ class SwitchDirection extends Component {
                 <Grid component="label" container alignItems="center" spacing={1}>
                     <Grid item>Asc</Grid>
                     <Grid item>
-                        <Switch checked={this.isChecked()} onChange={this.onChangeDirection}/>
+                        <Switch color="primary" checked={this.isChecked()} onChange={this.onChangeDirection}/>
                     </Grid>
                     <Grid item>Desc</Grid>
                 </Grid>

@@ -1,14 +1,17 @@
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import './App.css';
 import PageSelector from "./components/PageSelector";
 import Header from "./components/Header";
 import Grid from "@material-ui/core/Grid";
 import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
-import {useStore} from "react-redux";
+import {useSelector, useStore} from "react-redux";
 import {getComputers, getCountComputers} from "./redux/computers";
-import {selectIsConnected, selectSearchParameters} from "./redux/selectors";
-import ComputerContainer from './containers/CardContainer';
+import {selectAddButton, selectIsConnected, selectMenuIsOpen, selectSearchParameters} from "./redux/selectors";
+import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
+import theme from "./paletteBis";
+import AddCard from "./components/AddCard";
+import Router from "./components/Router";
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -51,14 +54,31 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
 
 function App() {
     const store = useStore();
+    const open = useSelector(selectMenuIsOpen);
+    const add = useSelector(selectAddButton);
     useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
+
     return (
         <Grid container direction="row" spacing={2}>
-            <Grid item xs={12}><Header/></Grid>
 
-            <Grid item xs={12} container justify="center">
-                <Grid item xs={12} container justify="center"><ChangePagination/></Grid>
-                <Grid item xs={10} className="card_container"><ComputerContainer/></Grid>
+            <Grid item xs={12}><ThemeProvider theme={theme}><Header/></ThemeProvider></Grid>
+
+
+            <Grid item xs={12} container spacing={3}>
+                <Grid item xs={12} container justify="center" className="margin" alignItems="center">
+                    <ChangePagination/>
+                </Grid>
+
+                {
+                    add ? <Grid item xs={12} container justify="center"><AddCard/></Grid> : null
+                }
+
+                <Grid item xs={12} container justify="center">
+                    {open ? <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
+                            <Grid item xs={7} md={7} lg={9} className="card_container"><Router/></Grid></Fragment>
+                        : <Grid item xs={11} className="card_container"><Router/></Grid>}
+
+                </Grid>
             </Grid>
 
             <Grid item xs={12} container justify="center">

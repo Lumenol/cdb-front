@@ -24,17 +24,19 @@ class OrderBy extends Component {
                 <FormControl component="fieldset">
                     <FormLabel component="legend">{t("title.orderBy")}</FormLabel>
                     <RadioGroup value={value} onChange={this.onChangeOrderBy}>
-                        <FormControlLabel value={NAME} control={<Radio/>} label={t("computer.name")}/>
-                        <FormControlLabel value={COMPANY} control={<Radio/>} label={t("computer.company")}/>
-                        <FormControlLabel value={INTRODUCED} control={<Radio/>} label={t("computer.introduced")}/>
-                        <FormControlLabel value={DISCONTINUED} control={<Radio/>} label={t("computer.discontinued")}/>
+                        <FormControlLabel value={NAME} control={<Radio color="primary"/>} label={t("computer.name")}/>
+                        <FormControlLabel value={COMPANY} control={<Radio color="primary"/>}
+                                          label={t("computer.company")}/>
+                        <FormControlLabel value={INTRODUCED} control={<Radio color="primary"/>}
+                                          label={t("computer.introduced")}/>
+                        <FormControlLabel value={DISCONTINUED} control={<Radio color="primary"/>}
+                                          label={t("computer.discontinued")}/>
                     </RadioGroup>
                 </FormControl>
             </div>
         );
     }
 }
-
 
 function mapStateToProps(state) {
     return {
