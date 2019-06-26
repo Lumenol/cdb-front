@@ -4,7 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
-import {selectAddButton, selectMenuIsOpen, selectUserBecomeAnAdmin, selectUsername} from "../redux/selectors";
+import {
+    selectAddButton,
+    selectMenuIsOpen,
+    selectUpdateButton,
+    selectUserBecomeAnAdmin,
+    selectUsername
+} from "../redux/selectors";
 import {connect} from "react-redux";
 import {closeMenu, openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
@@ -25,6 +31,8 @@ import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 class DenseAppBar extends Component {
 
     toggleAdd = () => {
+        if (this.props.updateButton.boolean)
+            return;
         this.props.add(!this.props.addButton);
     };
 
@@ -33,11 +41,10 @@ class DenseAppBar extends Component {
         const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName} = this.props;
 
         if (adminMode) {
-           button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
+            button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
             </Button>
-        }
-        else{
-         button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
+        } else {
+            button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
             </Button>
         }
 
@@ -97,6 +104,7 @@ function mapStateToProps(state) {
     return {
         isOpen: selectMenuIsOpen(state),
         addButton: selectAddButton(state),
+        updateButton: selectUpdateButton(state),
         adminMode: selectUserBecomeAnAdmin(state),
         userName: selectUsername(state)
     }

@@ -19,6 +19,8 @@ export const selectCompanies = state => state.companies.companies;
 
 export const selectAddButton = state => state.addButton;
 
+export const selectUpdateButton = state => state.updateButton;
+
 export function selectMinPage() {
     return 1;
 }

@@ -18,7 +18,6 @@ import theme from "../paletteBis";
 import {withTranslation} from "react-i18next";
 
 
-
 const styles = theme => ({
     margin: {
         margin: theme.spacing(3),
