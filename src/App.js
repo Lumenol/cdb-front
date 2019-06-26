@@ -12,7 +12,6 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
-import Divider from "@material-ui/core/Divider";
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -58,7 +57,8 @@ function App() {
     const open = useSelector(selectMenuIsOpen);
     const add = useSelector(selectAddButton);
     useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
-
+    {/* si update alors update with props id + props "update" +props placeholder*/
+    }
     return (
         <Grid container direction="row" spacing={2}>
 
@@ -71,8 +71,10 @@ function App() {
                 </Grid>
 
                 {
-                    add ? <Grid item xs={12} container justify="center"><AddCard/>
-                        <Divider variant="middle"/></Grid> : null
+                    add ? open ?
+                        <Fragment><Grid item xs={4} md={4} lg={2}></Grid> <Grid item xs={7} md={7} lg={9} container
+                                                                                justify="center"><AddCard/>
+                        </Grid></Fragment> : <Grid item xs={11} container justify="center"><AddCard/></Grid> : null
                 }
 
                 <Grid item xs={12} container justify="center">

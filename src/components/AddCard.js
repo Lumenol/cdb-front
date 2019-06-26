@@ -14,6 +14,7 @@ import {selectCompanyImg} from "../utils/selectCompanyImage";
 import {connect} from "react-redux";
 import {selectCompanies} from "../redux/selectors";
 import {addComputer} from "../redux/computers";
+import {addButton} from "../redux/addButton";
 
 class AddCard extends Component {
 
@@ -34,7 +35,7 @@ class AddCard extends Component {
     }
 
     checkName(name) {
-        if (name === undefined || name.trim() == "")
+        if (name === undefined || name.trim() === "")
             return "Please provide computer's name.";
     }
 
@@ -54,11 +55,13 @@ class AddCard extends Component {
     };
 
     onInDateChange = (event) => {
+
+        const date = event.target.value;
         this.setState({
-            introductionDate: event.target.value,
+            introductionDate: date,
             errorMsg: {
                 ...this.state.errorMsg,
-                inDate: this.checkDate(event.target.value)
+                inDate: this.checkDate(date)
             }
         });
     };
@@ -87,21 +90,26 @@ class AddCard extends Component {
         if (this.state.errorMsg.name || this.state.errorMsg.inDate
             || this.state.errorMsg.outDate || this.state.errorMsg.company)
             return;
-        if (this.state.discontinuedDate && new Date(this.state.discontinuedDate).getDate()
-            < new Date(this.state.introductionDate).getDate()) {
+        if (this.state.discontinuedDate && new Date(this.state.discontinuedDate).getTime()
+            < new Date(this.state.introductionDate).getTime()) {
             this.setState({
-                ...this.state.errorMsg,
-                outDate: "Discontinued date cannot be before introduced date"
+                errorMsg: {
+                    ...this.state.errorMsg,
+                    outDate: "Discontinued date cannot be before introduced date."
+                }
             });
             return;
         }
+        {/*si update ou create mode, alors addComputer ou createComputer*/
+        }
         this.props.addComputer(this.state.name, this.state.introductionDate, this.state.discontinuedDate, this.state.company.id);
+        this.props.add(false);
     };
 
     render() {
         const companies = this.props.companies;
         return (
-            <Grid item xs={3} container direction="row">
+            <Grid item xs={12} container direction="row">
                 <Card className="addCard">
 
                     <CardMedia
@@ -134,7 +142,6 @@ class AddCard extends Component {
                                 label="Introduced date"
                                 type="date"
                                 onChange={this.onInDateChange}
-                                defaultValue="2017-05-24"
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -148,7 +155,6 @@ class AddCard extends Component {
                                 label="Discontinued date"
                                 onChange={this.onOutDateChange}
                                 type="date"
-                                defaultValue="2017-05-24"
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -189,6 +195,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addComputer: (name, inDate, outDate, companyId) => dispatch(addComputer(name, inDate, outDate, companyId)),
+        add: (boolean) => {
+            dispatch(addButton(boolean));
+        },
     }
 };
 

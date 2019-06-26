@@ -20,6 +20,7 @@ import searchParametersReducer from './redux/searchParameters';
 import addButtonReducer from './redux/addButton';
 import companiesReducer, {getCompanies} from "./redux/companies";
 import routerReducer from './redux/router';
+import updateButtonReducer from './redux/updateButton';
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
@@ -29,8 +30,8 @@ const search = {searchParameters: searchParametersReducer};
 const addButton = {addButton: addButtonReducer};
 const companies = {companies: companiesReducer};
 const router = {router: routerReducer};
-
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router});
+const updateButton = {updateButton: updateButtonReducer};
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...updateButton});
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,4 +1,4 @@
-import {countComputers, getAll} from "../api/computers";
+import {countComputers, createComputer, getAll, updateComputer as upComputer} from "../api/computers";
 import {
     selectComputerDirection,
     selectComputerOrderBy,
@@ -12,7 +12,6 @@ const UNSELECT_COMPUTER = "UNSELECT_COMPUTER";
 const SET_COMPUTERS = "SET_COMPUTERS";
 const SET_ERROR = "SET_ERROR";
 const SET_COUNT_COMPUTERS = "SELECT_COUNT_COMPUTERS";
-const ADD_COMPUTER = "ADD_COMPUTER";
 
 export function getComputers() {
     return async function (dispatch, getState) {
@@ -38,10 +37,36 @@ export function getCountComputers() {
     }
 }
 
-export const addComputer = (name, inDate, outDate, companyId) => {
-    return async function (dispatch, getState) {
-        //  await addComputer(name, null, null, companyId);
-        console.log(name + " " + companyId);
+export const addComputer = (name, introduced, discontinued, manufacturerId) => {
+    return async function (dispatch) {
+        try {
+            await addComputer(createComputer({
+                name,
+                introduced,
+                discontinued,
+                manufacturerId
+            }));
+            dispatch(getComputers());
+        } catch (e) {
+            dispatch(setError(e));
+        }
+    }
+};
+
+export const updateComputer = (id, name, introduced, discontinued, manufacturerId) => {
+    return async function (dispatch) {
+        try {
+            await upComputer({
+                id,
+                name,
+                introduced,
+                discontinued,
+                manufacturerId
+            });
+            dispatch(getComputers());
+        } catch (e) {
+            dispatch(setError(e));
+        }
     }
 };
 
@@ -73,21 +98,20 @@ export function setError(error) {
     }
 }
 
-export function unselectComputer(id) {
+export function unselectComputer() {
     return {
-        type: UNSELECT_COMPUTER,
-        id: id
+        type: UNSELECT_COMPUTER
     }
 }
 
-export default function reducer(state = {computers: [], selected: [], count: 0}, action) {
+export default function reducer(state = {computers: [], selected: null, count: 0}, action) {
     switch (action.type) {
         case SELECT_COMPUTER:
-            return {...state, selected: [action.id]};
+            return {...state, selected: action.id};
         case UNSELECT_COMPUTER:
-            return {...state, selected: state.selected.filter((id) => action.id !== id)};
+            return {...state, selected: null};
         case SET_COMPUTERS:
-            return {...state, computers: action.computers, selected: []};
+            return {...state, computers: action.computers, selected: null};
         case SET_ERROR:
             return {...state, error: action.error.message};
         case SET_COUNT_COMPUTERS:

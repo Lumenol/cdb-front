@@ -23,6 +23,7 @@ import {setShow, SHOW} from "../redux/router";
 class DenseAppBar extends Component {
 
     toggleAdd = () => {
+        /*si update is true alors return*/
         this.props.add(!this.props.addButton);
     };
 
