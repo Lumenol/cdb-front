@@ -10,7 +10,7 @@
     "name": "Nom"
   },
   "title": {
-    "title": "Base de données des ordinateurs",
+    "title": "Computer Database",
     "orderBy": "Trier par",
     "search": "Rechercher"
   },
@@ -35,6 +35,9 @@
     },
     "toolbar": {
       "searchPlaceholder": "Rechercher"
+    },
+    "header": {
+      "actions": ""
     }
   },
   "header": {

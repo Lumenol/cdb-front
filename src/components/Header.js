@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -20,11 +20,10 @@ import Box from "@material-ui/core/Box";
 import theme from "../paletteBis";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faUser, faUserCog} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
 import {setShow, SHOW} from "../redux/router";
-import Button from "@material-ui/core/Button";
 import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 
 
@@ -40,12 +39,14 @@ class DenseAppBar extends Component {
         let button;
         const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName} = this.props;
 
-        if (adminMode) {
-            button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
-            </Button>
-        } else {
-            button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
-            </Button>
+        {
+            adminMode ?
+                button = <Fragment><Fab size="small" color="primary" title="Passer utilisateur" onClick={switchUser}>
+                    <FontAwesomeIcon icon={faUser}/></Fab></Fragment>
+                :
+                button =
+                    <Fragment><Fab size="small" color="primary" title="Passer administrateur" onClick={switchAdmin}>
+                        <FontAwesomeIcon icon={faUserCog}/></Fab></Fragment>
         }
 
         return (
@@ -60,33 +61,38 @@ class DenseAppBar extends Component {
                                 </IconButton>)}
                             </Grid>
 
-                            <Grid item xs={8}>
-                                <Typography variant="h3" align="center" color="secondary" fontFamily="Permanent Marker">
+                            <Grid item xs={6} md={9} lg={9}>
+                                <Typography variant="h4" align="center" color="secondary" fontFamily="Permanent Marker">
                                     <Box fontFamily="Permanent Marker"> {t("title.title")}</Box>
                                 </Typography>
                             </Grid>
 
-                            <Grid item xs={2}>
-                                {button}
-                            </Grid>
+                            <Grid item xs={5} md={2} lg={2} container>
 
-                            <Grid item xs={2} container alignItems="center" justify="flex-end">
-                                <Fab size="small" color="primary" aria-label="Delete"
-                                     title={t("header.hover.addButton")}
-                                     onClick={this.toggleAdd}>
-                                    <FontAwesomeIcon icon={faPlus}/>
-                                </Fab>
-                            </Grid>
+                                <Grid item xs={3} container alignItems="center">
+                                    <Typography variant="h6" align="center" color="secondary"
+                                                fontFamily="Permanent Marker">
+                                        <Box>{userName}</Box>
+                                    </Typography>
+                                </Grid>
 
-                            <Grid item xs={1}>
-                                <Typography variant="h6" align="center" color="secondary" fontFamily="Permanent Marker">
-                                    <Box>{userName}</Box>
-                                </Typography>
 
-                            </Grid>
+                                <Grid item xs={3} container alignItems="center">
+                                    <Fab size="small" color="primary" aria-label="Add"
+                                         title={t("header.hover.addButton")}
+                                         onClick={this.toggleAdd}>
+                                        <FontAwesomeIcon icon={faPlus}/>
+                                    </Fab>
+                                </Grid>
 
-                            <Grid item xs={1}>
-                                <DisconnectButton/>
+                                <Grid item xs={3} container alignItems="center">
+                                    {button}
+                                </Grid>
+
+                                <Grid item xs={3} container alignItems="center">
+                                    <DisconnectButton/>
+                                </Grid>
+
                             </Grid>
 
 
