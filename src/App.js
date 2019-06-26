@@ -5,14 +5,21 @@ import Header from "./components/Header";
 import Grid from "@material-ui/core/Grid";
 import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
-import {useSelector, useStore} from "react-redux";
+import {useDispatch, useSelector, useStore} from "react-redux";
 import {getComputers, getCountComputers} from "./redux/computers";
-import {selectAddButton, selectIsConnected, selectMenuIsOpen, selectSearchParameters} from "./redux/selectors";
+import {
+    selectAddButton,
+    selectIsConnected,
+    selectMenuIsOpen,
+    selectNotifications,
+    selectSearchParameters
+} from "./redux/selectors";
 import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
-import {useNotifications} from "./components/Notifier";
+import {useSnackbar} from "notistack";
+import {clearNotifications} from "./redux/notification";
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -51,6 +58,20 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     }
 
     return store.subscribe(update);
+}
+
+function useNotifications() {
+    const notifications = useSelector(selectNotifications);
+    const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+    const dispatch = useDispatch();
+    notifications.forEach(({message, options}) => {
+            const key = enqueueSnackbar(message, options);
+            setTimeout(() => closeSnackbar(key), 10000);
+        }
+    );
+    if (!notifications) {
+        dispatch(clearNotifications());
+    }
 }
 
 function App() {

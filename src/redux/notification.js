@@ -1,6 +1,35 @@
 const ENQUEUE_SNACKBAR = 'ENQUEUE_SNACKBAR';
 const CLEAR_NOTIFICATIONS = 'CLEAR_NOTIFICATIONS';
 
+function notification(message, variant) {
+    return enqueueSnackbar({
+        message: message,
+        options: {
+            variant: variant,
+        }
+    });
+}
+
+export function notificationError(message) {
+    return notification(message, "error");
+}
+
+export function notificationWarning(message) {
+    return notification(message, "warning");
+}
+
+export function notificationDefault(message) {
+    return notification(message, "default");
+}
+
+export function notificationInfo(message) {
+    return notification(message, "info");
+}
+
+export function notificationSuccess(message) {
+    return notification(message, "success");
+}
+
 export const enqueueSnackbar = notification => {
     const key = notification.options && notification.options.key;
 
