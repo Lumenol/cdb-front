@@ -32,7 +32,6 @@ class AddCard extends Component {
     };
 
     checkDate(date) {
-        console.log(date);
         if ((new Date(date).getTime() < new Date(1970, 1, 1).getTime()))
             return "Date cannot be before 01/01/1970";
     }

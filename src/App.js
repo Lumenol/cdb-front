@@ -11,15 +11,17 @@ import {
     selectAddButton,
     selectIsConnected,
     selectMenuIsOpen,
+    selectNotifications,
     selectSearchParameters,
     selectUpdateButton,
     selectUserBecomeAnAdmin
 } from "./redux/selectors";
-
 import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
+import {useSnackbar} from "notistack";
+import {clearNotifications} from "./redux/notification";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import {setShow, SHOW} from "./redux/router";
@@ -73,13 +75,28 @@ function showCompanies() {
     return setShow(SHOW.COMPANIES);
 }
 
+function useNotifications() {
+    const notifications = useSelector(selectNotifications);
+    const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+    const dispatch = useDispatch();
+    notifications.forEach(({message, options}) => {
+            const key = enqueueSnackbar(message, options);
+            setTimeout(() => closeSnackbar(key), 10000);
+        }
+    );
+    if (!notifications) {
+        dispatch(clearNotifications());
+    }
+}
+
 function App() {
     const store = useStore();
     const open = useSelector(selectMenuIsOpen);
     const add = useSelector(selectAddButton);
-    const update = useSelector(selectUpdateButton);
-
     useEffect(() => refresh(store));
+    useNotifications();
+
+    const update = useSelector(selectUpdateButton);
     const adminMode = useSelector(selectUserBecomeAnAdmin);
     const {t} = useTranslation();
     const dispatcher = useDispatch();
