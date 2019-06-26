@@ -62,10 +62,6 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     return store.subscribe(update);
 }
 
-function showComputers() {
-    return setShow(SHOW.COMPUTERS);
-}
-
 function showCompanies() {
     return setShow(SHOW.COMPANIES);
 }
@@ -91,9 +87,8 @@ function App() {
                     <Button variant="contained" color="primary" onClick={()=>dispatcher(showCompanies())}>{t("companies")}
                     </Button>
 
-                    <Button variant="contained" color="primary" onClick={()=>dispatcher(showComputers())}>{t("computers")}
-                    </Button>
-                </List>)}
+
+                    </List>)}
                 </Grid>
 
                 {
