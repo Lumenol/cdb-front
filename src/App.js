@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Grid from "@material-ui/core/Grid";
 import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
-import {useSelector, useStore} from "react-redux";
+import {useDispatch, useSelector, useStore} from "react-redux";
 import {getComputers, getCountComputers} from "./redux/computers";
 import {
     selectAddButton,
@@ -63,11 +63,11 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
 }
 
 function showComputers() {
-    setShow(SHOW.COMPUTERS);
+    return setShow(SHOW.COMPUTERS);
 }
 
 function showCompanies() {
-    setShow(SHOW.COMPANIES);
+    return setShow(SHOW.COMPANIES);
 }
 
 function App() {
@@ -77,6 +77,7 @@ function App() {
     const adminMode = useSelector(selectUserBecomeAnAdmin);
     const {t} = useTranslation();
     useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
+    const dispatcher = useDispatch();
 
     return (
         <Grid container direction="row" spacing={2}>
@@ -87,10 +88,10 @@ function App() {
             <Grid item xs={12} container spacing={3}>
                 <Grid item xs={12} container justify="center" className="margin" alignItems="center">
                     {!adminMode ? (<ChangePagination/>) : (<List>
-                    <Button variant="contained" color="primary" onClick={showCompanies}>{t("companies")}
+                    <Button variant="contained" color="primary" onClick={()=>dispatcher(showCompanies())}>{t("companies")}
                     </Button>
 
-                    <Button variant="contained" color="primary" onClick={showComputers}>{t("computers")}
+                    <Button variant="contained" color="primary" onClick={()=>dispatcher(showComputers())}>{t("computers")}
                     </Button>
                 </List>)}
                 </Grid>
