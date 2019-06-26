@@ -9,6 +9,10 @@
   "company": {
     "name": "Nom"
   },
+  "user": {
+    "login": "Identifiant",
+    "role": "Administrateur"
+  },
   "title": {
     "title": "Base de données des ordinateurs",
     "orderBy": "Trier par",
@@ -16,6 +20,7 @@
   },
   "companies": "Fabriquants",
   "computers": "Ordinateurs",
+  "users": "Utilisateurs",
   "table": {
     "body": {
       "emptyDataSourceMessage": "Chargement...",

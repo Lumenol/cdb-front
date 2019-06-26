@@ -1,7 +1,8 @@
 const SET_SHOW = "SET_SHOW";
 export const SHOW = {
     COMPANIES: "COMPANIES",
-    COMPUTERS: "COMPUTERS"
+    COMPUTERS: "COMPUTERS",
+    USERS: "USERS"
 };
 
 export function setShow(show) {

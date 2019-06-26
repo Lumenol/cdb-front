@@ -9,6 +9,10 @@
   "company": {
     "name": "Name"
   },
+  "user": {
+    "login": "Login",
+    "role": "Admin"
+  },
   "title": {
     "title": "Computer Database",
     "orderBy": "Order by",
@@ -16,6 +20,7 @@
   },
   "companies": "Manufacturers",
   "computers": "Computers",
+  "users": "Users",
   "table": {
     "body": {
       "emptyDataSourceMessage": "Loading...",

@@ -21,7 +21,7 @@ import addButtonReducer from './redux/addButton';
 import companiesReducer, {getCompanies} from "./redux/companies";
 import routerReducer from './redux/router';
 import modeAdminActivateReducer from './redux/modeAdminIsActivate';
-
+import usersReducer, {getUsers} from './redux/users';
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
@@ -30,10 +30,11 @@ const menu = {isOpen: menuIsOpenReducer};
 const search = {searchParameters: searchParametersReducer};
 const addButton = {addButton: addButtonReducer};
 const companies = {companies: companiesReducer};
+const users = {users: usersReducer};
 const router = {router: routerReducer};
 const admin = {adminMode: modeAdminActivateReducer};
 
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin});
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin, ...users});
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -44,7 +45,7 @@ addTokenInterceptor(() => selectToken(store.getState()));
 
 store.dispatch(login("user", "user"));
 setTimeout(() => store.dispatch(getCompanies()), 5000);
-
+setTimeout(() => store.dispatch(getUsers()), 5000);
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
