@@ -29,7 +29,7 @@ class ComputerCard extends Component {
     toggleUpdate = () => {
         if (this.props.addButton)
             return;
-        this.props.toggleUpdateButton(!this.props.updateButton.boolean, this.props.selectedComputer);
+        this.props.toggleUpdateButton(!this.props.updateButton.boolean, this.props.computer);
     };
 
     render() {
@@ -97,15 +97,15 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         select: () => {
             dispatch(selectComputer(props.computer.id));
-            dispatch(updateButton(false, props.computer.id));
+            dispatch(updateButton(false, props.computer));
         },
         unselect: () => {
             dispatch(unselectComputer());
-            dispatch(updateButton(false, -1))
+            dispatch(updateButton(false, null))
         },
         update: (name, inDate, outDate, companyId) =>
             dispatch(updateComputer(props.computer.id, name, inDate, outDate, companyId)),
-        toggleUpdateButton: (boolean, id) => dispatch(updateButton(boolean, id))
+        toggleUpdateButton: (boolean, computer) => dispatch(updateButton(boolean, computer))
     }
 };
 

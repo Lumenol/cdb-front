@@ -20,7 +20,6 @@ const SET_ORDERBY_COMPUTER = 'SET_ORDERBY_COMPUTER';
 const SET_DIRECTION_COMPUTER = 'SET_DIRECTION_COMPUTER';
 const SET_SEARCH_COMPUTER = 'SET_SEARCH_COMPUTER';
 
-
 export function setPageSize(size) {
     return function (dispatch, getState) {
         const pageSize = selectPageSize(getState());

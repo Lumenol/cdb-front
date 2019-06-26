@@ -1,16 +1,16 @@
 const UPDATE_BUTTON = 'UPDATE_BUTTON';
 
-export function updateButton(boolean, id) {
+export function updateButton(boolean, computer) {
     return {
         type: UPDATE_BUTTON,
         updateButton: {
-            id,
+            computer,
             boolean
         }
     }
 }
 
-const reducer = (state = {boolean: false, id: -1}, action) => {
+const reducer = (state = {boolean: false, computer: null}, action) => {
     switch (action.type) {
         case UPDATE_BUTTON:
             return action.updateButton;

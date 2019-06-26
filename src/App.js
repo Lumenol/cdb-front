@@ -7,58 +7,70 @@ import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
 import {useSelector, useStore} from "react-redux";
 import {getComputers, getCountComputers} from "./redux/computers";
-import {selectAddButton, selectIsConnected, selectMenuIsOpen, selectSearchParameters} from "./redux/selectors";
+import {
+    selectAddButton,
+    selectIsConnected,
+    selectMenuIsOpen,
+    selectSearchParameters,
+    selectUpdateButton
+} from "./redux/selectors";
 import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
 
-function updateComputerIfSearchParametersHasChangeOrLogin(store) {
+function updateComputerIfSearchParametersHasChangeOrLogin() {
     const TIMEOUT = 300;
-    const computerHandler = () => {
-        store.dispatch(getComputers())
-    };
-    const countHandler = () => {
-        store.dispatch(getCountComputers())
-    };
 
     let oldSearchParameters;
     let computerTimer;
     let countTimer;
 
-    function update() {
-        const state = store.getState();
-        const searchParameters = selectSearchParameters(state);
-        const isConnected = selectIsConnected(state);
-        if (isConnected) {
-            if (searchParameters !== oldSearchParameters) {
-                if (!oldSearchParameters || searchParameters.search !== oldSearchParameters.search) {
-                    if (countTimer) {
-                        clearTimeout(countTimer);
-                    }
-                    countTimer = setTimeout(countHandler, TIMEOUT);
-                }
-                if (computerTimer) {
-                    clearTimeout(computerTimer);
-                }
-                computerTimer = setTimeout(computerHandler, TIMEOUT);
-                oldSearchParameters = searchParameters;
-            }
-        } else {
-            oldSearchParameters = undefined;
-        }
-    }
+    return function (store) {
+        const computerHandler = () => {
+            store.dispatch(getComputers())
+        };
+        const countHandler = () => {
+            store.dispatch(getCountComputers())
+        };
 
-    return store.subscribe(update);
+        function update() {
+            const state = store.getState();
+            const searchParameters = selectSearchParameters(state);
+            const isConnected = selectIsConnected(state);
+            if (isConnected) {
+                if (searchParameters !== oldSearchParameters) {
+                    if (!oldSearchParameters || searchParameters.search !== oldSearchParameters.search) {
+                        if (countTimer) {
+                            clearTimeout(countTimer);
+                        }
+                        countTimer = setTimeout(countHandler, TIMEOUT);
+                    }
+                    if (computerTimer) {
+                        clearTimeout(computerTimer);
+                    }
+                    computerTimer = setTimeout(computerHandler, TIMEOUT);
+                    oldSearchParameters = searchParameters;
+                }
+            } else {
+                oldSearchParameters = undefined;
+            }
+        }
+
+        return store.subscribe(update);
+    }
 }
+
+const refresh = updateComputerIfSearchParametersHasChangeOrLogin();
 
 function App() {
     const store = useStore();
     const open = useSelector(selectMenuIsOpen);
     const add = useSelector(selectAddButton);
-    useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
-    {/* si update alors update with props id + props "update" +props placeholder*/
-    }
+    const update = useSelector(selectUpdateButton);
+
+    useEffect(() => refresh(store));
+
     return (
         <Grid container direction="row" spacing={2}>
 
@@ -70,12 +82,10 @@ function App() {
                     <ChangePagination/>
                 </Grid>
 
-                {
-                    add ? open ?
-                        <Fragment><Grid item xs={4} md={4} lg={2}></Grid> <Grid item xs={7} md={7} lg={9} container
-                                                                                justify="center"><AddCard/>
-                        </Grid></Fragment> : <Grid item xs={11} container justify="center"><AddCard/></Grid> : null
-                }
+                {update.boolean ?
+                    <AddCard computer={update.computer}/> : null}
+
+                {add ? <AddCard/> : null}
 
                 <Grid item xs={12} container justify="center">
                     {open ? <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
@@ -84,6 +94,7 @@ function App() {
 
                 </Grid>
             </Grid>
+
 
             <Grid item xs={12} container justify="center">
                 <footer className="footer">

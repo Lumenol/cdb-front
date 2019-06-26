@@ -8,8 +8,6 @@ import '../css/ComputerCard.css';
 class ComputerContainer extends Component {
 
     render() {
-        {/*si update alors fonction filter sans celui avec l'id a update*/
-        }
         const {computers} = this.props;
 
         return (

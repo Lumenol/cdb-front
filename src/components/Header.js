@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
-import {selectAddButton, selectMenuIsOpen} from "../redux/selectors";
+import {selectAddButton, selectMenuIsOpen, selectUpdateButton} from "../redux/selectors";
 import {connect} from "react-redux";
 import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
@@ -23,7 +23,8 @@ import {setShow, SHOW} from "../redux/router";
 class DenseAppBar extends Component {
 
     toggleAdd = () => {
-        /*si update is true alors return*/
+        if (this.props.updateButton.boolean)
+            return;
         this.props.add(!this.props.addButton);
     };
 
@@ -75,7 +76,8 @@ class DenseAppBar extends Component {
 function mapStateToProps(state) {
     return {
         isOpen: selectMenuIsOpen(state),
-        addButton: selectAddButton(state)
+        addButton: selectAddButton(state),
+        updateButton: selectUpdateButton(state)
     }
 }
 
