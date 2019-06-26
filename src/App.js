@@ -12,7 +12,9 @@ import {
     selectIsConnected,
     selectMenuIsOpen,
     selectNotifications,
-    selectSearchParameters
+    selectSearchParameters,
+    selectUpdateButton,
+    selectUserBecomeAnAdmin
 } from "./redux/selectors";
 import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
@@ -20,44 +22,57 @@ import AddCard from "./components/AddCard";
 import Router from "./components/Router";
 import {useSnackbar} from "notistack";
 import {clearNotifications} from "./redux/notification";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import {setShow, SHOW} from "./redux/router";
+import {useTranslation} from "react-i18next";
 
-function updateComputerIfSearchParametersHasChangeOrLogin(store) {
+function updateComputerIfSearchParametersHasChangeOrLogin() {
     const TIMEOUT = 300;
-    const computerHandler = () => {
-        store.dispatch(getComputers())
-    };
-    const countHandler = () => {
-        store.dispatch(getCountComputers())
-    };
 
     let oldSearchParameters;
     let computerTimer;
     let countTimer;
 
-    function update() {
-        const state = store.getState();
-        const searchParameters = selectSearchParameters(state);
-        const isConnected = selectIsConnected(state);
-        if (isConnected) {
-            if (searchParameters !== oldSearchParameters) {
-                if (!oldSearchParameters || searchParameters.search !== oldSearchParameters.search) {
-                    if (countTimer) {
-                        clearTimeout(countTimer);
-                    }
-                    countTimer = setTimeout(countHandler, TIMEOUT);
-                }
-                if (computerTimer) {
-                    clearTimeout(computerTimer);
-                }
-                computerTimer = setTimeout(computerHandler, TIMEOUT);
-                oldSearchParameters = searchParameters;
-            }
-        } else {
-            oldSearchParameters = undefined;
-        }
-    }
+    return function (store) {
+        const computerHandler = () => {
+            store.dispatch(getComputers())
+        };
+        const countHandler = () => {
+            store.dispatch(getCountComputers())
+        };
 
-    return store.subscribe(update);
+        function update() {
+            const state = store.getState();
+            const searchParameters = selectSearchParameters(state);
+            const isConnected = selectIsConnected(state);
+            if (isConnected) {
+                if (searchParameters !== oldSearchParameters) {
+                    if (!oldSearchParameters || searchParameters.search !== oldSearchParameters.search) {
+                        if (countTimer) {
+                            clearTimeout(countTimer);
+                        }
+                        countTimer = setTimeout(countHandler, TIMEOUT);
+                    }
+                    if (computerTimer) {
+                        clearTimeout(computerTimer);
+                    }
+                    computerTimer = setTimeout(computerHandler, TIMEOUT);
+                    oldSearchParameters = searchParameters;
+                }
+            } else {
+                oldSearchParameters = undefined;
+            }
+        }
+
+        return store.subscribe(update);
+    }
+}
+
+const refresh = updateComputerIfSearchParametersHasChangeOrLogin();
+
+function showCompanies() {
+    return setShow(SHOW.COMPANIES);
 }
 
 function useNotifications() {
@@ -78,8 +93,13 @@ function App() {
     const store = useStore();
     const open = useSelector(selectMenuIsOpen);
     const add = useSelector(selectAddButton);
-    useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
+    useEffect(() => refresh(store));
     useNotifications();
+
+    const update = useSelector(selectUpdateButton);
+    const adminMode = useSelector(selectUserBecomeAnAdmin);
+    const {t} = useTranslation();
+    const dispatcher = useDispatch();
 
     return (
         <Grid container direction="row" spacing={2}>
@@ -89,12 +109,19 @@ function App() {
 
             <Grid item xs={12} container spacing={3}>
                 <Grid item xs={12} container justify="center" className="margin" alignItems="center">
-                    <ChangePagination/>
+                    {!adminMode ? (<ChangePagination/>) : (<List>
+                        <Button variant="contained" color="primary"
+                                onClick={() => dispatcher(showCompanies())}>{t("companies")}
+                        </Button>
+
+
+                    </List>)}
                 </Grid>
 
-                {
-                    add ? <Grid item xs={12} container justify="center"><AddCard/></Grid> : null
-                }
+                {update.boolean ?
+                    <AddCard computer={update.computer}/> : null}
+
+                {add ? <AddCard/> : null}
 
                 <Grid item xs={12} container justify="center">
                     {open ? <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
@@ -104,11 +131,12 @@ function App() {
                 </Grid>
             </Grid>
 
-            <Grid item xs={12} container justify="center">
+            {!adminMode ?
+                (<Grid item xs={12} container justify="center">
                 <footer className="footer">
                     <PageSelector/>
                 </footer>
-            </Grid>
+                </Grid>) : null}
             <PersistentDrawerLeft/>
         </Grid>
     )

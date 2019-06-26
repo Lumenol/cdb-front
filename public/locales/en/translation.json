@@ -6,11 +6,41 @@
     "company": "Manufacturer",
     "found": "Computers found"
   },
+  "company": {
+    "name": "Name"
+  },
   "title": {
     "title": "Computer Database",
     "orderBy": "Order by",
     "search": "Search"
   },
   "companies": "Manufacturers",
-  "computers": "Computers"
+  "computers": "Computers",
+  "table": {
+    "body": {
+      "emptyDataSourceMessage": "Loading...",
+      "deleteTooltip": "Delete",
+      "editRow": {
+        "cancelTooltip": "Cancel",
+        "deleteText": "Are you sure ?",
+        "saveTooltip": "Yes"
+      }
+    },
+    "pagination": {
+      "labelRowsSelect": "Rows per page",
+      "nextTooltip": "Next page",
+      "previousTooltip": "Previous page",
+      "lastTooltip": "Last page",
+      "firstTooltip": "First page"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search"
+    }
+  },
+  "header": {
+    "hover": {
+      "addButton": "New computer",
+      "disconnectButton": "Disconnect"
+    }
+  }
 }

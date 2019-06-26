@@ -6,11 +6,42 @@
     "company": "Fabriquant",
     "found": "Ordinateurs trouvés"
   },
+  "company": {
+    "name": "Nom"
+  },
   "title": {
-    "title": "Base de donnée des ordinateurs",
+    "title": "Base de données des ordinateurs",
     "orderBy": "Trier par",
     "search": "Rechercher"
   },
   "companies": "Fabriquants",
-  "computers": "Ordinateurs"
+  "computers": "Ordinateurs",
+  "table": {
+    "body": {
+      "emptyDataSourceMessage": "Chargement...",
+      "deleteTooltip": "Supprimer",
+      "editRow": {
+        "cancelTooltip": "Annuler",
+        "deleteText": "Veuillez confirmer la suppression",
+        "saveTooltip": "Confirmer"
+      }
+    },
+    "pagination": {
+      "labelRowsSelect": "Résultats par page",
+      "nextTooltip": "Page suivante",
+      "previousTooltip": "Page précédente",
+      "lastTooltip": "Dernière page",
+      "firstTooltip": "Première page"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Rechercher"
+    }
+  },
+  "header": {
+    "test": "test",
+    "hover": {
+      "addButton": "Ajouter un ordinateur",
+      "disconnectButton": "Se déconnecter"
+    }
+  }
 }

@@ -19,6 +19,8 @@ export const selectCompanies = state => state.companies.companies;
 
 export const selectAddButton = state => state.addButton;
 
+export const selectUpdateButton = state => state.updateButton;
+
 export function selectMinPage() {
     return 1;
 }
@@ -56,6 +58,10 @@ export function selectMenuIsOpen(state) {
 export function selectShow(state) {
     return state.router;
 
+}
+
+export function selectUserBecomeAnAdmin(state) {
+    return state.adminMode;
 }
 
 export const selectIsConnected = state => selectTokenIsNotExpired(state);

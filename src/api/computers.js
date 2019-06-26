@@ -29,18 +29,18 @@ export async function getComputerById(id) {
     }
 }
 
-export async function createComputer(createComputerDTO) {
+export async function createComputer(computerDto) {
     try {
-        await axios.post(COMPUTERS_URL, createComputerDTO);
+        await axios.post(COMPUTERS_URL, computerDto);
     } catch (e) {
         console.error(e);
         throw(e);
     }
 }
 
-export async function updateComputer(updateComputerDTO) {
+export async function updateComputer(computerDTO) {
     try {
-        await axios.put(COMPUTERS_URL, updateComputerDTO);
+        await axios.put(COMPUTERS_URL, computerDTO);
     } catch (e) {
         console.error(e);
         throw(e);
