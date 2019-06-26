@@ -12,6 +12,7 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
+import {useNotifications} from "./components/Notifier";
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -57,6 +58,7 @@ function App() {
     const open = useSelector(selectMenuIsOpen);
     const add = useSelector(selectAddButton);
     useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
+    useNotifications();
 
     return (
         <Grid container direction="row" spacing={2}>
