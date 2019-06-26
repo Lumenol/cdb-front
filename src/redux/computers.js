@@ -57,7 +57,7 @@ export function deleteAComputer(id) {
             await deleteComputer(id);
             dispatch(getComputers());
             dispatch(getCountComputers());
-        }catch (e) {
+        } catch (e) {
             dispatch(setError(e));
         }
     }
