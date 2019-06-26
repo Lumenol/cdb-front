@@ -1,7 +1,6 @@
 import {selectCurrentPage, selectMaxPage, selectMinPage, selectPageSize} from "./selectors";
 
 export const ORDER_BY = {
-    ID: "id",
     NAME: "name",
     INTRODUCED: "introduced",
     DISCONTINUED: "discontinued",
@@ -19,7 +18,6 @@ const SET_PAGE_SIZE = "SET_PAGE_SIZE";
 const SET_ORDERBY_COMPUTER = 'SET_ORDERBY_COMPUTER';
 const SET_DIRECTION_COMPUTER = 'SET_DIRECTION_COMPUTER';
 const SET_SEARCH_COMPUTER = 'SET_SEARCH_COMPUTER';
-
 
 export function setPageSize(size) {
     return function (dispatch, getState) {
@@ -86,7 +84,7 @@ export function setSearchComputer(search) {
 
 export default function reducer(state = {
     page: 1,
-    orderBy: ORDER_BY.ID,
+    orderBy: ORDER_BY.NAME,
     size: 10,
     direction: DIRECTION.ASC,
     search: ""

@@ -20,6 +20,11 @@ import searchParametersReducer from './redux/searchParameters';
 import addButtonReducer from './redux/addButton';
 import companiesReducer, {getCompanies} from "./redux/companies";
 import routerReducer from './redux/router';
+import notificationReducer from './redux/notification';
+import {SnackbarProvider} from "notistack";
+import updateButtonReducer from './redux/updateButton';
+import modeAdminActivateReducer from './redux/modeAdminIsActivate';
+
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
@@ -29,8 +34,11 @@ const search = {searchParameters: searchParametersReducer};
 const addButton = {addButton: addButtonReducer};
 const companies = {companies: companiesReducer};
 const router = {router: routerReducer};
+const updateButton = {updateButton: updateButtonReducer};
+const admin = {adminMode: modeAdminActivateReducer};
+const notification = {notifications: notificationReducer};
 
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router});
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin, ...updateButton, ...notification});
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -45,7 +53,9 @@ ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
             <I18nReduxProvider i18n={i18n}>
-                <App/>
+                <SnackbarProvider maxSnack={3} preventDuplicate>
+                    <App/>
+                </SnackbarProvider>
             </I18nReduxProvider>
         </ThemeProvider>
     </Provider>,

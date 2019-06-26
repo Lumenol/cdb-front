@@ -16,8 +16,6 @@ import Typography from "@material-ui/core/Typography";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import theme from "../paletteBis";
 import {withTranslation} from "react-i18next";
-import Button from "@material-ui/core/Button";
-import {setShow, SHOW} from "../redux/router";
 
 
 const styles = theme => ({
@@ -30,7 +28,7 @@ const styles = theme => ({
 class PersistentDrawerLeft extends Component {
 
     render() {
-        const {classes, isOpen, close, count, t, showCompanies, showComputers} = this.props;
+        const {classes, isOpen, close, count, t} = this.props;
         return (
             <ThemeProvider theme={theme}>
                 <Drawer variant="persistent" anchor="left" open={isOpen}>
@@ -44,13 +42,7 @@ class PersistentDrawerLeft extends Component {
                         </div>
                     </div>
                     <Divider/>
-                    <List className={classes.margin}>
-                        <Button variant="contained" color="primary" onClick={showCompanies}>{t("companies")}
-                        </Button>
 
-                        <Button variant="contained" color="primary" onClick={showComputers}>{t("computers")}
-                        </Button>
-                    </List>
                     <Divider/>
                     <div className={classes.margin}>
                         <InputSearch/>
@@ -68,7 +60,8 @@ class PersistentDrawerLeft extends Component {
 function mapStateToProps(state) {
     return {
         isOpen: selectMenuIsOpen(state),
-        count: selectComputerCount(state)
+        count: selectComputerCount(state),
+
     };
 }
 
@@ -78,12 +71,6 @@ function mapDispatchToProps(dispatch) {
         close: () => {
             dispatch(closeMenu());
         },
-        showCompanies: () => {
-            dispatch(setShow(SHOW.COMPANIES))
-        },
-        showComputers: () => {
-            dispatch(setShow(SHOW.COMPUTERS))
-        }
     };
 }
 

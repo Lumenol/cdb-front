@@ -1,5 +1,5 @@
 import React from "react";
-import {CompaniesContainer} from "../containers/CompaniesContainer";
+import CompaniesContainer from "../containers/CompaniesContainer";
 import {SHOW} from "../redux/router";
 import ComputerContainer from "../containers/CardContainer";
 import connect from "react-redux/es/connect/connect";

@@ -1,4 +1,4 @@
-import {countComputers, deleteComputer, getAll} from "../api/computers";
+import {countComputers, createComputer, deleteComputer, getAll, updateComputer as upComputer} from "../api/computers";
 import {
     selectComputerDirection,
     selectComputerOrderBy,
@@ -36,6 +36,39 @@ export function getCountComputers() {
         }
     }
 }
+
+export const addComputer = (name, introduced, discontinued, manufacturerId) => {
+    return async function (dispatch) {
+        try {
+            await addComputer(createComputer({
+                name,
+                introduced,
+                discontinued,
+                manufacturerId
+            }));
+            dispatch(getComputers());
+        } catch (e) {
+            dispatch(setError(e));
+        }
+    }
+};
+
+export const updateComputer = (id, name, introduced, discontinued, manufacturerId) => {
+    return async function (dispatch) {
+        try {
+            await upComputer({
+                id,
+                name,
+                introduced,
+                discontinued,
+                manufacturerId
+            });
+            dispatch(getComputers());
+        } catch (e) {
+            dispatch(setError(e));
+        }
+    }
+};
 
 function setCountComputers(count) {
     return {
@@ -77,21 +110,20 @@ export function setError(error) {
     }
 }
 
-export function unselectComputer(id) {
+export function unselectComputer() {
     return {
-        type: UNSELECT_COMPUTER,
-        id: id
+        type: UNSELECT_COMPUTER
     }
 }
 
-export default function reducer(state = {computers: [], selected: [], count: 0}, action) {
+export default function reducer(state = {computers: [], selected: null, count: 0}, action) {
     switch (action.type) {
         case SELECT_COMPUTER:
-            return {...state, selected: [action.id]};
+            return {...state, selected: action.id};
         case UNSELECT_COMPUTER:
-            return {...state, selected: state.selected.filter((id) => action.id !== id)};
+            return {...state, selected: null};
         case SET_COMPUTERS:
-            return {...state, computers: action.computers, selected: []};
+            return {...state, computers: action.computers, selected: null};
         case SET_ERROR:
             return {...state, error: action.error.message};
         case SET_COUNT_COMPUTERS:

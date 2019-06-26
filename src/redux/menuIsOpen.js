@@ -16,7 +16,7 @@ export function openMenu() {
 }
 
 
-const reducer = (state = true, action) => {
+const reducer = (state = false, action) => {
     switch (action.type) {
         case MENU_IS_OPEN:
             return action.isOpen;
