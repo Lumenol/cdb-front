@@ -1,23 +1,26 @@
 const MODE_ADMIN_IS_ACTIVATE = 'MODE_ADMIN_IS_ACTIVATE';
+const MODE_ADMIN_IS_DEACTIVATE = 'MODE_ADMIN_IS_DEACTIVATE';
 
 export function switchModeAdmin() {
     return {
         type: MODE_ADMIN_IS_ACTIVATE,
-        isAdmin: true
+        adminMode: true
     }
 }
 
 export function switchModeUser() {
     return {
-        type: MODE_ADMIN_IS_ACTIVATE,
-        isAdmin: false
+        type: MODE_ADMIN_IS_DEACTIVATE,
+        adminMode: false
     }
 }
 
-const reducer = (state = true, action) => {
+const reducer = (state = false, action) => {
     switch (action.type) {
         case MODE_ADMIN_IS_ACTIVATE:
-            return action.isAdmin;
+            return action.adminMode;
+        case MODE_ADMIN_IS_DEACTIVATE:
+            return action.adminMode;
         default :
             return state;
     }

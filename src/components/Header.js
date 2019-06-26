@@ -29,8 +29,18 @@ class DenseAppBar extends Component {
     };
 
     render() {
+        let button;
+        const {t, isOpen, open, adminMode, switchAdmin, switchUser} = this.props;
 
-        const {t, isOpen, open, isAdmin, admin} = this.props;
+        if (adminMode) {
+           button = <Button variant="contained" color="primary" onClick={switchUser}>USER
+            </Button>
+        }
+        else{
+         button = <Button variant="contained" color="primary" onClick={switchAdmin}>ADMIN
+            </Button>
+        }
+
         return (
             <ThemeProvider theme={theme}>
                 <Grid container direction="column">
@@ -50,8 +60,7 @@ class DenseAppBar extends Component {
                             </Grid>
 
                             <Grid item xs={2}>
-                                <Button variant="contained" color="primary" onClick={admin}>ADMIN
-                                </Button>
+                                {button}
                             </Grid>
 
                             <Grid item xs={2} container alignItems="center" justify="flex-end">
@@ -81,7 +90,7 @@ function mapStateToProps(state) {
     return {
         isOpen: selectMenuIsOpen(state),
         addButton: selectAddButton(state),
-        isAdmin: selectUserBecomeAnAdmin(state)
+        adminMode: selectUserBecomeAnAdmin(state)
     }
 }
 
@@ -100,9 +109,12 @@ function mapDispatchToProps(dispatch) {
         showComputers: () => {
             dispatch(setShow(SHOW.COMPUTERS))
         },
-        admin: () => {
+        switchAdmin: () => {
             dispatch(switchModeAdmin());
-        }
+        },
+        switchUser: () => {
+            dispatch(switchModeUser());
+        },
     };
 }
 

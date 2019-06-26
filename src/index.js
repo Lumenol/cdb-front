@@ -31,7 +31,7 @@ const search = {searchParameters: searchParametersReducer};
 const addButton = {addButton: addButtonReducer};
 const companies = {companies: companiesReducer};
 const router = {router: routerReducer};
-const admin = {isAdmin: modeAdminActivateReducer};
+const admin = {adminMode: modeAdminActivateReducer};
 
 const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin});
 
