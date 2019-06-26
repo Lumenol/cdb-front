@@ -6,7 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
 import {selectAddButton, selectMenuIsOpen, selectUserBecomeAnAdmin} from "../redux/selectors";
 import {connect} from "react-redux";
-import {openMenu} from "../redux/menuIsOpen";
+import {closeMenu, openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
 import DisconnectButton from "./DisconectButton";
 import Grid from "@material-ui/core/Grid";
@@ -30,7 +30,7 @@ class DenseAppBar extends Component {
 
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchAdmin, switchUser} = this.props;
+        const {t, isOpen, open, adminMode, switchAdmin, switchUser } = this.props;
 
         if (adminMode) {
            button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
@@ -48,9 +48,9 @@ class DenseAppBar extends Component {
                         <Toolbar>
 
                             <Grid item xs={1}>
-                                {!isOpen && <IconButton aria-label="Menu" onClick={open}>
+                                {!isOpen && (adminMode ? null : <IconButton aria-label="Menu" onClick={open}>
                                     <MenuIcon/>
-                                </IconButton>}
+                                </IconButton>)}
                             </Grid>
 
                             <Grid item xs={8}>
@@ -103,16 +103,13 @@ function mapDispatchToProps(dispatch) {
         add: (boolean) => {
             dispatch(addButton(boolean));
         },
-        showCompanies: () => {
-            dispatch(setShow(SHOW.COMPANIES))
-        },
-        showComputers: () => {
-            dispatch(setShow(SHOW.COMPUTERS))
-        },
         switchAdmin: () => {
+            dispatch(closeMenu());
+            dispatch(setShow(SHOW.COMPANIES));
             dispatch(switchModeAdmin());
         },
         switchUser: () => {
+            dispatch(setShow(SHOW.COMPUTERS));
             dispatch(switchModeUser());
         },
     };
