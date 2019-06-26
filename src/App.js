@@ -62,10 +62,6 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     return store.subscribe(update);
 }
 
-function showComputers() {
-    return setShow(SHOW.COMPUTERS);
-}
-
 function showCompanies() {
     return setShow(SHOW.COMPANIES);
 }
