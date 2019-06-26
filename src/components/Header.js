@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
-import {selectAddButton, selectMenuIsOpen} from "../redux/selectors";
+import {selectAddButton, selectMenuIsOpen, selectUserBecomeAnAdmin} from "../redux/selectors";
 import {connect} from "react-redux";
 import {openMenu} from "../redux/menuIsOpen";
 import Paper from "@material-ui/core/Paper";
@@ -18,6 +18,8 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
 import {setShow, SHOW} from "../redux/router";
+import Button from "@material-ui/core/Button";
+import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 
 
 class DenseAppBar extends Component {
@@ -27,8 +29,18 @@ class DenseAppBar extends Component {
     };
 
     render() {
+        let button;
+        const {t, isOpen, open, adminMode, switchAdmin, switchUser} = this.props;
 
-        const {t, isOpen, open} = this.props;
+        if (adminMode) {
+           button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
+            </Button>
+        }
+        else{
+         button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
+            </Button>
+        }
+
         return (
             <ThemeProvider theme={theme}>
                 <Grid container direction="column">
@@ -47,6 +59,9 @@ class DenseAppBar extends Component {
                                 </Typography>
                             </Grid>
 
+                            <Grid item xs={2}>
+                                {button}
+                            </Grid>
 
                             <Grid item xs={2} container alignItems="center" justify="flex-end">
                                 <Fab size="small" color="primary" aria-label="Delete" title="Ajouter ordinateur"
@@ -74,7 +89,8 @@ class DenseAppBar extends Component {
 function mapStateToProps(state) {
     return {
         isOpen: selectMenuIsOpen(state),
-        addButton: selectAddButton(state)
+        addButton: selectAddButton(state),
+        adminMode: selectUserBecomeAnAdmin(state)
     }
 }
 
@@ -92,7 +108,13 @@ function mapDispatchToProps(dispatch) {
         },
         showComputers: () => {
             dispatch(setShow(SHOW.COMPUTERS))
-        }
+        },
+        switchAdmin: () => {
+            dispatch(switchModeAdmin());
+        },
+        switchUser: () => {
+            dispatch(switchModeUser());
+        },
     };
 }
 

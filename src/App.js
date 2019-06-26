@@ -5,13 +5,23 @@ import Header from "./components/Header";
 import Grid from "@material-ui/core/Grid";
 import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
-import {useSelector, useStore} from "react-redux";
+import {useDispatch, useSelector, useStore} from "react-redux";
 import {getComputers, getCountComputers} from "./redux/computers";
-import {selectAddButton, selectIsConnected, selectMenuIsOpen, selectSearchParameters} from "./redux/selectors";
+import {
+    selectAddButton,
+    selectIsConnected,
+    selectMenuIsOpen,
+    selectSearchParameters,
+    selectUserBecomeAnAdmin
+} from "./redux/selectors";
 import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import {setShow, SHOW} from "./redux/router";
+import {useTranslation} from "react-i18next";
 
 function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     const TIMEOUT = 300;
@@ -52,11 +62,22 @@ function updateComputerIfSearchParametersHasChangeOrLogin(store) {
     return store.subscribe(update);
 }
 
+function showComputers() {
+    return setShow(SHOW.COMPUTERS);
+}
+
+function showCompanies() {
+    return setShow(SHOW.COMPANIES);
+}
+
 function App() {
     const store = useStore();
     const open = useSelector(selectMenuIsOpen);
     const add = useSelector(selectAddButton);
+    const adminMode = useSelector(selectUserBecomeAnAdmin);
+    const {t} = useTranslation();
     useEffect(() => updateComputerIfSearchParametersHasChangeOrLogin(store));
+    const dispatcher = useDispatch();
 
     return (
         <Grid container direction="row" spacing={2}>
@@ -66,7 +87,13 @@ function App() {
 
             <Grid item xs={12} container spacing={3}>
                 <Grid item xs={12} container justify="center" className="margin" alignItems="center">
-                    <ChangePagination/>
+                    {!adminMode ? (<ChangePagination/>) : (<List>
+                    <Button variant="contained" color="primary" onClick={()=>dispatcher(showCompanies())}>{t("companies")}
+                    </Button>
+
+                    <Button variant="contained" color="primary" onClick={()=>dispatcher(showComputers())}>{t("computers")}
+                    </Button>
+                </List>)}
                 </Grid>
 
                 {
@@ -81,11 +108,12 @@ function App() {
                 </Grid>
             </Grid>
 
-            <Grid item xs={12} container justify="center">
+            {!adminMode ?
+                (<Grid item xs={12} container justify="center">
                 <footer className="footer">
                     <PageSelector/>
                 </footer>
-            </Grid>
+            </Grid>) : null}
             <PersistentDrawerLeft/>
         </Grid>
     )
