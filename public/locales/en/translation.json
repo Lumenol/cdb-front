@@ -36,5 +36,11 @@
     "toolbar": {
       "searchPlaceholder": "Search"
     }
+  },
+  "header": {
+    "hover": {
+      "addButton": "New computer",
+      "disconnectButton": "Disconnect"
+    }
   }
 }
