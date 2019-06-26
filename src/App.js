@@ -20,6 +20,7 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
+import FormLogin from "./components/FormLogin";
 import {useSnackbar} from "notistack";
 import {clearNotifications} from "./redux/notification";
 import Button from "@material-ui/core/Button";
@@ -84,7 +85,7 @@ function useNotifications() {
             setTimeout(() => closeSnackbar(key), 10000);
         }
     );
-    if (!notifications) {
+    if (notifications.length > 0) {
         dispatch(clearNotifications());
     }
 }
@@ -101,45 +102,43 @@ function App() {
     const {t} = useTranslation();
     const dispatcher = useDispatch();
 
-    return (
-        <Grid container direction="row" spacing={2}>
+    const isConnected = useSelector(selectIsConnected);
+    return isConnected ? (
+            <Grid container direction="row" spacing={2}>
 
-            <Grid item xs={12}><ThemeProvider theme={theme}><Header/></ThemeProvider></Grid>
+                <Grid item xs={12}><ThemeProvider theme={theme}><Header/></ThemeProvider></Grid>
 
+                <Grid item xs={12} container spacing={3}>
+                    <Grid item xs={12} container justify="center" className="margin" alignItems="center">
+                        {!adminMode ? (<ChangePagination/>) : (<List>
+                            <Button variant="contained" color="primary"
+                                    onClick={() => dispatcher(showCompanies())}>{t("companies")}
+                            </Button>
+                        </List>)}
+                    </Grid>
 
-            <Grid item xs={12} container spacing={3}>
-                <Grid item xs={12} container justify="center" className="margin" alignItems="center">
-                    {!adminMode ? (<ChangePagination/>) : (<List>
-                        <Button variant="contained" color="primary"
-                                onClick={() => dispatcher(showCompanies())}>{t("companies")}
-                        </Button>
+                    {update.boolean ?
+                        <AddCard computer={update.computer}/> : null}
 
+                    {add ? <AddCard/> : null}
 
-                    </List>)}
+                    <Grid item xs={12} container justify="center">
+                        {open ? <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
+                                <Grid item xs={7} md={7} lg={9} className="card_container"><Router/></Grid></Fragment>
+                            : <Grid item xs={11} className="card_container"><Router/></Grid>}
+
+                    </Grid>
                 </Grid>
 
-                {update.boolean ?
-                    <AddCard computer={update.computer}/> : null}
-
-                {add ? <AddCard/> : null}
-
-                <Grid item xs={12} container justify="center">
-                    {open ? <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
-                            <Grid item xs={7} md={7} lg={9} className="card_container"><Router/></Grid></Fragment>
-                        : <Grid item xs={11} className="card_container"><Router/></Grid>}
-
-                </Grid>
-            </Grid>
-
-            {!adminMode ?
-                (<Grid item xs={12} container justify="center">
-                <footer className="footer">
-                    <PageSelector/>
-                </footer>
-                </Grid>) : null}
-            <PersistentDrawerLeft/>
-        </Grid>
-    )
+                {!adminMode ?
+                    (<Grid item xs={12} container justify="center">
+                        <footer className="footer">
+                            <PageSelector/>
+                        </footer>
+                    </Grid>) : null}
+                <PersistentDrawerLeft/>
+            </Grid>) :
+        (<FormLogin/>)
 }
 
 export default App;

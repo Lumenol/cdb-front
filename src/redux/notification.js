@@ -56,7 +56,6 @@ export default (state = [], action) => {
                     ...action.notification,
                 },
             ];
-
         case CLEAR_NOTIFICATIONS:
             return [];
 
