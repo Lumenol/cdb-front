@@ -33,11 +33,11 @@ class DenseAppBar extends Component {
         const {t, isOpen, open, adminMode, switchAdmin, switchUser} = this.props;
 
         if (adminMode) {
-           button = <Button variant="contained" color="primary" onClick={switchUser}>USER
+           button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
             </Button>
         }
         else{
-         button = <Button variant="contained" color="primary" onClick={switchAdmin}>ADMIN
+         button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
             </Button>
         }
 
