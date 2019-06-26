@@ -22,32 +22,20 @@ class PageSelector extends Component {
     state = {
         maxStep: this.props.maxPage < 6 ? this.props.maxPage - 1 : 6,
         midStep: this.props.maxStep / 2,
-        displayControl: false
     };
 
-    onMouseOver = () => {
-        this.setState({
-            displayControl: true
-        })
-    };
 
-    onMouseOut = () => {
-        this.setState({
-            displayControl: false
-        })
-    };
 
     render() {
         const {classes, currentPage, minPage, maxPage, next, previous} = this.props;
-        const {displayControl} = this.state;
         const maxStep = maxPage < 7 ? maxPage - 1 : 6;
         const midStep = maxStep / 2;
 
         return (
-            <Grid container direction="row" onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+            <Grid container direction="row">
 
                 <Grid item container justify="center">
-                    {displayControl && maxPage > 7 ?
+                    {maxPage > 7 ?
                         <Typography color="secondary">
                             {currentPage} / {maxPage}
                         </Typography> : null}
