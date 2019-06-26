@@ -21,6 +21,8 @@ import addButtonReducer from './redux/addButton';
 import companiesReducer, {getCompanies} from "./redux/companies";
 import routerReducer from './redux/router';
 import updateButtonReducer from './redux/updateButton';
+import modeAdminActivateReducer from './redux/modeAdminIsActivate';
+
 
 const computers = {computers: computerReducer};
 const language = {language: languageReducer};
@@ -31,7 +33,9 @@ const addButton = {addButton: addButtonReducer};
 const companies = {companies: companiesReducer};
 const router = {router: routerReducer};
 const updateButton = {updateButton: updateButtonReducer};
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...updateButton});
+const admin = {adminMode: modeAdminActivateReducer};
+
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin, ...updateButton});
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

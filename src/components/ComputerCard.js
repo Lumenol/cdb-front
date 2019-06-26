@@ -9,7 +9,7 @@ import {faKeyboard, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import '../css/ComputerCard.css';
 import {Grid} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
-import {selectComputer, unselectComputer, updateComputer} from "../redux/computers";
+import {deleteAComputer, selectComputer, unselectComputer, updateComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectAddButton, selectSelectedComputers, selectUpdateButton} from "../redux/selectors";
 import {selectCompanyImg} from "../utils/selectCompanyImage";
@@ -35,6 +35,7 @@ class ComputerCard extends Component {
     render() {
         const {name, manufacturer, introduced, discontinued} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
+
         return (
 
             <Fragment>
@@ -67,7 +68,7 @@ class ComputerCard extends Component {
                         <Grid item xs={2}>
                             <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
                                 <Grid item xs={1}>
-                                    <Fab size="small" color="primary" aria-label="Delete">
+                                    <Fab size="small" color="primary" aria-label="Delete" onClick={this.props.delete}>
                                         <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
                                     </Fab>
                                 </Grid>
@@ -103,6 +104,7 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(unselectComputer());
             dispatch(updateButton(false, null))
         },
+        delete: () => dispatch(deleteAComputer(props.computer.id)),
         update: (name, inDate, outDate, companyId) =>
             dispatch(updateComputer(props.computer.id, name, inDate, outDate, companyId)),
         toggleUpdateButton: (boolean, computer) => dispatch(updateButton(boolean, computer))

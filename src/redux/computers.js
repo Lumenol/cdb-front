@@ -1,4 +1,4 @@
-import {countComputers, createComputer, getAll, updateComputer as upComputer} from "../api/computers";
+import {countComputers, createComputer, deleteComputer, getAll, updateComputer as upComputer} from "../api/computers";
 import {
     selectComputerDirection,
     selectComputerOrderBy,
@@ -81,6 +81,18 @@ export function selectComputer(id) {
     return {
         type: SELECT_COMPUTER,
         id: id
+    }
+}
+
+export function deleteAComputer(id) {
+    return async function (dispatch) {
+        try {
+            await deleteComputer(id);
+            dispatch(getComputers());
+            dispatch(getCountComputers());
+        } catch (e) {
+            dispatch(setError(e));
+        }
     }
 }
 
