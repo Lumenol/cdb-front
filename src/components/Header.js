@@ -70,13 +70,17 @@ class DenseAppBar extends Component {
                                 {button}
                             </Grid>
 
+
                             <Grid item xs={2} container alignItems="center" justify="flex-end">
+                                {!adminMode &&
                                 <Fab size="small" color="primary" aria-label="Delete"
                                      title={t("header.hover.addButton")}
                                      onClick={this.toggleAdd}>
                                     <FontAwesomeIcon icon={faPlus}/>
                                 </Fab>
+                                }
                             </Grid>
+
 
                             <Grid item xs={1}>
                                 <Typography variant="h6" align="center" color="secondary" fontFamily="Permanent Marker">
