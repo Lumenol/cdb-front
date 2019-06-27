@@ -6,6 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
 import {
     selectAddButton,
+    selectLanguage,
     selectMenuIsOpen,
     selectUpdateButton,
     selectUserBecomeAnAdmin,
@@ -26,6 +27,10 @@ import {addButton} from "../redux/addButton";
 import Button from "@material-ui/core/Button";
 import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 import {showCompanies, showComputers} from "../redux/router";
+import Flag from 'react-world-flags'
+import {setLanguage} from "../redux/i18n";
+import FormControl from "@material-ui/core/FormControl";
+import NativeSelect from "@material-ui/core/NativeSelect";
 
 
 class DenseAppBar extends Component {
@@ -62,7 +67,7 @@ class DenseAppBar extends Component {
 
                             <Grid item xs={8}>
                                 <Typography variant="h3" align="center" color="secondary" fontFamily="Permanent Marker">
-                                    <Box fontFamily="Permanent Marker"> {t("title.title")}</Box>
+                                    <Box fontFamily="Permanent Marker">Computer Database</Box>
                                 </Typography>
                             </Grid>
 
@@ -93,6 +98,23 @@ class DenseAppBar extends Component {
                                 <DisconnectButton/>
                             </Grid>
 
+                            <Grid item xs={1}>
+                                {
+                                    this.props.language === 'fr' ?
+                                        <Flag code="fr" height='16'/> :
+                                        <Flag code="gb" height='16'/>
+                                }
+                            </Grid>
+
+                            <FormControl>
+                                <NativeSelect
+                                    onChange={(event) => this.props.changeLanguage(event.target.value)}
+                                >
+                                    <option value="fr">fr</option>
+                                    <option value="en">en</option>
+                                </NativeSelect>
+                            </FormControl>
+
 
                         </Toolbar>
                     </Paper>
@@ -110,13 +132,17 @@ function mapStateToProps(state) {
         addButton: selectAddButton(state),
         updateButton: selectUpdateButton(state),
         adminMode: selectUserBecomeAnAdmin(state),
-        userName: selectUsername(state)
+        userName: selectUsername(state),
+        language: selectLanguage(state)
     }
 }
 
 
 function mapDispatchToProps(dispatch) {
     return {
+        changeLanguage: (lang) => {
+            dispatch(setLanguage(lang))
+        },
         open: () => {
             dispatch(openMenu());
         },
