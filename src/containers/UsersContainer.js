@@ -26,8 +26,6 @@ import Switch from "@material-ui/core/Switch";
 class UsersContainer extends Component {
     onChange = (event) => {
         this.props.editUser(event.target.value, event.target.checked ? ["ADMIN"] : ["USER"]);
-        console.log(event.target.value + " " + event.target.checked);
-
     };
 
     render() {
