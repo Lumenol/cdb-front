@@ -19,6 +19,25 @@ import {updateButton} from "../redux/updateButton";
 
 class AddCard extends Component {
 
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef()
+    }
+
+    componentDidMount = () => this.handleScroll();
+
+    componentDidUpdate = () => this.handleScroll();
+
+    handleScroll = () => {
+        const {index, selected} = this.props;
+        if (index === selected) {
+            setTimeout(() => {
+                this.myRef.current.scrollIntoView({behavior: 'smooth'})
+            }, 500)
+        }
+    };
+
+
     state = {
         id: this.props.computer ? this.props.computer.id : null,
         name: this.props.computer ? this.props.computer.name : null,
@@ -121,13 +140,11 @@ class AddCard extends Component {
         const companies = this.props.companies || [];
         const rendering = (<Grid item xs={4} container direction="row">
             <Card className="addCard">
-
                 <CardMedia
                     className="media"
                     image={selectCompanyImg(this.state.company.name)}
                     title="Brand"
                 />
-
                 <form>
                     <CardContent>
                         <TextField
@@ -198,8 +215,10 @@ class AddCard extends Component {
 
         return (
             <Fragment>
+                <div ref={this.myRef}></div>
                 {this.props.open ?
-                    <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
+                    <Fragment>
+                        <Grid item xs={4} md={4} lg={2}></Grid>
                         <Grid item xs={7} md={7} lg={9} container justify="center">
                             {rendering}
                         </Grid></Fragment> :
