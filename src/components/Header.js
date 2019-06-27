@@ -15,7 +15,6 @@ import {
 } from "../redux/selectors";
 import {connect} from "react-redux";
 import {closeMenu, openMenu} from "../redux/menuIsOpen";
-import Paper from "@material-ui/core/Paper";
 import DisconnectButton from "./DisconectButton";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -32,8 +31,6 @@ import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 import AdminBar from "./AdminBar";
 import Flag from 'react-world-flags'
 import {setLanguage} from "../redux/i18n";
-import FormControl from "@material-ui/core/FormControl";
-import NativeSelect from "@material-ui/core/NativeSelect";
 import {updateButton} from "../redux/updateButton";
 
 
@@ -71,78 +68,59 @@ class DenseAppBar extends Component {
         return (
             <ThemeProvider theme={theme}>
                 <Grid container direction="column">
-                    <Paper position="static">
-                        <div className={style}>
-                            <Toolbar>
+                    <div className={style}>
+                        <Toolbar>
+                            {adminMode ? null :
+                                <Grid item xs={2} md={3} lg={6}><IconButton aria-label="Menu" onClick={open}>
+                                    <MenuIcon/>
+                                </IconButton></Grid>}
 
+                            {adminMode ?
+                                <Grid item item xs={4} md={3} lg={6}><AdminBar className={darkMode}/></Grid> : null}
 
-                                {adminMode ? null :
-                                    <Grid item xs={2} md={4} lg={6}><IconButton aria-label="Menu" onClick={open}>
-                                        <MenuIcon/>
-                                    </IconButton></Grid>}
-
-                                {adminMode ?
-                                    <Grid item item xs={2} md={4} lg={6}><AdminBar className={darkMode}/></Grid> : null}
-
-                                <Grid item xs={2} md={6} lg={8}>
-                                    <ThemeProvider theme={whiteTheme}><Typography variant="h4"
-                                                                                  color="primary"
-                                                                                  fontFamily="Permanent Marker">
+                            <Grid item xs={5} md={5} lg={8}>
+                                <ThemeProvider theme={whiteTheme}>
+                                    <Typography variant="h4" color="primary" fontFamily="Permanent Marker">
                                         <Box fontFamily="Permanent Marker"> {t("title.title")}</Box>
                                     </Typography></ThemeProvider>
+                            </Grid>
+
+                            <Grid item xs={5} md={4} lg={3} container justify="flex-end">
+
+                                <Grid item xs={2} container alignItems="center">
+                                    <Typography variant="h6" align="center" color="secondary"
+                                                fontFamily="Permanent Marker">
+                                        <Box>{userName}</Box>
+                                    </Typography>
                                 </Grid>
 
-                                <Grid item xs={2} md={2} lg={2} container>
+                                {adminMode ? null : <Grid item xs={2} container alignItems="center">
+                                    {!adminMode &&
+                                    <Fab size="small" color="primary" aria-label="Add"
+                                         title={t("header.hover.addButton")}
+                                         onClick={this.toggleAdd}>
+                                        <FontAwesomeIcon icon={faPlus}/>
+                                    </Fab>}
+                                </Grid>}
 
-                                    <Grid item xs={3} container alignItems="center">
-                                        <Typography variant="h6" align="center" color="secondary"
-                                                    fontFamily="Permanent Marker">
-                                            <Box>{userName}</Box>
-                                        </Typography>
-                                    </Grid>
-
-
-                                    {adminMode ? null : <Grid item xs={3} container alignItems="center">
-                                        {!adminMode &&
-                                        <Fab size="small" color="primary" aria-label="Add"
-                                             title={t("header.hover.addButton")}
-                                             onClick={this.toggleAdd}>
-                                            <FontAwesomeIcon icon={faPlus}/>
-                                        </Fab>}
-                                    </Grid>}
-
-                                    <Grid item xs={3} container alignItems="center">
-                                        {button}
-                                    </Grid>
-
-                                    <Grid item xs={3} container alignItems="center">
-                                        <DisconnectButton/>
-                                    </Grid>
-
+                                <Grid item xs={2} container alignItems="center">
+                                    {button}
                                 </Grid>
 
-                                <Grid item xs={1}>
+                                <Grid item xs={2} container alignItems="center">
                                     {
                                         this.props.language === 'fr' ?
                                             <Flag code="fr" height='16'/> :
                                             <Flag code="gb" height='16'/>
                                     }
                                 </Grid>
+                                <Grid item xs={2} container alignItems="center">
+                                    <DisconnectButton/>
+                                </Grid>
 
-                                <FormControl>
-                                    <NativeSelect
-                                        onChange={(event) => this.props.changeLanguage(event.target.value)}
-                                    >
-                                        <option value="fr">fr</option>
-                                        <option value="en">en</option>
-                                    </NativeSelect>
-                                </FormControl>
-
-
-                            </Toolbar>
-                        </div>
-                    </Paper>
-
+                            </Grid>
+                        </Toolbar>
+                    </div>
                 </Grid>
             </ThemeProvider>
         )
