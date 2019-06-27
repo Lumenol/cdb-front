@@ -23,9 +23,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
-import {setShow, SHOW} from "../redux/router";
 import Button from "@material-ui/core/Button";
 import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
+import {showCompanies, showComputers} from "../redux/router";
 
 
 class DenseAppBar extends Component {
@@ -125,11 +125,11 @@ function mapDispatchToProps(dispatch) {
         },
         switchAdmin: () => {
             dispatch(closeMenu());
-            dispatch(setShow(SHOW.COMPANIES));
+            dispatch(showCompanies());
             dispatch(switchModeAdmin());
         },
         switchUser: () => {
-            dispatch(setShow(SHOW.COMPUTERS));
+            dispatch(showComputers());
             dispatch(switchModeUser());
         },
     };

@@ -119,3 +119,7 @@ function selectTokenIsNotExpired(state) {
 }
 
 export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + (count % size > 0 ? 1 : 0));
+
+export function selectNotifications(state) {
+    return state.notifications;
+}
