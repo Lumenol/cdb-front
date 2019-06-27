@@ -68,6 +68,18 @@ class FormLogin extends Component {
         })
     };
 
+    handleKeyPress = (event) => {
+        if (this.fieldOk) {
+            if (event.key === 'Enter') {
+                console.log('enter press here! ')
+            }
+        }
+    };
+
+    fieldOk = () => {
+        return (this.state.login.trim() !== "" && this.state.password !== "")
+    };
+
     render() {
         const {classes, t} = this.props;
 
@@ -82,6 +94,7 @@ class FormLogin extends Component {
                         margin="normal"
                         value={this.state.login}
                         onChange={this.onInputOnLogin}
+                        onKeyPress={this.handleKeyPress}
                     />
                     <TextField
                         id="standard-password-input"
@@ -92,6 +105,7 @@ class FormLogin extends Component {
                         margin="normal"
                         value={this.state.password}
                         onChange={this.onInputOnPassword}
+                        onKeyPress={this.handleKeyPress}
                     />
                     {
                         this.props.loginError &&
@@ -101,7 +115,7 @@ class FormLogin extends Component {
                     }
                     <Button variant="contained" size="medium" color="primary" className={classes.margin}
                             onClick={this.onClickConnexion}
-                            disabled={this.state.login.trim() === "" || this.state.password === ""}>
+                            disabled={!this.fieldOk()}>
                         {t("connection.connection")}
                     </Button>
                 </FormControl>
