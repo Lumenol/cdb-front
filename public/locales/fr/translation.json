@@ -9,6 +9,10 @@
   "company": {
     "name": "Nom"
   },
+  "user": {
+    "login": "Identifiant",
+    "role": "Administrateur"
+  },
   "title": {
     "title": "Base de données des ordinateurs",
     "orderBy": "Trier par",
@@ -17,11 +21,12 @@
   "companies": "Fabriquants",
   "connection": {
     "login": "Identifiant",
-    "password": "Login",
+    "password": "Mot de passe",
     "connection": "Se connecter",
     "error": "Login ou mot de passe incorrect"
   },
   "computers": "Ordinateurs",
+  "users": "Utilisateurs",
   "table": {
     "body": {
       "emptyDataSourceMessage": "Chargement...",

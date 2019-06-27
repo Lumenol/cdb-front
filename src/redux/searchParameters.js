@@ -1,4 +1,5 @@
 import {selectCurrentPage, selectMaxPage, selectMinPage, selectPageSize} from "./selectors";
+import {getComputers, getCountComputers} from "./computers";
 
 export const ORDER_BY = {
     NAME: "name",
@@ -11,7 +12,6 @@ export const DIRECTION = {
     ASC: "asc",
     DESC: "desc"
 };
-
 
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_PAGE_SIZE = "SET_PAGE_SIZE";
@@ -29,13 +29,18 @@ export function setPageSize(size) {
             const currentPage = selectCurrentPage(state);
             if (currentPage > maxPage) {
                 dispatch(setCurrentPage(maxPage));
+            } else {
+                dispatch(getComputers());
             }
         }
     }
 }
 
 function setCurrentPage(page) {
-    return {type: SET_CURRENT_PAGE, page: page};
+    return function (dispatch) {
+        dispatch({type: SET_CURRENT_PAGE, page: page});
+        dispatch(getComputers());
+    };
 }
 
 export function previousPage() {
@@ -61,25 +66,44 @@ export function nextPage() {
 }
 
 export function setOrderByComputer(orderBy) {
-    return {
-        type: SET_ORDERBY_COMPUTER,
-        orderBy: orderBy
-    }
+    return function (dispatch) {
+        dispatch({
+            type: SET_ORDERBY_COMPUTER,
+            orderBy: orderBy
+        });
+        dispatch(getComputers());
+    };
 }
 
 
 export function setDirectionComputer(direction) {
-    return {
-        type: SET_DIRECTION_COMPUTER,
-        direction: direction
-    }
+    return function (dispatch) {
+        dispatch({
+            type: SET_DIRECTION_COMPUTER,
+            direction: direction
+        });
+        dispatch(getComputers());
+    };
 }
 
+let searchTimer;
+const TIMEOUT = 300;
+
 export function setSearchComputer(search) {
-    return {
-        type: SET_SEARCH_COMPUTER,
-        search: search
-    }
+    return function (dispatch) {
+        dispatch({
+            type: SET_SEARCH_COMPUTER,
+            search: search
+        });
+        if (searchTimer) {
+            clearTimeout(searchTimer);
+        }
+        const handler = () => {
+            dispatch(getComputers());
+            dispatch(getCountComputers());
+        };
+        searchTimer = setTimeout(handler, TIMEOUT);
+    };
 }
 
 export default function reducer(state = {

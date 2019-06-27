@@ -19,6 +19,25 @@ import {updateButton} from "../redux/updateButton";
 
 class AddCard extends Component {
 
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef()
+    }
+
+    componentDidMount = () => this.handleScroll();
+
+    componentDidUpdate = () => this.handleScroll();
+
+    handleScroll = () => {
+        const {index, selected} = this.props;
+        if (index === selected) {
+            setTimeout(() => {
+                this.myRef.current.scrollIntoView({behavior: 'smooth'})
+            }, 500)
+        }
+    };
+
+
     state = {
         id: this.props.computer ? this.props.computer.id : null,
         name: this.props.computer ? this.props.computer.name : null,
@@ -118,88 +137,89 @@ class AddCard extends Component {
     };
 
     render() {
-        const companies = this.props.companies;
-        const rendering = (<Grid item xs={4} container direction="row">
-            <Card className="addCard">
+        const companies = this.props.companies || [];
+        const rendering = (
+            <Grid item xs={4} container direction="row">
+                <Card className="addCard">
+                    <CardMedia
+                        className="media"
+                        image={selectCompanyImg(this.state.company.name)}
+                        title="Brand"
+                    />
+                    <form>
+                        <CardContent>
+                            <TextField
+                                id="standard-full-width"
+                                style={{margin: 5}}
+                                label="Computer name"
+                                placeholder={this.state.name}
+                                value={this.state.name || ""}
+                                fullWidth
+                                margin="normal"
+                                onChange={this.onNameChange}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            {this.state.name === "" || this.state.errorMsg.name ?
+                                <h5>{this.state.errorMsg.name} </h5> : null}
+                        </CardContent>
 
-                <CardMedia
-                    className="media"
-                    image={selectCompanyImg(this.state.company.name)}
-                    title="Brand"
-                />
+                        <CardContent>
+                            <TextField
+                                id="date"
+                                label="Introduced date"
+                                type="date"
+                                onChange={this.onInDateChange}
+                                defaultValue={this.state.introductionDate}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            {this.state.errorMsg.inDate ? <h5>{this.state.errorMsg.inDate} </h5> : null}
+                        </CardContent>
 
-                <form>
-                    <CardContent>
-                        <TextField
-                            id="standard-full-width"
-                            style={{margin: 5}}
-                            label="Computer name"
-                            placeholder={this.state.name}
-                            value={this.state.name || ""}
-                            fullWidth
-                            margin="normal"
-                            onChange={this.onNameChange}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        {this.state.name === "" || this.state.errorMsg.name ?
-                            <h5>{this.state.errorMsg.name} </h5> : null}
-                    </CardContent>
+                        <CardContent>
+                            <TextField
+                                id="date"
+                                label="Discontinued date"
+                                onChange={this.onOutDateChange}
+                                type="date"
+                                defaultValue={this.state.discontinuedDate}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            {this.state.errorMsg.outDate ? <h5>{this.state.errorMsg.outDate} </h5> : null}
+                        </CardContent>
 
-                    <CardContent>
-                        <TextField
-                            id="date"
-                            label="Introduced date"
-                            type="date"
-                            onChange={this.onInDateChange}
-                            defaultValue={this.state.introductionDate}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        {this.state.errorMsg.inDate ? <h5>{this.state.errorMsg.inDate} </h5> : null}
-                    </CardContent>
+                        <CardContent>
+                            <InputLabel htmlFor="age-simple">Company</InputLabel>
+                            <Select
+                                value={this.state.company}
+                                onChange={this.onCompanyChange}
+                            >
+                                {companies.map(e => <MenuItem value={e} key={e.id}>{e.name}</MenuItem>)}
+                            </Select>
+                            {this.state.errorMsg.company ? <h5>{this.state.errorMsg.company} </h5> : null}
+                        </CardContent>
 
-                    <CardContent>
-                        <TextField
-                            id="date"
-                            label="Discontinued date"
-                            onChange={this.onOutDateChange}
-                            type="date"
-                            defaultValue={this.state.discontinuedDate}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        {this.state.errorMsg.outDate ? <h5>{this.state.errorMsg.outDate} </h5> : null}
-                    </CardContent>
+                        <CardContent>
+                            <Button variant="contained" color="primary" onClick={this.submit}>
+                                <Typography>{this.state.mode}</Typography>
+                            </Button>
+                        </CardContent>
+                    </form>
 
-                    <CardContent>
-                        <InputLabel htmlFor="age-simple">Company</InputLabel>
-                        <Select
-                            value={this.state.company}
-                            onChange={this.onCompanyChange}
-                        >
-                            {companies.map(e => <MenuItem value={e} key={e.id}>{e.name}</MenuItem>)}
-                        </Select>
-                        {this.state.errorMsg.company ? <h5>{this.state.errorMsg.company} </h5> : null}
-                    </CardContent>
-
-                    <CardContent>
-                        <Button variant="contained" color="primary" onClick={this.submit}>
-                            <Typography>{this.state.mode}</Typography>
-                        </Button>
-                    </CardContent>
-                </form>
-
-            </Card>
-        </Grid>);
+                </Card>
+            </Grid>);
 
         return (
             <Fragment>
+                <div ref={this.myRef}></div>
                 {this.props.open ?
-                    <Fragment><Grid item xs={4} md={4} lg={2}></Grid>
+                    <Fragment>
+                        <Grid item xs={4} md={4} lg={2}></Grid>
                         <Grid item xs={7} md={7} lg={9} container justify="center">
                             {rendering}
                         </Grid></Fragment> :

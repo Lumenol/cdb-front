@@ -40,6 +40,15 @@ export async function countCompanies() {
     }
 }
 
+export async function createCompany(createCompanyDTO) {
+    try {
+        await axios.post(COMPANIES_URL, createCompanyDTO);
+    } catch (e) {
+        console.error(e);
+        throw(e);
+    }
+}
+
 export async function existCompanyById(id) {
     try {
         const result = await axios.get(COMPANIES_URL + `/exist/${id}`);

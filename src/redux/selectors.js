@@ -17,6 +17,8 @@ export function selectComputersError(state) {
 
 export const selectCompanies = state => state.companies.companies;
 
+export const selectUsers = state => state.users.users;
+
 export const selectAddButton = state => state.addButton;
 
 export const selectUpdateButton = state => state.updateButton;

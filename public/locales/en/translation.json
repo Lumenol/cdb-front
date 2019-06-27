@@ -9,6 +9,10 @@
   "company": {
     "name": "Name"
   },
+  "user": {
+    "login": "Login",
+    "role": "Admin"
+  },
   "title": {
     "title": "Computer Database",
     "orderBy": "Order by",
@@ -22,6 +26,7 @@
     "error": "Wrong username or password"
   },
   "computers": "Computers",
+  "users": "Users",
   "table": {
     "body": {
       "emptyDataSourceMessage": "Loading...",

@@ -23,9 +23,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
-import {setShow, SHOW} from "../redux/router";
 import Button from "@material-ui/core/Button";
 import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
+import {showCompanies, showComputers} from "../redux/router";
 
 
 class DenseAppBar extends Component {
@@ -72,13 +72,17 @@ class DenseAppBar extends Component {
                                 {button}
                             </Grid>
 
+
                             <Grid item xs={2} container alignItems="center" justify="flex-end">
+                                {!adminMode &&
                                 <Fab size="small" color="primary" aria-label="Delete"
                                      title={t("header.hover.addButton")}
                                      onClick={this.toggleAdd}>
                                     <FontAwesomeIcon icon={faPlus}/>
                                 </Fab>
+                                }
                             </Grid>
+
 
                             <Grid item xs={1}>
                                 <Typography variant="h6" align="center" color="secondary" fontFamily="Permanent Marker">
@@ -124,11 +128,11 @@ function mapDispatchToProps(dispatch) {
         },
         switchAdmin: () => {
             dispatch(closeMenu());
-            dispatch(setShow(SHOW.COMPANIES));
+            dispatch(showCompanies());
             dispatch(switchModeAdmin());
         },
         switchUser: () => {
-            dispatch(setShow(SHOW.COMPUTERS));
+            dispatch(showComputers());
             dispatch(switchModeUser());
         }
     };
