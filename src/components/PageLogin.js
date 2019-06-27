@@ -107,7 +107,7 @@ class PageLogin extends Component {
                         <Avatar className={classes.avatar}>
                             <LockOutlinedIcon/>
                         </Avatar>
-                        <form className={classes.form} noValidate>
+                        <form className={classes.form} noValidate onSubmit={() => false}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
@@ -136,7 +136,7 @@ class PageLogin extends Component {
                             />
 
                             <Button
-                                type="submit"
+                                type="button"
                                 fullWidth
                                 variant="contained"
                                 color="primary"
