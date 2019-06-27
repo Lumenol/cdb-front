@@ -30,6 +30,15 @@ export async function deleteCompanies(id) {
     }
 }
 
+export async function updateCompany(companyDTO) {
+    try {
+        await axios.put(COMPANIES_URL, companyDTO);
+    } catch (e) {
+        console.error(e);
+        throw(e);
+    }
+}
+
 export async function countCompanies() {
     try {
         const result = await axios.get(COMPANIES_URL + `/count`);

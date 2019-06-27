@@ -18,16 +18,16 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import {addCompany, deleteCompany} from "../redux/companies";
+import {addCompany, deleteCompany, editCompany} from "../redux/companies";
 import {withTranslation} from "react-i18next";
 
 
 class CompaniesContainer extends Component {
 
     render() {
-        const {t, remove, companies, create, i18n} = this.props;
+        const {t, remove, companies, create, edit, i18n} = this.props;
         const columns = [
-            {title: 'id', field: 'id'},
+            {title: 'id', field: 'id', editable: 'never'},
             {title: t("company.name"), field: 'name'}
         ];
 
@@ -71,7 +71,12 @@ class CompaniesContainer extends Component {
                     },
                     onRowAdd: async newData => {
                         create(newData.name)
+                    },
+                    onRowUpdate: async (newData, oldData) => {
+                        edit(oldData.id, newData.name);
                     }
+
+
                 }}
                 localization={i18n.store.data[i18n.language].translation.table}
             />
@@ -82,7 +87,8 @@ class CompaniesContainer extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         remove: (id) => dispatch(deleteCompany(id)),
-        create: (name) => dispatch(addCompany(name))
+        create: (name) => dispatch(addCompany(name)),
+        edit: (id, newName) => dispatch(editCompany(id, newName))
     }
 };
 

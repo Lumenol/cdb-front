@@ -29,7 +29,7 @@
   "users": "Utilisateurs",
   "table": {
     "body": {
-      "emptyDataSourceMessage": "Chargement...",
+      "emptyDataSourceMessage": "Pas de résultats",
       "deleteTooltip": "Supprimer",
       "editRow": {
         "cancelTooltip": "Annuler",
