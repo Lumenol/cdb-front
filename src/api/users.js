@@ -4,7 +4,6 @@ import {USERS_URL} from "../configuration/constants";
 export async function getUsers() {
     try {
         const result = await axios.get(USERS_URL);
-        console.log(result);
         return result.data;
     } catch (e) {
         console.error(e);
