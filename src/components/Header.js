@@ -32,8 +32,6 @@ import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 import AdminBar from "./AdminBar";
 import Flag from 'react-world-flags'
 import {setLanguage} from "../redux/i18n";
-import FormControl from "@material-ui/core/FormControl";
-import NativeSelect from "@material-ui/core/NativeSelect";
 import {updateButton} from "../redux/updateButton";
 
 
@@ -49,6 +47,18 @@ class DenseAppBar extends Component {
         this.props.switchAdmin();
         this.props.update(false, null);
         this.props.add(false);
+    };
+
+    switchLanguage = () => {
+        const l = this.props.language;
+        switch (l) {
+            case 'fr':
+                this.props.changeLanguage('en');
+                break;
+            case 'en':
+                this.props.changeLanguage('fr')
+
+        }
     };
 
     render() {
@@ -121,7 +131,7 @@ class DenseAppBar extends Component {
 
                                 </Grid>
 
-                                <Grid item xs={1}>
+                                <Grid item xs={1} onClick={this.switchLanguage}>
                                     {
                                         this.props.language === 'fr' ?
                                             <Flag code="fr" height='16'/> :
@@ -129,25 +139,16 @@ class DenseAppBar extends Component {
                                     }
                                 </Grid>
 
-                                <FormControl>
-                                    <NativeSelect
-                                        onChange={(event) => this.props.changeLanguage(event.target.value)}
-                                    >
-                                        <option value="fr">fr</option>
-                                        <option value="en">en</option>
-                                    </NativeSelect>
-                                </FormControl>
-
-
                             </Toolbar>
                         </div>
                     </Paper>
 
                 </Grid>
             </ThemeProvider>
-        )
-            ;
+        );
     }
+
+
 }
 
 function mapStateToProps(state) {
