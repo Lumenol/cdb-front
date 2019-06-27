@@ -63,7 +63,7 @@ class CompaniesContainer extends Component {
                     )
                 }}
                 icons={tableIcons}
-                title={t("companies")}
+                title=""
                 columns={columns}
                 data={companies}
                 editable={{
