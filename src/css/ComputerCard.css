@@ -35,3 +35,11 @@
 h5 {
     color: red;
 }
+
+.darkMode {
+    background-color: #282c34;
+}
+
+.orangeMode {
+    background-color: #FF9800;
+}

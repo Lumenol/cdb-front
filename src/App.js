@@ -15,9 +15,6 @@ import {
     selectUpdateButton,
     selectUserBecomeAnAdmin
 } from "./redux/selectors";
-
-import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
-import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
 import Button from "@material-ui/core/Button";
@@ -87,7 +84,7 @@ function App() {
     return (
         <Grid container direction="row" spacing={2}>
 
-            <Grid item xs={12}><ThemeProvider theme={theme}><Header/></ThemeProvider></Grid>
+            <Grid item xs={12}><Header/></Grid>
 
 
             <Grid item xs={12} container spacing={3}>

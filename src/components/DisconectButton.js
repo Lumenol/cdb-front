@@ -4,8 +4,6 @@ import {connect} from "react-redux";
 import {logout} from "../redux/connection";
 import {selectIsConnected} from "../redux/selectors";
 import PropTypes from "prop-types";
-import theme from "../paletteBis";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import {withTranslation} from "react-i18next";
 
 class DisconnectButton extends Component {
@@ -21,13 +19,12 @@ class DisconnectButton extends Component {
 
     render() {
         const {isConnected, t} = this.props;
-        theme.palette.primary.main = "#FF9800";
         return (
-            <ThemeProvider theme={theme}><Switch title={t("header.hover.disconnectButton")}
-                                                 checked={isConnected}
-                                                 onChange={this.onChange}
-                                                 color="primary">
-            </Switch></ThemeProvider>
+            <Switch title={t("header.hover.disconnectButton")}
+                    checked={isConnected}
+                    onChange={this.onChange}
+                    color="secondary">
+            </Switch>
         )
     }
 
