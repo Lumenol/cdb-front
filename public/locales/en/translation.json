@@ -37,6 +37,10 @@
         "saveTooltip": "Yes"
       }
     },
+    ,
+    "header": {
+      "actions": "Action"
+    },
     "pagination": {
       "labelRowsSelect": "Rows per page",
       "nextTooltip": "Next page",

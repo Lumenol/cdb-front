@@ -46,6 +46,9 @@
     },
     "toolbar": {
       "searchPlaceholder": "Rechercher"
+    },
+    "header": {
+      "actions": ""
     }
   },
   "header": {

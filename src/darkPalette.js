@@ -2,17 +2,14 @@ import {createMuiTheme} from '@material-ui/core/styles';
 
 export default createMuiTheme({
     palette: {
-        primary: {main: '#FF9800'},
-        secondary: {
-            main: '#212121',
-            second: '#FFFFFF'
-        },
+        primary: {main: '#282c34'},
+        secondary: {main: '#ffffff'},
+        background: {main: '#282c34'},
     },
 
     typography: {
         fontFamily: [
-            'Viga',
-            'Permanent Marker'
+            'Viga'
         ].join(','),
         fontWeightMedium: 500,
         body1: {fontWeight: 500,},
