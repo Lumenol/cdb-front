@@ -75,8 +75,6 @@ class UsersContainer extends Component {
                     onRowDelete: async oldData => {
                         remove(oldData.id)
                     },
-                    onRowAdd: async newData => {
-                    }
                 }}
                 localization={i18n.store.data[i18n.language].translation.table}
             />
