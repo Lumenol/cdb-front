@@ -1,18 +1,16 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment} from 'react';
 import './App.css';
 import PageSelector from "./components/PageSelector";
 import Header from "./components/Header";
 import Grid from "@material-ui/core/Grid";
 import PersistentDrawerLeft from "./components/Menu";
 import ChangePagination from "./components/ChangePagination";
-import {useDispatch, useSelector, useStore} from "react-redux";
-import {getComputers, getCountComputers} from "./redux/computers";
+import {useDispatch, useSelector} from "react-redux";
 import {
     selectAddButton,
     selectIsConnected,
     selectMenuIsOpen,
     selectNotifications,
-    selectSearchParameters,
     selectUpdateButton,
     selectUserBecomeAnAdmin
 } from "./redux/selectors";
@@ -27,51 +25,6 @@ import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import {showCompanies, showUsers} from "./redux/router";
 import {useTranslation} from "react-i18next";
-
-function updateComputerIfSearchParametersHasChangeOrLogin() {
-    const TIMEOUT = 300;
-
-    let oldSearchParameters;
-    let computerTimer;
-    let countTimer;
-
-    return function (store) {
-        const computerHandler = () => {
-            store.dispatch(getComputers())
-        };
-        const countHandler = () => {
-            store.dispatch(getCountComputers())
-        };
-
-        function update() {
-            const state = store.getState();
-            const searchParameters = selectSearchParameters(state);
-            const isConnected = selectIsConnected(state);
-            if (isConnected) {
-                if (searchParameters !== oldSearchParameters) {
-                    if (!oldSearchParameters || searchParameters.search !== oldSearchParameters.search) {
-                        if (countTimer) {
-                            clearTimeout(countTimer);
-                        }
-                        countTimer = setTimeout(countHandler, TIMEOUT);
-                    }
-                    if (computerTimer) {
-                        clearTimeout(computerTimer);
-                    }
-                    computerTimer = setTimeout(computerHandler, TIMEOUT);
-                    oldSearchParameters = searchParameters;
-                }
-            } else {
-                oldSearchParameters = undefined;
-            }
-        }
-
-        return store.subscribe(update);
-    }
-}
-
-const refresh = updateComputerIfSearchParametersHasChangeOrLogin();
-
 
 function useNotifications() {
     const notifications = useSelector(selectNotifications);
@@ -89,10 +42,8 @@ function useNotifications() {
 
 
 function App() {
-    const store = useStore();
     const open = useSelector(selectMenuIsOpen);
     const add = useSelector(selectAddButton);
-    useEffect(() => refresh(store));
     useNotifications();
 
     const update = useSelector(selectUpdateButton);
