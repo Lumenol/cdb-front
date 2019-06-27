@@ -18,7 +18,6 @@ import AddCard from "./components/AddCard";
 import Router from "./components/Router";
 import {useSnackbar} from "notistack";
 import {clearNotifications} from "./redux/notification";
-import {useTranslation} from "react-i18next";
 import PageLogin from "./components/PageLogin";
 
 function useNotifications() {
@@ -43,8 +42,6 @@ function App() {
 
     const update = useSelector(selectUpdateButton);
     const adminMode = useSelector(selectUserBecomeAnAdmin);
-    const {t} = useTranslation();
-    const dispatcher = useDispatch();
 
     const isConnected = useSelector(selectIsConnected);
     return isConnected ? (

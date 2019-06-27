@@ -52,18 +52,18 @@ class DenseAppBar extends Component {
     switchLanguage = () => {
         const l = this.props.language;
         switch (l) {
+            default:
             case 'fr':
                 this.props.changeLanguage('en');
                 break;
             case 'en':
                 this.props.changeLanguage('fr')
-
         }
     };
 
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchUser, userName, isAdmin} = this.props;
+        const {t, open, adminMode, switchUser, userName, isAdmin} = this.props;
         const style = adminMode ? "darkMode" : "orangeMode";
         const theme = adminMode ? darkMode : orangeTheme;
 
@@ -92,7 +92,7 @@ class DenseAppBar extends Component {
                                     </IconButton></Grid>}
 
                                 {adminMode ?
-                                    <Grid item item xs={2} md={4} lg={6}><AdminBar className={darkMode}/></Grid> : null}
+                                    <Grid item xs={2} md={4} lg={6}><AdminBar className={darkMode}/></Grid> : null}
 
                                 <Grid item xs={2} md={6} lg={8}>
                                     <ThemeProvider theme={whiteTheme}><Typography variant="h4"
