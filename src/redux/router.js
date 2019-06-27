@@ -1,10 +1,36 @@
+import {getUsers} from "./users";
+import {getCompanies} from "./companies";
+import {getComputers} from "./computers";
+
 const SET_SHOW = "SET_SHOW";
 export const SHOW = {
     COMPANIES: "COMPANIES",
-    COMPUTERS: "COMPUTERS"
+    COMPUTERS: "COMPUTERS",
+    USERS: "USERS"
 };
 
-export function setShow(show) {
+export function showUsers() {
+    return function (dispatch) {
+        dispatch(getUsers());
+        dispatch(setShow(SHOW.USERS));
+    }
+}
+
+export function showCompanies() {
+    return function (dispatch) {
+        dispatch(getCompanies());
+        dispatch(setShow(SHOW.COMPANIES));
+    }
+}
+
+export function showComputers() {
+    return function (dispatch) {
+        dispatch(getComputers());
+        dispatch(setShow(SHOW.COMPUTERS));
+    }
+}
+
+function setShow(show) {
     return {
         type: SET_SHOW,
         show: show

@@ -1,7 +1,7 @@
 import React, {Component, forwardRef} from 'react';
 import MaterialTable, {MTableToolbar} from 'material-table';
 import {connect} from "react-redux";
-import {selectCompanies} from "../redux/selectors";
+import {selectUsers} from "../redux/selectors";
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
@@ -18,17 +18,28 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import {addCompany, deleteCompany} from "../redux/companies";
 import {withTranslation} from "react-i18next";
+import {deleteUser, editUser} from "../redux/users";
+import Switch from "@material-ui/core/Switch";
 
 
-class CompaniesContainer extends Component {
+class UsersContainer extends Component {
+    onChange = (event) => {
+        this.props.editUser(event.target.value, event.target.checked ? ["ADMIN"] : ["USER"]);
+        console.log(event.target.value + " " + event.target.checked);
+
+    };
 
     render() {
-        const {t, remove, companies, create, i18n} = this.props;
+        const {t, remove, users, i18n} = this.props;
         const columns = [
             {title: 'id', field: 'id'},
-            {title: t("company.name"), field: 'name'}
+            {title: t("user.login"), field: 'login'},
+            {
+                title: t("user.role"),
+                field: 'admin',
+                render: user => (<Switch checked={user.admin} value={user.id} onChange={this.onChange}/>)
+            }
         ];
 
 
@@ -62,16 +73,13 @@ class CompaniesContainer extends Component {
                     )
                 }}
                 icons={tableIcons}
-                title={t("companies")}
+                title={t("users")}
                 columns={columns}
-                data={companies}
+                data={users}
                 editable={{
                     onRowDelete: async oldData => {
                         remove(oldData.id)
                     },
-                    onRowAdd: async newData => {
-                        create(newData.name)
-                    }
                 }}
                 localization={i18n.store.data[i18n.language].translation.table}
             />
@@ -81,16 +89,17 @@ class CompaniesContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        remove: (id) => dispatch(deleteCompany(id)),
-        create: (name) => dispatch(addCompany(name))
+        remove: (id) => dispatch(deleteUser(id)),
+        editUser: (id, newRole) => dispatch(editUser(id, newRole))
+
     }
 };
 
 const mapStateToProps = (state) => {
     return {
-        companies: selectCompanies(state)
+        users: selectUsers(state)
     };
 };
 
-const Translation = withTranslation()(CompaniesContainer);
-export default CompaniesContainer = connect(mapStateToProps, mapDispatchToProps)(Translation);
+const Translation = withTranslation()(UsersContainer);
+export default UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Translation);
