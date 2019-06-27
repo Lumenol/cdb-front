@@ -9,7 +9,7 @@ function I18nProvider(props) {
     i18n.changeLanguage(language);
     return (
         <I18nextProvider i18n={i18n}>
-            <Suspense fallback={"Chargement i18n ..."}>
+            <Suspense fallback={""}>
                 {children}
             </Suspense>
         </I18nextProvider>

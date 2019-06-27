@@ -10,6 +10,7 @@ import {
     selectMenuIsOpen,
     selectUpdateButton,
     selectUserBecomeAnAdmin,
+    selectUserIsAdmin,
     selectUsername
 } from "../redux/selectors";
 import {connect} from "react-redux";
@@ -43,14 +44,16 @@ class DenseAppBar extends Component {
 
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName} = this.props;
+        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName, isAdmin} = this.props;
 
-        if (adminMode) {
-            button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
-            </Button>
-        } else {
-            button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
-            </Button>
+        if (isAdmin) {
+            if (adminMode) {
+                button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
+                </Button>
+            } else {
+                button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
+                </Button>
+            }
         }
 
         return (
@@ -132,6 +135,7 @@ function mapStateToProps(state) {
         addButton: selectAddButton(state),
         updateButton: selectUpdateButton(state),
         adminMode: selectUserBecomeAnAdmin(state),
+        isAdmin: selectUserIsAdmin(state),
         userName: selectUsername(state),
         language: selectLanguage(state)
     }
