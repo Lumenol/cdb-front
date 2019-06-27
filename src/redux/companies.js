@@ -1,4 +1,4 @@
-import {createCompany, deleteCompanies, getCompanies as getAll} from '../api/companies';
+import {createCompany, deleteCompanies, getCompanies as getAll, updateCompany} from '../api/companies';
 
 const SET_ERROR = 'SET_ERROR';
 const SET_COMPANIES = 'SET_COMPANIES';
@@ -27,6 +27,17 @@ export const addCompany = (name) => {
     }
 };
 
+export function editCompany(id, name) {
+    return async function (dispatch) {
+        try {
+            await updateCompany({id, name});
+            dispatch(getCompanies());
+        } catch (e) {
+            dispatch(setError(e));
+        }
+    }
+}
+
 export function deleteCompany(id) {
     return async function (dispatch) {
         try {
@@ -37,6 +48,7 @@ export function deleteCompany(id) {
         }
     }
 }
+
 function setCompanies(companies) {
     return {
         type: SET_COMPANIES,

@@ -14,7 +14,7 @@
     "role": "Administrateur"
   },
   "title": {
-    "title": "Computers Database",
+    "title": "Computer DataBase",
     "orderBy": "Trier par",
     "search": "Rechercher"
   },
@@ -29,13 +29,16 @@
   "users": "Utilisateurs",
   "table": {
     "body": {
-      "emptyDataSourceMessage": "Chargement...",
+      "emptyDataSourceMessage": "Pas de résultats",
       "deleteTooltip": "Supprimer",
       "editRow": {
         "cancelTooltip": "Annuler",
         "deleteText": "Veuillez confirmer la suppression",
         "saveTooltip": "Confirmer"
       }
+    },
+    "header": {
+      "actions": ""
     },
     "pagination": {
       "labelRowsSelect": "Résultats par page",
@@ -46,13 +49,9 @@
     },
     "toolbar": {
       "searchPlaceholder": "Rechercher"
-    },
-    "header": {
-      "actions": ""
     }
   },
   "header": {
-    "test": "test",
     "hover": {
       "addButton": "Ajouter un ordinateur",
       "disconnectButton": "Se déconnecter"
