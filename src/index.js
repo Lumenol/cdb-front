@@ -12,7 +12,7 @@ import languageReducer from "./redux/i18n";
 import computerReducer from './redux/computers';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import connectionReducer, {login} from "./redux/connection";
+import connectionReducer from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
@@ -20,6 +20,8 @@ import searchParametersReducer from './redux/searchParameters';
 import addButtonReducer from './redux/addButton';
 import companiesReducer, {getCompanies} from "./redux/companies";
 import routerReducer from './redux/router';
+import notificationReducer from './redux/notification';
+import {SnackbarProvider} from "notistack";
 import updateButtonReducer from './redux/updateButton';
 import modeAdminActivateReducer from './redux/modeAdminIsActivate';
 
@@ -34,8 +36,9 @@ const companies = {companies: companiesReducer};
 const router = {router: routerReducer};
 const updateButton = {updateButton: updateButtonReducer};
 const admin = {adminMode: modeAdminActivateReducer};
+const notification = {notifications: notificationReducer};
 
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin, ...updateButton});
+const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin, ...updateButton, ...notification});
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -44,14 +47,15 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 addTokenInterceptor(() => selectToken(store.getState()));
 
-store.dispatch(login("user", "user"));
 setTimeout(() => store.dispatch(getCompanies()), 5000);
 
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
             <I18nReduxProvider i18n={i18n}>
-                <App/>
+                <SnackbarProvider maxSnack={3} preventDuplicate>
+                    <App/>
+                </SnackbarProvider>
             </I18nReduxProvider>
         </ThemeProvider>
     </Provider>,

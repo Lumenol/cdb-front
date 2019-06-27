@@ -4,6 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import {login} from "../redux/connection";
+import connect from "react-redux/es/connect/connect";
+import {selectLoginError} from "../redux/selectors";
+import {withTranslation} from "react-i18next";
 
 
 const styles = theme => ({
@@ -28,6 +31,9 @@ const styles = theme => ({
     extendedIcon: {
         marginRight: theme.spacing(1),
     },
+    error: {
+        color: 'red'
+    }
 });
 
 
@@ -54,19 +60,23 @@ class FormLogin extends Component {
         )
     };
 
-    onSubmit = () => {
-        login(this.state.login, this.state.password);
+    onClickConnexion = () => {
+        this.props.OnSubmit(this.state.login, this.state.password);
+        this.setState({
+            login: "",
+            password: ""
+        })
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, t} = this.props;
 
         return (
             <div>
                 <FormControl>
                     <TextField
                         id="standard-search"
-                        label="Login"
+                        label={t("connection.login")}
                         type="search"
                         className={classes.textField}
                         margin="normal"
@@ -75,24 +85,43 @@ class FormLogin extends Component {
                     />
                     <TextField
                         id="standard-password-input"
-                        label="Password"
+                        label={t("connection.password")}
                         className={classes.textField}
                         type="password"
                         autoComplete="current-password"
                         margin="normal"
+                        value={this.state.password}
                         onChange={this.onInputOnPassword}
                     />
+                    {
+                        this.props.loginError &&
+                        <div>
+                            <p className={classes.error}>{t("connection.error")}</p>
+                        </div>
+                    }
                     <Button variant="contained" size="medium" color="primary" className={classes.margin}
-                            onClick={this.onSubmit}
+                            onClick={this.onClickConnexion}
                             disabled={this.state.login.trim() === "" || this.state.password === ""}>
-                        Connexion
+                        {t("connection.connection")}
                     </Button>
                 </FormControl>
-
             </div>
 
         );
     }
 }
 
-export default FormLogin = (withStyles(styles)(FormLogin));
+const mapStateToProps = (state) => {
+    return {
+        loginError: selectLoginError(state)
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        OnSubmit: (l, p) => dispatch(login(l, p)),
+    }
+}
+
+const Translation = withTranslation()(FormLogin);
+export default FormLogin = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Translation));

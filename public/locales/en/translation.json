@@ -15,6 +15,12 @@
     "search": "Search"
   },
   "companies": "Manufacturers",
+  "connection": {
+    "login": "Username",
+    "password": "Password",
+    "connection": "Sign in",
+    "error": "Wrong username or password"
+  },
   "computers": "Computers",
   "table": {
     "body": {

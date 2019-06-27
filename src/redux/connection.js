@@ -1,4 +1,6 @@
 import {getToken} from "../api/connection";
+import {notificationError} from "./notification";
+import i18n from "../configuration/i18n";
 
 const LOGOUT = "LOGOUT";
 const SET_TOKEN = "SET_TOKEN";
@@ -10,6 +12,7 @@ export function login(username, password) {
             const token = await getToken(username, password);
             dispatch(setToken(token));
         } catch (e) {
+            dispatch(notificationError(i18n.t("connection.error")));
             dispatch(setError(e));
         }
     }
