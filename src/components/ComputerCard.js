@@ -32,6 +32,12 @@ class ComputerCard extends Component {
         this.props.toggleUpdateButton(!this.props.updateButton.boolean, this.props.computer);
     };
 
+    toggleDelete = () => {
+        if (this.props.updateButton.boolean)
+            return;
+        this.props.delete();
+    };
+
     render() {
         const {name, manufacturer, introduced, discontinued} = this.props.computer;
         const style = this.props.isSelected ? "cardSelected" : "card";
@@ -57,7 +63,10 @@ class ComputerCard extends Component {
                                         {manufacturer}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary">
-                                        {introduced} • {discontinued}
+                                        {introduced}
+                                        {discontinued === null || discontinued === "" || discontinued === undefined ? null :
+                                            <Fragment> • </Fragment>}
+                                        {discontinued}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -68,7 +77,7 @@ class ComputerCard extends Component {
                         <Grid item xs={2}>
                             <Grid item container direction="column" spacing={1} xs={2} lg={2} md={2}>
                                 <Grid item xs={1}>
-                                    <Fab size="small" color="primary" aria-label="Delete" onClick={this.props.delete}>
+                                    <Fab size="small" color="primary" aria-label="Delete" onClick={this.toggleDelete}>
                                         <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
                                     </Fab>
                                 </Grid>
