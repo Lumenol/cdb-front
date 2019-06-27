@@ -14,7 +14,7 @@
     "role": "Administrateur"
   },
   "title": {
-    "title": "Computers Database",
+    "title": "Computer DataBase",
     "orderBy": "Trier par",
     "search": "Rechercher"
   },
@@ -37,6 +37,9 @@
         "saveTooltip": "Confirmer"
       }
     },
+    "header": {
+      "actions": ""
+    },
     "pagination": {
       "labelRowsSelect": "Résultats par page",
       "nextTooltip": "Page suivante",
@@ -46,13 +49,9 @@
     },
     "toolbar": {
       "searchPlaceholder": "Rechercher"
-    },
-    "header": {
-      "actions": ""
     }
   },
   "header": {
-    "test": "test",
     "hover": {
       "addButton": "Ajouter un ordinateur",
       "disconnectButton": "Se déconnecter"

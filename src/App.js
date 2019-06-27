@@ -53,7 +53,7 @@ function App() {
     return isConnected ? (
             <Grid container direction="row" spacing={2}>
 
-            <Grid item xs={12}><Header/></Grid>
+                <Grid item xs={12}><Header/></Grid>
 
                 <Grid item xs={12} container spacing={3}>
                     <Grid item xs={12} container justify="center" className="margin" alignItems="center">

@@ -6,6 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {withTranslation} from "react-i18next";
 import {
     selectAddButton,
+    selectLanguage,
     selectMenuIsOpen,
     selectUpdateButton,
     selectUserBecomeAnAdmin,
@@ -29,6 +30,10 @@ import {addButton} from "../redux/addButton";
 import {showCompanies, showComputers} from "../redux/router";
 import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 import AdminBar from "./AdminBar";
+import Flag from 'react-world-flags'
+import {setLanguage} from "../redux/i18n";
+import FormControl from "@material-ui/core/FormControl";
+import NativeSelect from "@material-ui/core/NativeSelect";
 
 
 class DenseAppBar extends Component {
@@ -114,6 +119,23 @@ class DenseAppBar extends Component {
 
                                 </Grid>
 
+                            <Grid item xs={1}>
+                                {
+                                    this.props.language === 'fr' ?
+                                        <Flag code="fr" height='16'/> :
+                                        <Flag code="gb" height='16'/>
+                                }
+                            </Grid>
+
+                            <FormControl>
+                                <NativeSelect
+                                    onChange={(event) => this.props.changeLanguage(event.target.value)}
+                                >
+                                    <option value="fr">fr</option>
+                                    <option value="en">en</option>
+                                </NativeSelect>
+                            </FormControl>
+
 
                             </Toolbar>
                         </div>
@@ -132,14 +154,18 @@ function mapStateToProps(state) {
         addButton: selectAddButton(state),
         updateButton: selectUpdateButton(state),
         adminMode: selectUserBecomeAnAdmin(state),
+        isAdmin: selectUserIsAdmin(state),
         userName: selectUsername(state),
-        isAdmin: selectUserIsAdmin(state)
+        language: selectLanguage(state)
     }
 }
 
 
 function mapDispatchToProps(dispatch) {
     return {
+        changeLanguage: (lang) => {
+            dispatch(setLanguage(lang))
+        },
         open: () => {
             dispatch(openMenu());
         },
@@ -154,7 +180,7 @@ function mapDispatchToProps(dispatch) {
         switchUser: () => {
             dispatch(showComputers());
             dispatch(switchModeUser());
-        }
+        },
     };
 }
 

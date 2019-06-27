@@ -14,7 +14,7 @@
     "role": "Admin"
   },
   "title": {
-    "title": "Computer Database",
+    "title": "Computer DataBase",
     "orderBy": "Order by",
     "search": "Search"
   },
@@ -37,7 +37,6 @@
         "saveTooltip": "Yes"
       }
     },
-    ,
     "header": {
       "actions": "Action"
     },
