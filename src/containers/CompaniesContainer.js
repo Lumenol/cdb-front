@@ -1,5 +1,5 @@
 import React, {Component, forwardRef} from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable, {MTableToolbar} from 'material-table';
 import {connect} from "react-redux";
 import {selectCompanies} from "../redux/selectors";
 
@@ -54,6 +54,13 @@ class CompaniesContainer extends Component {
 
         return (
             <MaterialTable
+                components={{
+                    Toolbar: props => (
+                        <div style={{backgroundColor: '#e8eaf5'}}>
+                            <MTableToolbar {...props} />
+                        </div>
+                    )
+                }}
                 icons={tableIcons}
                 title={t("companies")}
                 columns={columns}

@@ -1,5 +1,5 @@
 import React, {Component, forwardRef} from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable, {MTableToolbar} from 'material-table';
 import {connect} from "react-redux";
 import {selectUsers} from "../redux/selectors";
 
@@ -35,7 +35,11 @@ class UsersContainer extends Component {
         const columns = [
             {title: 'id', field: 'id'},
             {title: t("user.login"), field: 'login'},
-            {title: t("user.role"), field: 'admin'}
+            {
+                title: t("user.role"),
+                field: 'admin',
+                render: user => (<Switch checked={user.admin} value={user.id} onChange={this.onChange}/>)
+            }
         ];
 
 
@@ -59,18 +63,19 @@ class UsersContainer extends Component {
             ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref}/>)
         };
 
-
-        const data = users.map((user) => ({
-            ...user,
-            admin: (<Switch checked={user.admin} value={user.id} onChange={this.onChange}/>)
-        }));
-
         return (
             <MaterialTable
+                components={{
+                    Toolbar: props => (
+                        <div style={{backgroundColor: '#e8eaf5'}}>
+                            <MTableToolbar {...props} />
+                        </div>
+                    )
+                }}
                 icons={tableIcons}
                 title={t("users")}
                 columns={columns}
-                data={data}
+                data={users}
                 editable={{
                     onRowDelete: async oldData => {
                         remove(oldData.id)
