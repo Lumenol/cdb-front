@@ -6,6 +6,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import {useTranslation} from "react-i18next";
+import {showCompanies, showUsers} from "../redux/router";
+import {useDispatch} from "react-redux";
 
 function TabContainer(props) {
     return (
@@ -30,6 +32,7 @@ export default function SimpleTabs() {
     const classes = useStyles();
     const {t} = useTranslation();
     const [value, setValue] = React.useState(0);
+    const dispatcher = useDispatch();
 
     function handleChange(event, newValue) {
         setValue(newValue);
@@ -40,9 +43,11 @@ export default function SimpleTabs() {
             <AppBar position="static" className={classes.root}>
                 <Tabs value={value}
                       onChange={handleChange}
+                      variant="scrollable"
+                      scrollButtons="auto"
                 >
-                    <Tab label={t("companies")}/>
-                    <Tab label={t("users")}/>
+                    <Tab label={t("companies")} onClick={() => dispatcher(showCompanies())}/>
+                    <Tab label={t("users")} onClick={() => dispatcher(showUsers())}/>
                 </Tabs>
             </AppBar>
         </div>

@@ -18,9 +18,6 @@ import AddCard from "./components/AddCard";
 import Router from "./components/Router";
 import {useSnackbar} from "notistack";
 import {clearNotifications} from "./redux/notification";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import {showCompanies, showUsers} from "./redux/router";
 import {useTranslation} from "react-i18next";
 import PageLogin from "./components/PageLogin";
 
@@ -57,13 +54,7 @@ function App() {
 
                 <Grid item xs={12} container spacing={3}>
                     <Grid item xs={12} container justify="center" className="margin" alignItems="center">
-                        {!adminMode ? (<ChangePagination/>) : (<List>
-                            <Button variant="contained" color="primary"
-                                    onClick={() => dispatcher(showCompanies())}>{t("companies")}
-                            </Button>
-                            <Button variant="contained" color="primary" onClick={() => dispatcher(showUsers())}>{t("users")}
-                            </Button>
-                        </List>)}
+                        {!adminMode && (<ChangePagination/>)}
                     </Grid>
 
                     {update.boolean ?

@@ -34,6 +34,7 @@ import Flag from 'react-world-flags'
 import {setLanguage} from "../redux/i18n";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import {updateButton} from "../redux/updateButton";
 
 
 class DenseAppBar extends Component {
@@ -45,9 +46,9 @@ class DenseAppBar extends Component {
     };
 
     toggleSwitchAdmin = () => {
-        if (this.props.addButton || this.props.updateButton.boolean)
-            return;
         this.props.switchAdmin();
+        this.props.update(false, null);
+        this.props.add(false);
     };
 
     render() {
@@ -75,22 +76,23 @@ class DenseAppBar extends Component {
                             <Toolbar>
 
 
-                                {!isOpen && (adminMode ? null :
-                                    <Grid item xs={3}><IconButton aria-label="Menu" onClick={open}>
+                                {adminMode ? null :
+                                    <Grid item xs={2} md={4} lg={6}><IconButton aria-label="Menu" onClick={open}>
                                         <MenuIcon/>
-                                    </IconButton></Grid>)}
+                                    </IconButton></Grid>}
 
-                                {adminMode ? <Grid item xs={3}><AdminBar className={darkMode}/></Grid> : null}
+                                {adminMode ?
+                                    <Grid item item xs={2} md={4} lg={6}><AdminBar className={darkMode}/></Grid> : null}
 
-                                <Grid item xs={6} md={9} lg={9}>
-                                    <ThemeProvider theme={whiteTheme}><Typography variant="h4" align="center"
+                                <Grid item xs={2} md={6} lg={8}>
+                                    <ThemeProvider theme={whiteTheme}><Typography variant="h4"
                                                                                   color="primary"
                                                                                   fontFamily="Permanent Marker">
                                         <Box fontFamily="Permanent Marker"> {t("title.title")}</Box>
                                     </Typography></ThemeProvider>
                                 </Grid>
 
-                                <Grid item xs={5} md={2} lg={2} container>
+                                <Grid item xs={2} md={2} lg={2} container>
 
                                     <Grid item xs={3} container alignItems="center">
                                         <Typography variant="h6" align="center" color="secondary"
@@ -119,22 +121,22 @@ class DenseAppBar extends Component {
 
                                 </Grid>
 
-                            <Grid item xs={1}>
-                                {
-                                    this.props.language === 'fr' ?
-                                        <Flag code="fr" height='16'/> :
-                                        <Flag code="gb" height='16'/>
-                                }
-                            </Grid>
+                                <Grid item xs={1}>
+                                    {
+                                        this.props.language === 'fr' ?
+                                            <Flag code="fr" height='16'/> :
+                                            <Flag code="gb" height='16'/>
+                                    }
+                                </Grid>
 
-                            <FormControl>
-                                <NativeSelect
-                                    onChange={(event) => this.props.changeLanguage(event.target.value)}
-                                >
-                                    <option value="fr">fr</option>
-                                    <option value="en">en</option>
-                                </NativeSelect>
-                            </FormControl>
+                                <FormControl>
+                                    <NativeSelect
+                                        onChange={(event) => this.props.changeLanguage(event.target.value)}
+                                    >
+                                        <option value="fr">fr</option>
+                                        <option value="en">en</option>
+                                    </NativeSelect>
+                                </FormControl>
 
 
                             </Toolbar>
@@ -181,6 +183,9 @@ function mapDispatchToProps(dispatch) {
             dispatch(showComputers());
             dispatch(switchModeUser());
         },
+        update: (boolean, computer) => {
+            dispatch(updateButton(boolean, computer));
+        }
     };
 }
 

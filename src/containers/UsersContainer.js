@@ -72,7 +72,7 @@ class UsersContainer extends Component {
                     )
                 }}
                 icons={tableIcons}
-                title={t("users")}
+                title=""
                 columns={columns}
                 data={users}
                 editable={{
