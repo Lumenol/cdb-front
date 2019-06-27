@@ -21,7 +21,7 @@
   "companies": "Fabriquants",
   "connection": {
     "login": "Identifiant",
-    "password": "Login",
+    "password": "Mot de passe",
     "connection": "Se connecter",
     "error": "Login ou mot de passe incorrect"
   },
