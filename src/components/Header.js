@@ -8,7 +8,7 @@ import {
     selectAddButton,
     selectMenuIsOpen,
     selectUpdateButton,
-    selectUserBecomeAnAdmin,
+    selectUserBecomeAnAdmin, selectUserIsAdmin,
     selectUsername
 } from "../redux/selectors";
 import {connect} from "react-redux";
@@ -38,8 +38,9 @@ class DenseAppBar extends Component {
 
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName} = this.props;
+        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName, isAdmin} = this.props;
 
+    if(isAdmin) {
         if (adminMode) {
             button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
             </Button>
@@ -47,6 +48,7 @@ class DenseAppBar extends Component {
             button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
             </Button>
         }
+    }
 
         return (
             <ThemeProvider theme={theme}>
@@ -110,7 +112,8 @@ function mapStateToProps(state) {
         addButton: selectAddButton(state),
         updateButton: selectUpdateButton(state),
         adminMode: selectUserBecomeAnAdmin(state),
-        userName: selectUsername(state)
+        userName: selectUsername(state),
+        isAdmin: selectUserIsAdmin(state)
     }
 }
 
@@ -131,7 +134,7 @@ function mapDispatchToProps(dispatch) {
         switchUser: () => {
             dispatch(showComputers());
             dispatch(switchModeUser());
-        },
+        }
     };
 }
 
