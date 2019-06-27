@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SimpleTabs() {
-    const classes = useStyles();
+    // const classes = useStyles();
     const {t} = useTranslation();
     const [value, setValue] = React.useState(0);
     const dispatcher = useDispatch();
@@ -40,7 +40,7 @@ export default function SimpleTabs() {
 
     return (
         <div>
-            <AppBar position="static" className={classes.root}>
+            <AppBar position="static">
                 <Tabs value={value}
                       onChange={handleChange}
                       variant="scrollable"
