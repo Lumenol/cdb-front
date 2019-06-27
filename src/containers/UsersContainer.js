@@ -31,7 +31,7 @@ class UsersContainer extends Component {
     render() {
         const {t, remove, users, i18n} = this.props;
         const columns = [
-            {title: 'id', field: 'id'},
+            {title: 'id', field: 'id', editable: 'never'},
             {title: t("user.login"), field: 'login'},
             {
                 title: t("user.role"),
@@ -63,6 +63,7 @@ class UsersContainer extends Component {
 
         return (
             <MaterialTable
+
                 components={{
                     Toolbar: props => (
                         <div style={{backgroundColor: '#e8eaf5'}}>
