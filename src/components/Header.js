@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,15 +19,17 @@ import Paper from "@material-ui/core/Paper";
 import DisconnectButton from "./DisconectButton";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import theme from "../paletteBis";
+import orangeTheme from "../paletteBis";
+import darkMode from "../darkPalette";
+import whiteTheme from "../whitePalette";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faUser, faUserCog} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
-import Button from "@material-ui/core/Button";
-import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 import {showCompanies, showComputers} from "../redux/router";
+import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
+import AdminBar from "./AdminBar";
 import Flag from 'react-world-flags'
 import {setLanguage} from "../redux/i18n";
 import FormControl from "@material-ui/core/FormControl";
@@ -42,64 +44,80 @@ class DenseAppBar extends Component {
         this.props.add(!this.props.addButton);
     };
 
+    toggleSwitchAdmin = () => {
+        if (this.props.addButton || this.props.updateButton.boolean)
+            return;
+        this.props.switchAdmin();
+    };
+
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName, isAdmin} = this.props;
+        const {t, isOpen, open, adminMode, switchUser, userName, isAdmin} = this.props;
+        const style = adminMode ? "darkMode" : "orangeMode";
+        const theme = adminMode ? darkMode : orangeTheme;
 
         if (isAdmin) {
-            if (adminMode) {
-                button = <Button variant="contained" color="primary" title="Passer Utilisateur" onClick={switchUser}>USER
-                </Button>
-            } else {
-                button = <Button variant="contained" color="primary" title="Passer Administrateur" onClick={switchAdmin}>ADMIN
-                </Button>
-            }
+            button = adminMode ?
+                <Fragment><Fab size="small" color="secondary" title="Passer utilisateur" onClick={switchUser}>
+                    <FontAwesomeIcon icon={faUser}/></Fab></Fragment>
+                :
+                <Fragment><Fab size="small" color="primary" title="Passer administrateur"
+                               onClick={this.toggleSwitchAdmin}>
+                    <FontAwesomeIcon icon={faUserCog}/></Fab></Fragment>
+
         }
 
         return (
             <ThemeProvider theme={theme}>
                 <Grid container direction="column">
                     <Paper position="static">
-                        <Toolbar>
-
-                            <Grid item xs={1}>
-                                {!isOpen && (adminMode ? null : <IconButton aria-label="Menu" onClick={open}>
-                                    <MenuIcon/>
-                                </IconButton>)}
-                            </Grid>
-
-                            <Grid item xs={8}>
-                                <Typography variant="h3" align="center" color="secondary" fontFamily="Permanent Marker">
-                                    <Box fontFamily="Permanent Marker">Computer Database</Box>
-                                </Typography>
-                            </Grid>
-
-                            <Grid item xs={2}>
-                                {button}
-                            </Grid>
+                        <div className={style}>
+                            <Toolbar>
 
 
-                            <Grid item xs={2} container alignItems="center" justify="flex-end">
-                                {!adminMode &&
-                                <Fab size="small" color="primary" aria-label="Delete"
-                                     title={t("header.hover.addButton")}
-                                     onClick={this.toggleAdd}>
-                                    <FontAwesomeIcon icon={faPlus}/>
-                                </Fab>
-                                }
-                            </Grid>
+                                {!isOpen && (adminMode ? null :
+                                    <Grid item xs={3}><IconButton aria-label="Menu" onClick={open}>
+                                        <MenuIcon/>
+                                    </IconButton></Grid>)}
+
+                                {adminMode ? <Grid item xs={3}><AdminBar className={darkMode}/></Grid> : null}
+
+                                <Grid item xs={6} md={9} lg={9}>
+                                    <ThemeProvider theme={whiteTheme}><Typography variant="h4" align="center"
+                                                                                  color="primary"
+                                                                                  fontFamily="Permanent Marker">
+                                        <Box fontFamily="Permanent Marker"> {t("title.title")}</Box>
+                                    </Typography></ThemeProvider>
+                                </Grid>
+
+                                <Grid item xs={5} md={2} lg={2} container>
+
+                                    <Grid item xs={3} container alignItems="center">
+                                        <Typography variant="h6" align="center" color="secondary"
+                                                    fontFamily="Permanent Marker">
+                                            <Box>{userName}</Box>
+                                        </Typography>
+                                    </Grid>
 
 
-                            <Grid item xs={1}>
-                                <Typography variant="h6" align="center" color="secondary" fontFamily="Permanent Marker">
-                                    <Box>{userName}</Box>
-                                </Typography>
+                                    {adminMode ? null : <Grid item xs={3} container alignItems="center">
+                                        {!adminMode &&
+                                        <Fab size="small" color="primary" aria-label="Add"
+                                             title={t("header.hover.addButton")}
+                                             onClick={this.toggleAdd}>
+                                            <FontAwesomeIcon icon={faPlus}/>
+                                        </Fab>}
+                                    </Grid>}
 
-                            </Grid>
+                                    <Grid item xs={3} container alignItems="center">
+                                        {button}
+                                    </Grid>
 
-                            <Grid item xs={1}>
-                                <DisconnectButton/>
-                            </Grid>
+                                    <Grid item xs={3} container alignItems="center">
+                                        <DisconnectButton/>
+                                    </Grid>
+
+                                </Grid>
 
                             <Grid item xs={1}>
                                 {
@@ -119,7 +137,8 @@ class DenseAppBar extends Component {
                             </FormControl>
 
 
-                        </Toolbar>
+                            </Toolbar>
+                        </div>
                     </Paper>
 
                 </Grid>

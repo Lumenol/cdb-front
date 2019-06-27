@@ -14,6 +14,7 @@
     "role": "Administrateur"
   },
   "title": {
+    "title": "Computer DataBase",
     "orderBy": "Trier par",
     "search": "Rechercher"
   },
@@ -45,6 +46,9 @@
     },
     "toolbar": {
       "searchPlaceholder": "Rechercher"
+    },
+    "header": {
+      "actions": ""
     }
   },
   "header": {

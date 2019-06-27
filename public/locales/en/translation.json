@@ -14,6 +14,7 @@
     "role": "Admin"
   },
   "title": {
+    "title": "Computer DataBase",
     "orderBy": "Order by",
     "search": "Search"
   },
@@ -35,6 +36,10 @@
         "deleteText": "Are you sure ?",
         "saveTooltip": "Yes"
       }
+    },
+    ,
+    "header": {
+      "actions": "Action"
     },
     "pagination": {
       "labelRowsSelect": "Rows per page",
