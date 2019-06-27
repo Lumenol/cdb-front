@@ -19,6 +19,12 @@
     "search": "Rechercher"
   },
   "companies": "Fabriquants",
+  "connection": {
+    "login": "Identifiant",
+    "password": "Login",
+    "connection": "Se connecter",
+    "error": "Login ou mot de passe incorrect"
+  },
   "computers": "Ordinateurs",
   "users": "Utilisateurs",
   "table": {
