@@ -18,13 +18,13 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import theme from "./paletteBis";
 import AddCard from "./components/AddCard";
 import Router from "./components/Router";
-import FormLogin from "./components/FormLogin";
 import {useSnackbar} from "notistack";
 import {clearNotifications} from "./redux/notification";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import {showCompanies, showUsers} from "./redux/router";
 import {useTranslation} from "react-i18next";
+import PageLogin from "./components/PageLogin";
 
 function useNotifications() {
     const notifications = useSelector(selectNotifications);
@@ -89,7 +89,7 @@ function App() {
                     </Grid>) : null}
                 <PersistentDrawerLeft/>
             </Grid>) :
-        (<FormLogin/>)
+        (<PageLogin/>)
 }
 
 export default App;
