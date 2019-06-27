@@ -118,7 +118,7 @@ class AddCard extends Component {
     };
 
     render() {
-        const companies = this.props.companies;
+        const companies = this.props.companies || [];
         const rendering = (<Grid item xs={4} container direction="row">
             <Card className="addCard">
 
