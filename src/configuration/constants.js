@@ -2,6 +2,7 @@ export const BASE_URL = 'http://localhost:3000/api/';
 export const LOGIN_URL = BASE_URL + 'login';
 export const COMPANIES_URL = BASE_URL + 'companies';
 export const COMPUTERS_URL = BASE_URL + 'computers';
+export const USERS_URL = BASE_URL + 'users';
 
 export const companies = new Map();
 companies.set("Apple Inc.", 'https://bit.ly/2WM55gP');

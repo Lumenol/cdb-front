@@ -17,6 +17,8 @@ export function selectComputersError(state) {
 
 export const selectCompanies = state => state.companies.companies;
 
+export const selectUsers = state => state.users.users;
+
 export const selectAddButton = state => state.addButton;
 
 export const selectUpdateButton = state => state.updateButton;
@@ -117,3 +119,7 @@ function selectTokenIsNotExpired(state) {
 }
 
 export const selectMaxPage = createSelector([selectComputerCount, selectPageSize], (count, size) => Math.floor(count / size) + (count % size > 0 ? 1 : 0));
+
+export function selectNotifications(state) {
+    return state.notifications;
+}

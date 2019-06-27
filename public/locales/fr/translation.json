@@ -9,14 +9,24 @@
   "company": {
     "name": "Nom"
   },
+  "user": {
+    "login": "Identifiant",
+    "role": "Administrateur"
+  },
   "title": {
-    "title": "Computer Database",
+    "title": "Computers Database",
     "orderBy": "Trier par",
     "search": "Rechercher"
   },
   "companies": "Fabriquants",
-  "users": "Utilisateurs",
+  "connection": {
+    "login": "Identifiant",
+    "password": "Mot de passe",
+    "connection": "Se connecter",
+    "error": "Login ou mot de passe incorrect"
+  },
   "computers": "Ordinateurs",
+  "users": "Utilisateurs",
   "table": {
     "body": {
       "emptyDataSourceMessage": "Chargement...",

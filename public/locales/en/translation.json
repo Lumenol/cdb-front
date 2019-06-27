@@ -9,14 +9,24 @@
   "company": {
     "name": "Name"
   },
+  "user": {
+    "login": "Login",
+    "role": "Admin"
+  },
   "title": {
     "title": "Computer Database",
     "orderBy": "Order by",
     "search": "Search"
   },
   "companies": "Manufacturers",
-  "users": "Users",
+  "connection": {
+    "login": "Username",
+    "password": "Password",
+    "connection": "Sign in",
+    "error": "Wrong username or password"
+  },
   "computers": "Computers",
+  "users": "Users",
   "table": {
     "body": {
       "emptyDataSourceMessage": "Loading...",
@@ -40,9 +50,6 @@
     },
     "toolbar": {
       "searchPlaceholder": "Search"
-    },
-    "header": {
-      "actions": ""
     }
   },
   "header": {

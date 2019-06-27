@@ -9,6 +9,7 @@ import {
     selectMenuIsOpen,
     selectUpdateButton,
     selectUserBecomeAnAdmin,
+    selectUserIsAdmin,
     selectUsername
 } from "../redux/selectors";
 import {connect} from "react-redux";
@@ -25,17 +26,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faUser, faUserCog} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
-import {setShow, SHOW} from "../redux/router";
+import {setShow, showCompanies, showComputers} from "../redux/router";
 import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 import AdminBar from "./AdminBar";
 
-function TabContainer(props) {
-    return (
-        <Typography component="div" style={{padding: 8 * 3}}>
-            {props.children}
-        </Typography>
-    );
-}
 
 class DenseAppBar extends Component {
 
@@ -53,20 +47,20 @@ class DenseAppBar extends Component {
 
     render() {
         let button;
+        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName, isAdmin} = this.props;
         let tabs;
-        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName} = this.props;
         const style = adminMode ? "darkMode" : "orangeMode";
         const theme = adminMode ? darkMode : orangeTheme;
 
-        {
-            adminMode ?
-                button = <Fragment><Fab size="small" color="secondary" title="Passer utilisateur" onClick={switchUser}>
+        if (isAdmin) {
+            button = adminMode ?
+                <Fragment><Fab size="small" color="secondary" title="Passer utilisateur" onClick={switchUser}>
                     <FontAwesomeIcon icon={faUser}/></Fab></Fragment>
                 :
-                button =
-                    <Fragment><Fab size="small" color="primary" title="Passer administrateur"
-                                   onClick={this.toggleSwitchAdmin}>
-                        <FontAwesomeIcon icon={faUserCog}/></Fab></Fragment>
+                <Fragment><Fab size="small" color="primary" title="Passer administrateur"
+                               onClick={this.toggleSwitchAdmin}>
+                    <FontAwesomeIcon icon={faUserCog}/></Fab></Fragment>
+
         }
 
         return (
@@ -103,11 +97,12 @@ class DenseAppBar extends Component {
 
 
                                     {adminMode ? null : <Grid item xs={3} container alignItems="center">
+                                        {!adminMode &&
                                         <Fab size="small" color="primary" aria-label="Add"
                                              title={t("header.hover.addButton")}
                                              onClick={this.toggleAdd}>
                                             <FontAwesomeIcon icon={faPlus}/>
-                                        </Fab>
+                                        </Fab>}
                                     </Grid>}
 
                                     <Grid item xs={3} container alignItems="center">
@@ -139,6 +134,7 @@ function mapStateToProps(state) {
         updateButton: selectUpdateButton(state),
         adminMode: selectUserBecomeAnAdmin(state),
         userName: selectUsername(state),
+        isAdmin: selectUserIsAdmin(state)
     }
 }
 
@@ -153,13 +149,13 @@ function mapDispatchToProps(dispatch) {
         },
         switchAdmin: () => {
             dispatch(closeMenu());
-            dispatch(setShow(SHOW.COMPANIES));
+            dispatch(showCompanies());
             dispatch(switchModeAdmin());
         },
         switchUser: () => {
-            dispatch(setShow(SHOW.COMPUTERS));
+            dispatch(showComputers());
             dispatch(switchModeUser());
-        },
+        }
     };
 }
 
