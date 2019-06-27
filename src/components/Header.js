@@ -26,7 +26,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faUser, faUserCog} from "@fortawesome/free-solid-svg-icons";
 import Fab from "@material-ui/core/Fab";
 import {addButton} from "../redux/addButton";
-import {setShow, showCompanies, showComputers} from "../redux/router";
+import {showCompanies, showComputers} from "../redux/router";
 import {switchModeAdmin, switchModeUser} from "../redux/modeAdminIsActivate";
 import AdminBar from "./AdminBar";
 
@@ -47,8 +47,7 @@ class DenseAppBar extends Component {
 
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchAdmin, switchUser, userName, isAdmin} = this.props;
-        let tabs;
+        const {t, isOpen, open, adminMode, switchUser, userName, isAdmin} = this.props;
         const style = adminMode ? "darkMode" : "orangeMode";
         const theme = adminMode ? darkMode : orangeTheme;
 
