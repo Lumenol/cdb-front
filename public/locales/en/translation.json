@@ -38,7 +38,7 @@
       }
     },
     "header": {
-      "actions": "Action"
+      "actions": ""
     },
     "pagination": {
       "labelRowsSelect": "Rows per page",

@@ -48,6 +48,18 @@ class DenseAppBar extends Component {
         this.props.add(false);
     };
 
+    switchLanguage = () => {
+        const l = this.props.language;
+        switch (l) {
+            default:
+            case 'fr':
+                this.props.changeLanguage('en');
+                break;
+            case 'en':
+                this.props.changeLanguage('fr')
+        }
+    };
+
     render() {
         let button;
         const {t, isOpen, open, adminMode, switchUser, userName, isAdmin} = this.props;
@@ -107,13 +119,14 @@ class DenseAppBar extends Component {
                                     {button}
                                 </Grid>
 
-                                <Grid item xs={2} container alignItems="center">
+                                <Grid item xs={2} container alignItems="center" onClick={this.switchLanguage}>
                                     {
                                         this.props.language === 'fr' ?
-                                            <Flag code="fr" height='16'/> :
-                                            <Flag code="gb" height='16'/>
+                                            <Flag code="fr" height="20"/> :
+                                            <Flag code="us" height="20"/>
                                     }
                                 </Grid>
+
                                 <Grid item xs={2} container alignItems="center">
                                     <DisconnectButton/>
                                 </Grid>
