@@ -1,6 +1,6 @@
 import {getUsers} from "./users";
 import {getCompanies} from "./companies";
-import {getComputers} from "./computers";
+import {getComputers, getCountComputers} from "./computers";
 
 const SET_SHOW = "SET_SHOW";
 export const SHOW = {
@@ -26,6 +26,7 @@ export function showCompanies() {
 export function showComputers() {
     return function (dispatch) {
         dispatch(getComputers());
+        dispatch(getCountComputers());
         dispatch(setShow(SHOW.COMPUTERS));
     }
 }

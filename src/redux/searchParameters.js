@@ -29,6 +29,8 @@ export function setPageSize(size) {
             const currentPage = selectCurrentPage(state);
             if (currentPage > maxPage) {
                 dispatch(setCurrentPage(maxPage));
+            } else {
+                dispatch(getComputers());
             }
         }
     }
