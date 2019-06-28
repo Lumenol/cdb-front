@@ -88,8 +88,10 @@
   },
   "header": {
     "hover": {
-      "addButton": "Ajouter un ordinateur",
-      "disconnectButton": "Se déconnecter"
+      "addButton": "Créer un ordinateur",
+      "disconnectButton": "Se déconnecter",
+      "admin": "Passer administrateur",
+      "user": "Passer utilisateur"
     }
   }
 }

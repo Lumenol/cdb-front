@@ -12,7 +12,7 @@ import languageReducer from "./redux/i18n";
 import computerReducer from './redux/computers';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import connectionReducer from "./redux/connection";
+import connectionReducer, {SET_TOKEN} from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
@@ -39,11 +39,15 @@ const updateButton = {updateButton: updateButtonReducer};
 const admin = {adminMode: modeAdminActivateReducer};
 const notification = {notifications: notificationReducer};
 
-const reducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin, ...updateButton, ...notification, ...users});
+const appReducer = combineReducers({...menu, ...language, ...computers, ...connection, ...search, ...addButton, ...companies, ...router, ...admin, ...updateButton, ...notification, ...users});
 
-
+const rootReducer = (state, action) => {
+    if (action.type === SET_TOKEN)
+        state = undefined;
+    return appReducer(state, action);
+};
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 
 addTokenInterceptor(() => selectToken(store.getState()));

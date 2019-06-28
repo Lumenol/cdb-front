@@ -69,10 +69,10 @@ class DenseAppBar extends Component {
 
         if (isAdmin) {
             button = adminMode ?
-                <Fragment><Fab size="small" color="secondary" title="Passer utilisateur" onClick={switchUser}>
+                <Fragment><Fab size="small" color="secondary" title={t("header.hover.user")} onClick={switchUser}>
                     <FontAwesomeIcon icon={faUser}/></Fab></Fragment>
                 :
-                <Fragment><Fab size="small" color="primary" title="Passer administrateur"
+                <Fragment><Fab size="small" color="primary" title={t("header.hover.admin")}
                                onClick={this.toggleSwitchAdmin}>
                     <FontAwesomeIcon icon={faUserCog}/></Fab></Fragment>
 
