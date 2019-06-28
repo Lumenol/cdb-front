@@ -12,7 +12,7 @@ import languageReducer from "./redux/i18n";
 import computerReducer from './redux/computers';
 import menuIsOpenReducer from './redux/menuIsOpen';
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import connectionReducer, {LOGOUT, SET_TOKEN} from "./redux/connection";
+import connectionReducer, {SET_TOKEN} from "./redux/connection";
 import {addTokenInterceptor} from "./configuration/axios";
 import {selectToken} from "./redux/selectors";
 import thunk from "redux-thunk";
