@@ -1,0 +1,45 @@
+
+.color {
+    background-color: #00796B;
+    height: 100%;
+}
+
+.addCard {
+    min-width: 100%;
+}
+
+.cardSelected {
+    background-color: transparent;
+    border: 3px solid #00796B;
+}
+
+.divIcon {
+    margin-bottom: 1vh;
+    max-width: 350px;
+    background-color: #61dafb;
+}
+
+.icons {
+    margin-top: 1vh;
+    margin-left: 0.3vw;
+}
+
+.media {
+    height: 20vh;
+}
+
+.margin {
+    min-height: 100px;
+}
+
+h5 {
+    color: red;
+}
+
+.darkMode {
+    background-color: #282c34;
+}
+
+.orangeMode {
+    background-color: #FF9800;
+}

@@ -1,0 +1,97 @@
+{
+  "computer": {
+    "name": "Name",
+    "introduced": "Introduced",
+    "discontinued": "Discontinued",
+    "company": "Manufacturer",
+    "found": "Computers found",
+    "creation": {
+      "success": "Computer was successfully created !",
+      "error": "We could not create the computer, please try again."
+    },
+    "update": {
+      "success": "Computer was successfully updated !",
+      "error": "We could not update the computer, please try again."
+    },
+    "delete": {
+      "success": "Computer was successfully deleted !",
+      "error": "We could not delete computer, please try again."
+    },
+    "load": "We could not load computers, please try again."
+  },
+  "company": {
+    "name": "Name",
+    "creation": {
+      "success": "Company was successfully created !",
+      "error": "We could not create the company, please try again."
+    },
+    "update": {
+      "success": "Company was successfully updated !",
+      "error": "We could not update the company, please try again."
+    },
+    "delete": {
+      "success": "Company was successfully deleted !",
+      "error": "We could not delete company, please try again."
+    },
+    "load": "We could not load computers, please try again."
+  },
+  "user": {
+    "login": "Login",
+    "role": "Admin",
+    "update": {
+      "success": "User information has correctly been updated !",
+      "error": "We could not update user information, please try again."
+    },
+    "delete": {
+      "success": "User was successfully deleted !",
+      "error": "We could not delete user, please try again."
+    },
+    "load": "We could not load computers, please try again."
+  },
+  "title": {
+    "title": "Computer Database",
+    "orderBy": "Order by",
+    "search": "Search"
+  },
+  "companies": "Manufacturers",
+  "connection": {
+    "login": "Username",
+    "password": "Password",
+    "connection": "Sign in",
+    "error": "Wrong username or password"
+  },
+  "computers": "Computers",
+  "users": "Users",
+  "table": {
+    "body": {
+      "emptyDataSourceMessage": "No results",
+      "deleteTooltip": "Delete",
+      "editRow": {
+        "cancelTooltip": "Cancel",
+        "deleteText": "Are you sure ?",
+        "saveTooltip": "Yes"
+      }
+    },
+    "header": {
+      "actions": ""
+    },
+    "pagination": {
+      "labelRowsSelect": "Rows per page",
+      "nextTooltip": "Next page",
+      "previousTooltip": "Previous page",
+      "lastTooltip": "Last page",
+      "firstTooltip": "First page"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search"
+    }
+  },
+  "header": {
+    "hover": {
+      "addButton": "Create a computer",
+      "disconnectButton": "Disconnect",
+      "admin": "Change to administrator mode",
+      "user": "Change to user mode"
+    }
+  }
+}

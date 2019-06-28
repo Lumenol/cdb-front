@@ -2,11 +2,17 @@
   text-align: center;
 }
 
+.footer {
+
+
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
 }
+
 
 .App-header {
   background-color: #282c34;
@@ -22,6 +28,11 @@
 .App-link {
   color: #61dafb;
 }
+
+.card_container {
+  min-height: 500px;
+}
+
 
 @keyframes App-logo-spin {
   from {

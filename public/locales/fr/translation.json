@@ -1,0 +1,97 @@
+{
+  "computer": {
+    "name": "Nom",
+    "introduced": "Date d'introduction",
+    "discontinued": "Date de sortie",
+    "company": "Compagnie",
+    "found": "Ordinateurs trouvés",
+    "creation": {
+      "success": "L'ordinateur a été crée avec succès !",
+      "error": "Nous n'avons pas pu créer l'ordinateur, réessayez s'il vous plait."
+    },
+    "update": {
+      "success": "L'ordinateur a été mis à jour avec succès !",
+      "error": "Nous n'avons pas pu mettre à jour l'ordinateur, réessayez s'il vous plait."
+    },
+    "delete": {
+      "success": "L'ordinateur a bien été supprimé !",
+      "error": "Nous n'avons pas réussi à supprimer l'ordinateur, réessayez s'il vous plait."
+    },
+    "load": "Nous n'avons pas pu récupérer les ordinateurs, réessayez s'il vous plait."
+  },
+  "company": {
+    "name": "Nom",
+    "creation": {
+      "success": "La compagnie a été crée avec succès !",
+      "error": "Nous n'avons pas pu créer la compagnie, réessayez s'il vous plait."
+    },
+    "update": {
+      "success": "La compagnie a été mise à jour avec succès !",
+      "error": "Nous n'avons pas pu mettre à jour la compagnie, réessayez s'il vous plait."
+    },
+    "delete": {
+      "success": "La compagnie a bien été supprimée !",
+      "error": "Nous n'avons pas réussi à supprimer la compagnie, rééssayez s'il vous plait."
+    },
+    "load": "Nous n'avons pas pu récupérer les compagnies, réessayez s'il vous plait."
+  },
+  "user": {
+    "login": "Identifiant",
+    "role": "Administrateur",
+    "update": {
+      "success": "Les données de l'utilisateur ont été mises à jour avec succès !",
+      "error": "Nous n'avons pas pu mettre à jour les données de l'utilisateur, réessayez s'il vous plait."
+    },
+    "delete": {
+      "success": "L'utilisateur a bien été supprimé !",
+      "error": "Nous n'avons pas réussi à supprimer l'utilisateur, rééssayez s'il vous plait."
+    },
+    "load": "Nous n'avons pas pu récupérer les utilisateurs, réessayez s'il vous plait."
+  },
+  "title": {
+    "title": "Computer Database",
+    "orderBy": "Trier par",
+    "search": "Rechercher"
+  },
+  "companies": "Compagnies",
+  "connection": {
+    "login": "Identifiant",
+    "password": "Mot de passe",
+    "connection": "Se connecter",
+    "error": "Login ou mot de passe incorrect"
+  },
+  "computers": "Ordinateurs",
+  "users": "Utilisateurs",
+  "table": {
+    "body": {
+      "emptyDataSourceMessage": "Pas de résultats",
+      "deleteTooltip": "Supprimer",
+      "editRow": {
+        "cancelTooltip": "Annuler",
+        "deleteText": "Veuillez confirmer la suppression",
+        "saveTooltip": "Confirmer"
+      }
+    },
+    "header": {
+      "actions": ""
+    },
+    "pagination": {
+      "labelRowsSelect": "Résultats par page",
+      "nextTooltip": "Page suivante",
+      "previousTooltip": "Page précédente",
+      "lastTooltip": "Dernière page",
+      "firstTooltip": "Première page"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Rechercher"
+    }
+  },
+  "header": {
+    "hover": {
+      "addButton": "Créer un ordinateur",
+      "disconnectButton": "Se déconnecter",
+      "admin": "Passer administrateur",
+      "user": "Passer utilisateur"
+    }
+  }
+}
