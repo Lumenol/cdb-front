@@ -93,5 +93,15 @@
       "admin": "Passer administrateur",
       "user": "Passer utilisateur"
     }
+  },
+  "addCard": {
+    "create": "Créer",
+    "update": "Éditer",
+    "error": {
+      "name": "Veuillez spécifier un nom",
+      "dIntroB1970": "La date ne peut être antérieur au 01/01/1970"
+    },
+    "companyNotExist": "La compagnie n'existe pas",
+    "discoBeforeIntro": "La date de sortie ne peut être antérieur à la date d'introduction"
   }
 }
