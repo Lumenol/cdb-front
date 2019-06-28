@@ -11,10 +11,6 @@ export function selectSelectedComputers(state) {
     return state.computers.selected;
 }
 
-export function selectComputersError(state) {
-    return state.computers.error;
-}
-
 export const selectCompanies = state => state.companies.companies;
 
 export const selectUsers = state => state.users.users;
@@ -70,10 +66,6 @@ export const selectIsConnected = state => selectTokenIsNotExpired(state);
 
 export function selectToken(state) {
     return selectConnectionInfos(state).token;
-}
-
-export function selectLoginError(state) {
-    return selectConnectionInfos(state).error;
 }
 
 function selectConnectionInfos(state) {

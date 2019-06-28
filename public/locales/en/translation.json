@@ -4,14 +4,49 @@
     "introduced": "Introduced",
     "discontinued": "Discontinued",
     "company": "Manufacturer",
-    "found": "Computers found"
+    "found": "Computers found",
+    "creation": {
+      "success": "Computer was successfully created !",
+      "error": "We could not create the computer, please try again."
+    },
+    "update": {
+      "success": "Computer was successfully updated !",
+      "error": "We could not update the computer, please try again."
+    },
+    "delete": {
+      "success": "Computer was successfully deleted !",
+      "error": "We could not delete computer, please try again."
+    },
+    "load": "We could not load computers, please try again."
   },
   "company": {
-    "name": "Name"
+    "name": "Name",
+    "creation": {
+      "success": "Company was successfully created !",
+      "error": "We could not create the company, please try again."
+    },
+    "update": {
+      "success": "Company was successfully updated !",
+      "error": "We could not update the company, please try again."
+    },
+    "delete": {
+      "success": "Company was successfully deleted !",
+      "error": "We could not delete company, please try again."
+    },
+    "load": "We could not load computers, please try again."
   },
   "user": {
     "login": "Login",
-    "role": "Admin"
+    "role": "Admin",
+    "update": {
+      "success": "User information has correctly been updated !",
+      "error": "We could not update user information, please try again."
+    },
+    "delete": {
+      "success": "User was successfully deleted !",
+      "error": "We could not delete user, please try again."
+    },
+    "load": "We could not load computers, please try again."
   },
   "title": {
     "title": "Computer DataBase",

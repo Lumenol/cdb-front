@@ -1,6 +1,7 @@
 import {createCompany, deleteCompanies, getCompanies as getAll, updateCompany} from '../api/companies';
+import {notificationError, notificationSuccess} from "./notification";
+import i18n from "../configuration/i18n";
 
-const SET_ERROR = 'SET_ERROR';
 const SET_COMPANIES = 'SET_COMPANIES';
 
 export function getCompanies() {
@@ -9,7 +10,7 @@ export function getCompanies() {
             const result = await getAll();
             dispatch(setCompanies(result));
         } catch (e) {
-            dispatch(setError(e));
+            dispatch(notificationError(i18n.t("company.load")));
         }
     }
 }
@@ -21,8 +22,9 @@ export const addCompany = (name) => {
                 name
             }));
             dispatch(getCompanies());
+            dispatch(notificationSuccess(i18n.t("company.creation.success")));
         } catch (e) {
-            dispatch(setError(e));
+            dispatch(notificationError(i18n.t("company.creation.error")));
         }
     }
 };
@@ -32,8 +34,9 @@ export function editCompany(id, name) {
         try {
             await updateCompany({id, name});
             dispatch(getCompanies());
+            dispatch(notificationSuccess(i18n.t("company.update.success")));
         } catch (e) {
-            dispatch(setError(e));
+            dispatch(notificationError(i18n.t("company.update.error")));
         }
     }
 }
@@ -43,8 +46,9 @@ export function deleteCompany(id) {
         try {
             await deleteCompanies(id);
             dispatch(getCompanies());
+            dispatch(notificationSuccess(i18n.t("company.delete.success")));
         } catch (e) {
-            dispatch(setError(e));
+            dispatch(notificationError(i18n.t("company.delete.error")));
         }
     }
 }
@@ -56,19 +60,10 @@ function setCompanies(companies) {
     }
 }
 
-function setError(error) {
-    return {
-        type: SET_ERROR,
-        error: error
-    }
-}
-
 export default function reducer(state = {companies: [], error: ""}, action) {
     switch (action.type) {
         case SET_COMPANIES:
             return {companies: action.companies};
-        case SET_ERROR:
-            return {error: action.error};
         default:
             return state;
     }

@@ -32,6 +32,7 @@ import AdminBar from "./AdminBar";
 import Flag from 'react-world-flags'
 import {setLanguage} from "../redux/i18n";
 import {updateButton} from "../redux/updateButton";
+import {getCompanies} from "../redux/companies";
 
 
 class DenseAppBar extends Component {
@@ -62,7 +63,7 @@ class DenseAppBar extends Component {
 
     render() {
         let button;
-        const {t, isOpen, open, adminMode, switchUser, userName, isAdmin} = this.props;
+        const {t, open, adminMode, switchUser, userName, isAdmin} = this.props;
         const style = adminMode ? "darkMode" : "orangeMode";
         const theme = adminMode ? darkMode : orangeTheme;
 
@@ -88,7 +89,7 @@ class DenseAppBar extends Component {
                                 </IconButton></Grid>}
 
                             {adminMode ?
-                                <Grid item item xs={4} md={3} lg={6}><AdminBar className={darkMode}/></Grid> : null}
+                                <Grid item xs={4} md={3} lg={6}><AdminBar className={darkMode}/></Grid> : null}
 
                             <Grid item xs={5} md={5} lg={8}>
                                 <ThemeProvider theme={whiteTheme}>
@@ -164,6 +165,7 @@ function mapDispatchToProps(dispatch) {
         },
         add: (boolean) => {
             dispatch(addButton(boolean));
+            dispatch(getCompanies());
         },
         switchAdmin: () => {
             dispatch(closeMenu());
