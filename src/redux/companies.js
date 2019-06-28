@@ -18,9 +18,9 @@ export function getCompanies() {
 export const addCompany = (name) => {
     return async function (dispatch) {
         try {
-            await addCompany(createCompany({
+            await createCompany({
                 name
-            }));
+            });
             dispatch(getCompanies());
             dispatch(notificationSuccess(i18n.t("company.creation.success")));
         } catch (e) {
