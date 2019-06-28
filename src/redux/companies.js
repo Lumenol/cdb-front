@@ -60,7 +60,7 @@ function setCompanies(companies) {
     }
 }
 
-export default function reducer(state = {companies: [], error: ""}, action) {
+export default function reducer(state = {companies: []}, action) {
     switch (action.type) {
         case SET_COMPANIES:
             return {companies: action.companies};

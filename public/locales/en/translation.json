@@ -88,8 +88,10 @@
   },
   "header": {
     "hover": {
-      "addButton": "New computer",
-      "disconnectButton": "Disconnect"
+      "addButton": "Create a computer",
+      "disconnectButton": "Disconnect",
+      "admin": "Change to administrator mode",
+      "user": "Change to user mode"
     }
   }
 }

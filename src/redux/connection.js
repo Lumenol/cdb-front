@@ -4,8 +4,7 @@ import i18n from "../configuration/i18n";
 import {showComputers} from "./router";
 
 const LOGOUT = "LOGOUT";
-const SET_TOKEN = "SET_TOKEN";
-const SET_ERROR_LOGIN = "SET_ERROR_LOGIN";
+export const SET_TOKEN = "SET_TOKEN";
 
 export function login(username, password) {
     return async function (dispatch) {
@@ -15,7 +14,6 @@ export function login(username, password) {
             dispatch(showComputers());
         } catch (e) {
             dispatch(notificationError(i18n.t("connection.error")));
-            dispatch(setError(e));
         }
     }
 }
@@ -26,14 +24,10 @@ export function refreshToken() {
             const token = await refreshToken();
             dispatch(setToken(token));
         } catch (e) {
-            dispatch(setError(e));
         }
     }
 }
 
-function setError(error) {
-    return {type: SET_ERROR_LOGIN, error: error};
-}
 
 function setToken(token) {
     return {type: SET_TOKEN, token: token};
@@ -50,8 +44,6 @@ export default function connectionReducer(state = {token: ""}, action) {
             return {token: ''};
         case SET_TOKEN:
             return {token: action.token};
-        case SET_ERROR_LOGIN:
-            return {...state, error: action.error.message};
         default:
             return state;
     }
