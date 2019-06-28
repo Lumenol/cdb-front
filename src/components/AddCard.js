@@ -16,6 +16,7 @@ import {selectCompanies, selectMenuIsOpen} from "../redux/selectors";
 import {addComputer, updateComputer} from "../redux/computers";
 import {addButton} from "../redux/addButton";
 import {updateButton} from "../redux/updateButton";
+import {withTranslation} from "react-i18next";
 
 class AddCard extends Component {
 
@@ -45,24 +46,24 @@ class AddCard extends Component {
         discontinuedDate: this.props.computer ? this.props.computer.discontinued : null,
         company: this.props.computer && this.props.companies ? this.props.companies.find((e) => e.name === this.props.computer.manufacturer) || {} : {},
         errorMsg: {
-            name: this.props.computer ? null : "Please provide computer's name."
+            name: this.props.computer ? null : "addCard.error.name"
         },
-        mode: this.props.computer ? "Mettre à jour" : "Créer"
+        mode: this.props.computer ? "addCard.update" : "addCard.create"
     };
 
     checkDate(date) {
         if ((new Date(date).getTime() < new Date(1970, 1, 1).getTime()))
-            return "Date cannot be before 01/01/1970";
+            return "addCard.error.dIntroB1970";
     }
 
     checkName(name) {
         if (name === null || name.trim() === "")
-            return "Please provide computer's name.";
+            return "addCard.error.name";
     }
 
     checkCompany(company) {
         if (!this.props.companies.includes(company))
-            return "Sorry, company does not exist.";
+            return "addCard.companyNotExist";
     }
 
     onNameChange = (event) => {
@@ -116,7 +117,7 @@ class AddCard extends Component {
             this.setState({
                 errorMsg: {
                     ...this.state.errorMsg,
-                    outDate: "Discontinued date cannot be before introduced date."
+                    outDate: "addCard.discoBeforeIntro"
                 }
             });
             return;
@@ -137,6 +138,7 @@ class AddCard extends Component {
     };
 
     render() {
+        const {t} = this.props;
         const companies = this.props.companies || [];
         const rendering = (
             <Grid item xs={4} container direction="row">
@@ -151,7 +153,7 @@ class AddCard extends Component {
                             <TextField
                                 id="standard-full-width"
                                 style={{margin: 5}}
-                                label="Computer name"
+                                label={t("computer.name")}
                                 placeholder={this.state.name}
                                 value={this.state.name || ""}
                                 fullWidth
@@ -162,13 +164,13 @@ class AddCard extends Component {
                                 }}
                             />
                             {this.state.name === "" || this.state.errorMsg.name ?
-                                <h5>{this.state.errorMsg.name} </h5> : null}
+                                <h5>{t(this.state.errorMsg.name)} </h5> : null}
                         </CardContent>
 
                         <CardContent>
                             <TextField
                                 id="date"
-                                label="Introduced date"
+                                label={t("computer.introduced")}
                                 type="date"
                                 onChange={this.onInDateChange}
                                 defaultValue={this.state.introductionDate}
@@ -176,13 +178,13 @@ class AddCard extends Component {
                                     shrink: true,
                                 }}
                             />
-                            {this.state.errorMsg.inDate ? <h5>{this.state.errorMsg.inDate} </h5> : null}
+                            {this.state.errorMsg.inDate ? <h5>{t(this.state.errorMsg.inDate)} </h5> : null}
                         </CardContent>
 
                         <CardContent>
                             <TextField
                                 id="date"
-                                label="Discontinued date"
+                                label={t("computer.discontinued")}
                                 onChange={this.onOutDateChange}
                                 type="date"
                                 defaultValue={this.state.discontinuedDate}
@@ -190,23 +192,23 @@ class AddCard extends Component {
                                     shrink: true,
                                 }}
                             />
-                            {this.state.errorMsg.outDate ? <h5>{this.state.errorMsg.outDate} </h5> : null}
+                            {this.state.errorMsg.outDate ? <h5>{t(this.state.errorMsg.outDate)} </h5> : null}
                         </CardContent>
 
                         <CardContent>
-                            <InputLabel htmlFor="age-simple">Company</InputLabel>
+                            <InputLabel htmlFor="age-simple">{t("computer.company")}</InputLabel>
                             <Select
                                 value={this.state.company}
                                 onChange={this.onCompanyChange}
                             >
                                 {companies.map(e => <MenuItem value={e} key={e.id}>{e.name}</MenuItem>)}
                             </Select>
-                            {this.state.errorMsg.company ? <h5>{this.state.errorMsg.company} </h5> : null}
+                            {this.state.errorMsg.company ? <h5>{t(this.state.errorMsg.company)} </h5> : null}
                         </CardContent>
 
                         <CardContent>
                             <Button variant="contained" color="primary" onClick={this.submit}>
-                                <Typography>{this.state.mode}</Typography>
+                                <Typography>{t(this.state.mode)}</Typography>
                             </Button>
                         </CardContent>
                     </form>
@@ -252,4 +254,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default AddCard = connect(mapStateToProps, mapDispatchToProps)(AddCard);
+const Translation = withTranslation()(AddCard);
+export default AddCard = connect(mapStateToProps, mapDispatchToProps)(Translation);

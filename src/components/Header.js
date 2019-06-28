@@ -126,7 +126,7 @@ class DenseAppBar extends Component {
                                     {
                                         this.props.language === 'fr' ?
                                             <Flag code="fr" height="20"/> :
-                                            <Flag code="us" height="20"/>
+                                            <Flag code="gb" height="20"/>
                                     }
                                 </Grid>
 

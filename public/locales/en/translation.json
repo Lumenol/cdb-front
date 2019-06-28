@@ -93,5 +93,15 @@
       "admin": "Change to administrator mode",
       "user": "Change to user mode"
     }
+  },
+  "addCard": {
+    "create": "Create",
+    "update": "Update",
+    "error": {
+      "name": "Please provide computer's name.",
+      "dIntroB1970": "Date cannot be before 01/01/1970"
+    },
+    "companyNotExist": "Sorry, company does not exist.",
+    "discoBeforeIntro": "Discontinued date cannot be before introduced date."
   }
 }
