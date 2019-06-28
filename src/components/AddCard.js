@@ -43,7 +43,7 @@ class AddCard extends Component {
         name: this.props.computer ? this.props.computer.name : null,
         introductionDate: this.props.computer ? this.props.computer.introduced : null,
         discontinuedDate: this.props.computer ? this.props.computer.discontinued : null,
-        company: this.props.computer ? this.props.companies.find((e) => e.name === this.props.computer.manufacturer) || {} : {},
+        company: this.props.computer && this.props.companies ? this.props.companies.find((e) => e.name === this.props.computer.manufacturer) || {} : {},
         errorMsg: {
             name: this.props.computer ? null : "Please provide computer's name."
         },
@@ -245,7 +245,9 @@ const mapDispatchToProps = (dispatch) => {
         add: (boolean) => {
             dispatch(addButton(boolean));
         },
-        update: (boolean, computer) => dispatch(updateButton(boolean, computer)),
+        update: (boolean, computer) => {
+            dispatch(updateButton(boolean, computer));
+        },
         updateComputer: (id, name, inDate, outDate, companyId) => dispatch(updateComputer(id, name, inDate, outDate, companyId))
     }
 };

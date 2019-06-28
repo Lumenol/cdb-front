@@ -32,6 +32,7 @@ import AdminBar from "./AdminBar";
 import Flag from 'react-world-flags'
 import {setLanguage} from "../redux/i18n";
 import {updateButton} from "../redux/updateButton";
+import {getCompanies} from "../redux/companies";
 
 
 class DenseAppBar extends Component {
@@ -164,6 +165,7 @@ function mapDispatchToProps(dispatch) {
         },
         add: (boolean) => {
             dispatch(addButton(boolean));
+            dispatch(getCompanies());
         },
         switchAdmin: () => {
             dispatch(closeMenu());

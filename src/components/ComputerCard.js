@@ -9,12 +9,13 @@ import {faKeyboard, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import '../css/ComputerCard.css';
 import {Grid} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
-import {deleteAComputer, selectComputer, unselectComputer, updateComputer} from "../redux/computers";
+import {deleteAComputer, selectComputer, unselectComputer} from "../redux/computers";
 import {connect} from "react-redux";
 import {selectAddButton, selectSelectedComputers, selectUpdateButton} from "../redux/selectors";
 import {selectCompanyImg} from "../utils/selectCompanyImage";
 import AddCard from "./AddCard";
 import {updateButton} from "../redux/updateButton";
+import {getCompanies} from "../redux/companies";
 
 class ComputerCard extends Component {
 
@@ -114,9 +115,12 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(updateButton(false, null))
         },
         delete: () => dispatch(deleteAComputer(props.computer.id)),
-        update: (name, inDate, outDate, companyId) =>
-            dispatch(updateComputer(props.computer.id, name, inDate, outDate, companyId)),
-        toggleUpdateButton: (boolean, computer) => dispatch(updateButton(boolean, computer))
+        /*update: (name, inDate, outDate, companyId) =>
+            dispatch(updateComputer(props.computer.id, name, inDate, outDate, companyId)),*/
+        toggleUpdateButton: (boolean, computer) => {
+            dispatch(updateButton(boolean, computer));
+            dispatch(getCompanies());
+        }
     }
 };
 
