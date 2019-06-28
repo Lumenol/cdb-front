@@ -114,7 +114,7 @@ class PageLogin extends Component {
                                 required
                                 fullWidth
                                 id="standard-search"
-                                label={t("connection.login")}
+                                placeholder={t("connection.login")}
                                 type="search"
                                 autoFocus
                                 value={this.state.login}
@@ -124,7 +124,7 @@ class PageLogin extends Component {
                             <TextField
                                 variant="outlined"
                                 margin="normal"
-                                label={t("connection.password")}
+                                placeholder={t("connection.password")}
                                 required
                                 fullWidth
                                 name="password"

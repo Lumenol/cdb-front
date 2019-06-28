@@ -52,7 +52,6 @@ class CompaniesContainer extends Component {
             ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref}/>)
 
         };
-
         return (
             <MaterialTable
                 components={{

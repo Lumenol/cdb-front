@@ -100,11 +100,15 @@ class DenseAppBar extends Component {
 
                             <Grid item xs={5} md={4} lg={3} container justify="flex-end">
 
-                                <Grid item xs={2} container alignItems="center">
+                                <Grid item xs={4} md={4} lg={4} container alignItems="center" justify="center">
                                     <Typography variant="h6" align="center" color="secondary"
                                                 fontFamily="Permanent Marker">
-                                        <Box>{userName}</Box>
+                                        {userName}
                                     </Typography>
+                                </Grid>
+
+                                <Grid item xs={2} container alignItems="center">
+                                    {button}
                                 </Grid>
 
                                 {adminMode ? null : <Grid item xs={2} container alignItems="center">
@@ -116,11 +120,9 @@ class DenseAppBar extends Component {
                                     </Fab>}
                                 </Grid>}
 
-                                <Grid item xs={2} container alignItems="center">
-                                    {button}
-                                </Grid>
 
-                                <Grid item xs={2} container alignItems="center" onClick={this.switchLanguage}>
+                                <Grid item xs={2} container alignItems="center" justify="center"
+                                      onClick={this.switchLanguage}>
                                     {
                                         this.props.language === 'fr' ?
                                             <Flag code="fr" height="20"/> :
